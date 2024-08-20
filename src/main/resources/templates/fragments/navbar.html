@@ -1,0 +1,19 @@
+<!-- fragments/navbar.html -->
+<div th:fragment="navbar" class="navbar">
+    <div class="navbar-left">
+        <a href="#" class="navbar-item">Home</a>
+        <div class="dropdown">
+            <a href="#" class="navbar-item dropdown-btn">Gestiones</a>
+            <div class="dropdown-content">
+                <a th:href="@{/create-form}">Creación de Formularios</a>
+                <a th:href="@{/approvals}">Aprobaciones</a>
+            </div>
+        </div>
+    </div>
+    <div class="navbar-right">
+        <a href="#" class="navbar-icon">&#128269;</a>
+        <a href="#" class="navbar-icon">&#128172;<span class="badge">3</span></a>
+        <a href="#" class="navbar-icon">&#128276;<span class="badge">15</span></a>
+        <a th:href="@{/logout}" class="navbar-icon">&#128682;</a> <!-- Icono de logout -->
+    </div>
+</div>

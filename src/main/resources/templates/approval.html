@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Approval of Forms</title>
+  <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="approval-container">
+  <h2>Form Approval</h2>
+  <table class="approval-table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Form Type</th>
+      <th>Employee</th>
+      <th>Date Submitted</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterar sobre la lista de formularios -->
+    <tr th:each="formulario, iterStat : ${formularios}">
+      <td th:text="${iterStat.count}">1</td>
+      <td th:text="${formulario.tipo}">Permission Request</td>
+      <td th:text="${formulario.empleado}">John Doe</td>
+      <td th:text="${formulario.fechaEnvio}">2023-08-19</td>
+      <td>
+        <span th:text="${formulario.estado}" th:classappend="${formulario.estado.toLowerCase()}">Pending</span>
+      </td>
+      <td>
+        <button class="btn-approve" th:attr="data-id=${formulario.id}">Approve</button>
+        <button class="btn-reject" th:attr="data-id=${formulario.id}">Reject</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!-- Paginación (simulada para el ejemplo) -->
+  <div class="pagination">
+    <a href="#">&laquo;</a>
+    <a href="#" class="active">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">&raquo;</a>
+  </div>
+</div>
+
+<!-- Scripts opcionales para manejar acciones de aprobación/rechazo -->
+<script>
+  document.querySelectorAll('.btn-approve').forEach(button => {
+    button.addEventListener('click', function() {
+      const id = this.getAttribute('data-id');
+      // Lógica para aprobar el formulario usando el id
+      console.log('Approve form with ID:', id);
+    });
+  });
+
+  document.querySelectorAll('.btn-reject').forEach(button => {
+    button.addEventListener('click', function() {
+      const id = this.getAttribute('data-id');
+      // Lógica para rechazar el formulario usando el id
+      console.log('Reject form with ID:', id);
+    });
+  });
+</script>
+</body>
+</html>

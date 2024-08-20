@@ -1,3 +1,4 @@
+/* Estilos generales */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f7f7f7;
@@ -8,38 +9,72 @@ body {
     margin: 0;
 }
 
-.login-container {
+/* Estilos adicionales específicos (cuerpo de páginas de error) */
+.error-body {
+    text-align: center;
+    background-color: #f8d7da; /* Fondo rosado para errores */
+    color: #721c24; /* Texto oscuro para errores */
+    padding: 50px; /* Espaciado adicional */
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px; /* Separación debajo del título */
+}
+
+p {
+    font-size: 1.2em;
+}
+
+.error-code {
+    font-size: 4em;
+    margin-top: 20px;
+}
+
+/* Contenedor de la interfaz de usuario (formulario y login) */
+.login-container, .form-container {
     width: 90%; /* Ajuste para pantallas más pequeñas */
-    max-width: 360px;
-    padding: 10px;
+    max-width: 600px; /* Se ajusta para formulario y login */
+    padding: 20px; /* Padding ajustado */
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
-.login-box {
-    padding: 20px;
-}
-
-.login-box h2 {
+.login-box h2, .form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
 }
 
-.textbox {
+/* Estilos para los campos de entrada */
+.textbox, .form-group {
     position: relative;
     margin-bottom: 20px;
 }
 
-.textbox input {
+.textbox input, .form-group input,
+.form-group select, .form-group textarea {
     width: calc(100% - 40px); /* Ajustar el ancho para hacer espacio al icono */
-    padding: 10px 40px 10px 10px; /* Añadir espacio para el icono a la derecha */
+    padding: 10px; /* Se mantiene simple el padding */
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
 }
 
+.textbox input {
+    padding-right: 40px; /* Espacio reservado para el icono */
+}
+
+/* Iconos de entrada */
 .input-icon {
     position: absolute;
     right: 10px;
@@ -49,17 +84,10 @@ body {
     color: #aaa;
 }
 
-.remember-me {
-    margin-bottom: 20px;
-}
-
-.remember-me label {
-    font-size: 14px;
-    color: #666;
-}
-
-.btn-login {
+/* Botón de acción */
+.btn-login, .btn-submit {
     width: 100%;
+    max-width: 350px; /* Establecer un tamaño máximo de ancho */
     padding: 10px;
     background-color: #007bff;
     border: none;
@@ -67,12 +95,14 @@ body {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    margin: 0 auto; /* Centrar los elementos */
 }
 
-.btn-login:hover {
+.btn-login:hover, .btn-submit:hover {
     background-color: #0056b3;
 }
 
+/* Opciones extra (en el login) */
 .extra-options {
     text-align: center;
     margin-top: 20px;
@@ -86,4 +116,224 @@ body {
 
 .extra-options a:hover {
     text-decoration: underline;
+}
+
+/* Estilo para ocultar campos por defecto */
+.form-fields {
+    display: none;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .login-container, .form-container {
+        width: 90%;
+        padding: 10px;
+    }
+}
+
+/* Estilos específicos para la página de aprobación de formularios */
+.approval-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.approval-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.approval-table th, .approval-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.approval-table th {
+    background-color: #f2f2f2;
+}
+
+.status-label {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+}
+
+.status-label.pending {
+    background-color: #ffc107;
+}
+
+.status-label.approved {
+    background-color: #28a745;
+}
+
+.status-label.rejected {
+    background-color: #dc3545;
+}
+
+.btn-approve, .btn-reject {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn-approve {
+    background-color: #28a745;
+}
+
+.btn-reject {
+    background-color: #dc3545;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pagination a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    margin: 0 2px;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+/* Estilos para el Navbar */
+.navbar {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-left, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-item {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.navbar-item:hover {
+    color: #007bff;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.navbar-icon {
+    font-size: 20px;
+    margin-left: 15px;
+    color: #555;
+    text-decoration: none;
+    position: relative;
+}
+
+.navbar-icon:hover {
+    color: #007bff;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+/* Estilos para el Menú Desplegable */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropdown-btn {
+    color: #007bff;
+}
+
+/* Estilos para la página */
+.content-container {
+    margin-top: 80px; /* Espacio para el navbar */
+    text-align: center;
+    padding: 20px;
+}
+
+.centered-message {
+    margin: 20px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.btn-logout {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background-color: #c82333;
 }
