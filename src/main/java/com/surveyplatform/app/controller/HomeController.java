@@ -13,6 +13,12 @@ public class HomeController {
     }
 
     @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("mensaje", "¡Hola, Thymeleaf!");
+        return "index";
+    }
+
+    @GetMapping("/index")
     public String home(Model model) {
         model.addAttribute("mensaje", "¡Hola, Thymeleaf!");
         return "index";

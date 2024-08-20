@@ -20,7 +20,8 @@ public class SecurityConfig {
             "/login",
             "/register",
             "/error",
-            "/styles.css"
+            "/styles.css",
+            "/env-check"
     };
     private final String[] authenticatedList = {
             "/",

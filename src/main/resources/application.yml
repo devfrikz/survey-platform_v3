@@ -6,17 +6,7 @@ server:
       enabled: false
     path: /error
 spring:
+  profiles:
+    active: ${PROFILE_ACTIVE}
   application:
     name: survey-platform
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML5
-logging:
-  level:
-    org.springframework.security: DEBUG
-    org.springframework.web: DEBUG
-    org.springframework.security.web.access: DEBUG
-    org.springframework.security.web.FilterChainProxy: DEBUG
-    org.springframework.security.web.authentication: DEBUG

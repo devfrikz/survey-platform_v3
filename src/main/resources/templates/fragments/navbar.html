@@ -1,11 +1,11 @@
 <!-- fragments/navbar.html -->
 <div th:fragment="navbar" class="navbar">
     <div class="navbar-left">
-        <a href="#" class="navbar-item">Home</a>
+        <a th:href="@{/index}" class="navbar-item">Home</a>
         <div class="dropdown">
             <a href="#" class="navbar-item dropdown-btn">Gestiones</a>
             <div class="dropdown-content">
-                <a th:href="@{/create-form}">Creación de Formularios</a>
+                <a th:href="@{/create-form}">Formularios</a>
                 <a th:href="@{/approvals}">Aprobaciones</a>
             </div>
         </div>
