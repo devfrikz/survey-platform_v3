@@ -1,22 +1,24 @@
 server:
-  servlet:
-    context-path: /survey-platform
-  error:
-    whitelabel:
-      enabled: false
-    path: /error
+  port: 8080  # El puerto en el que se ejecutará la aplicación
+
 spring:
-  application:
-    name: survey-platform
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML5
-logging:
-  level:
-    org.springframework.security: DEBUG
-    org.springframework.web: DEBUG
-    org.springframework.security.web.access: DEBUG
-    org.springframework.security.web.FilterChainProxy: DEBUG
-    org.springframework.security.web.authentication: DEBUG
+  profiles:
+    active: ${PROFILE_ACTIVE:local}  # Toma el perfil activo de la variable de entorno PROFILE_ACTIVE, por defecto 'local'
+
+  main:
+    allow-circular-references: true  # Permite referencias circulares en beans, solo si es absolutamente necesario
+
+  config:
+    name: application
+    location: classpath:/,classpath:/config/,file:./,file:./config/  # Ubicaciones donde Spring buscará archivos de configuración
+
+springdoc:
+  swagger-ui:
+    operationsSorter: method  # Ordena las operaciones por método
+    tagsSorter: alpha  # Ordena las etiquetas alfabéticamente
+
+security:
+  config:
+    jwt:
+      secret: ${JWT_SECRET:surveyplatform-api}  # Secreto JWT configurable vía variable de entorno, con valor por defecto
+      expiration: 86400000
