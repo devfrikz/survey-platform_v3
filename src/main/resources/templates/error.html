@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Error</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 50px;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    p {
+      font-size: 1.2em;
+    }
+    .error-code {
+      font-size: 4em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<h1>¡Algo salió mal!</h1>
+<p>Lo sentimos, ocurrió un error inesperado.</p>
+<p class="error-code" th:text="${status}">Error</p>
+<p th:text="${error}">Detalles del error no disponibles.</p>
+<p th:text="${message}">Mensaje de error no disponible.</p>
+<a href="/" style="color: #721c24; text-decoration: none;">Volver a la página de inicio</a>
+</body>
+</html>

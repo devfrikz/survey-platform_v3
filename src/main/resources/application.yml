@@ -1,0 +1,22 @@
+server:
+  servlet:
+    context-path: /survey-platform
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+spring:
+  application:
+    name: survey-platform
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security.web.access: DEBUG
+    org.springframework.security.web.FilterChainProxy: DEBUG
+    org.springframework.security.web.authentication: DEBUG
