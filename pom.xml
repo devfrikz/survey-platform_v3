@@ -13,19 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>survey-platform</name>
 	<description>Survey Platform V2</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -61,7 +48,6 @@
 			<version>4.0.0</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -74,7 +60,6 @@
 			<version>1.18.30</version>
 			<scope>provided</scope>
 		</dependency>
-
 
 	</dependencies>
 

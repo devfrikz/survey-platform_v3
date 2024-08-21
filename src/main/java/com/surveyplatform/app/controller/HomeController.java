@@ -12,12 +12,6 @@ public class HomeController {
         return "login";  // Retorna la vista login.html
     }
 
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("mensaje", "¡Hola, Thymeleaf!");
-        return "index";
-    }
-
     @GetMapping("/index")
     public String home(Model model) {
         model.addAttribute("mensaje", "¡Hola, Thymeleaf!");
@@ -26,7 +20,7 @@ public class HomeController {
 
     @GetMapping("/login-success")
     public String loginSuccess() {
-        return "redirect:/";  // Redirige manualmente al índice después del login
+        return "redirect:/index";  // Redirige manualmente al índice después del login
     }
 
     @GetMapping("/error")
@@ -34,9 +28,9 @@ public class HomeController {
         return "error";  // Retorna la vista login.html
     }
 
-    @GetMapping("/logout")
-    public String logout() {
-        return "login";  // Retorna la vista login.html
-    }
+//    @GetMapping("/logout")
+//    public String logout() {
+//        return "redirect:/login?logout";  // Retorna la vista login.html
+//    }
 
 }

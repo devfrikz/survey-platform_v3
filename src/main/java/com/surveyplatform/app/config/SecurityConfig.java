@@ -20,7 +20,6 @@ public class SecurityConfig {
             "/login",
             "/register",
             "/error",
-            "/styles.css",
             "/env-check"
     };
     private final String[] authenticatedList = {
@@ -43,7 +42,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/login-success", true)
                         .permitAll()
                 )
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))  // Cambiado temporalmente a IF_REQUIRED
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();

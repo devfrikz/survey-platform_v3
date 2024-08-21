@@ -1,19 +1,50 @@
 <!-- fragments/navbar.html -->
-<div th:fragment="navbar" class="navbar">
-    <div class="navbar-left">
-        <a th:href="@{/index}" class="navbar-item">Home</a>
-        <div class="dropdown">
-            <a href="#" class="navbar-item dropdown-btn">Gestiones</a>
-            <div class="dropdown-content">
-                <a th:href="@{/create-form}">Formularios</a>
-                <a th:href="@{/approvals}">Aprobaciones</a>
-            </div>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a th:href="@{/index}" class="navbar-brand" style="font-family: 'Arial', sans-serif; font-size: 16px;">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: 'Arial', sans-serif; font-size: 16px;">
+                        Gestiones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/create-form}" style="font-family: 'Arial', sans-serif; font-size: 16px;">Formularios</a>
+                        <a class="dropdown-item" th:href="@{/approvals}" style="font-family: 'Arial', sans-serif; font-size: 16px;">Aprobaciones</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-comment-alt"></i>
+                        <span class="badge badge-pill badge-danger">1</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge badge-pill badge-danger">1</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="logout-link" onclick="document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="navbar-right">
-        <a href="#" class="navbar-icon">&#128269;</a>
-        <a href="#" class="navbar-icon">&#128172;<span class="badge">3</span></a>
-        <a href="#" class="navbar-icon">&#128276;<span class="badge">15</span></a>
-        <a th:href="@{/logout}" class="navbar-icon">&#128682;</a> <!-- Icono de logout -->
-    </div>
-</div>
+    <!-- Formulario oculto para logout -->
+    <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+    </form>
+</nav>
+
