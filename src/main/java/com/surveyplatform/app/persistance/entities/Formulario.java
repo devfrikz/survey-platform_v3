@@ -1,4 +1,4 @@
-package com.surveyplatform.app.model;
+package com.surveyplatform.app.persistance.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,5 +16,12 @@ public class Formulario {
     private Integer id;
     private String nombre;
     private String descripcion;
-    // me falta la relación de modulo
+
+    @ManyToOne
+    @JoinColumn(name = "modulo_id", nullable = false)
+    private Modulo modulo;
+
+    @ManyToOne
+    @JoinColumn(name = "tipo_id", nullable = false)
+    private FormularioTipo tipo;
 }

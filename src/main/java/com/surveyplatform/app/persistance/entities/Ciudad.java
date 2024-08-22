@@ -1,4 +1,4 @@
-package com.surveyplatform.app.model;
+package com.surveyplatform.app.persistance.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

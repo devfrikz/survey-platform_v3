@@ -11,10 +11,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class Formulario {
+public class FormularioDto {
     private int id;
     private String tipo;
     private String empleado;
     private LocalDate fechaEnvio;
-    private String estado;
+    private String modulo;
+    private Boolean estado;
 }
