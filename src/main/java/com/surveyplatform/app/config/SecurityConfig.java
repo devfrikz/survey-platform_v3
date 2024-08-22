@@ -19,8 +19,7 @@ public class SecurityConfig {
     private final String[] whiteList = {
             "/login",
             "/register",
-            "/error",
-            "/env-check"
+            "/error"
     };
     private final String[] authenticatedList = {
             "/",

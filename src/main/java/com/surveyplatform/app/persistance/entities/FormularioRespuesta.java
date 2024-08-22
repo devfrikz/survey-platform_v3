@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-@ToString
-@EqualsAndHashCode
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "formulario_respuesta", schema = "crm")
@@ -27,13 +27,9 @@ public class FormularioRespuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String datos; // JSONB could be stored as a String or a more complex JSON object
-    @Column(name = "usuario_id")
-    private int usuarioId;
-    @Column(name = "sucursal_id")
-    private int sucursalId;
+    private String datos;
     @Column(name = "aprobado_por")
-    private String aprobadoPor;
+    private Integer aprobadoPor;
     private Boolean aprobado;
     @Column(name = "notas_aprobacion")
     private String notasAprobacion;
@@ -45,4 +41,12 @@ public class FormularioRespuesta {
     @ManyToOne
     @JoinColumn(name = "formulario_id", nullable = false)
     private Formulario formulario;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "sucursal_id", nullable = false)
+    private Sucursal sucursal;
 }

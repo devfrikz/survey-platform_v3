@@ -21,9 +21,9 @@ public class Usuario {
     @Column(name = "nombre_completo")
     private String nombreCompleto;
     @Column(name = "sucursal_id")
-    private String sucursalId;
+    private Long sucursalId;
     @Column(name = "rol_id")
-    private String rolId;
+    private Long rolId;
     private Boolean activo;
 
 }

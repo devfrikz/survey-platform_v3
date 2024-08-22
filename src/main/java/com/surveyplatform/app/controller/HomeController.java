@@ -28,9 +28,4 @@ public class HomeController {
         return "error";  // Retorna la vista login.html
     }
 
-//    @GetMapping("/logout")
-//    public String logout() {
-//        return "redirect:/login?logout";  // Retorna la vista login.html
-//    }
-
 }

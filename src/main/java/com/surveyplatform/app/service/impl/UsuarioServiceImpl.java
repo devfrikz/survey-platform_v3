@@ -1,13 +1,17 @@
-package com.surveyplatform.app.service;
+package com.surveyplatform.app.service.impl;
 
 import com.surveyplatform.app.persistance.entities.Usuario;
 import com.surveyplatform.app.persistance.repository.UsuarioRepository;
+import com.surveyplatform.app.service.UsuarioService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UsuarioServiceImpl implements IUsuarioService {
+public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
@@ -49,5 +53,16 @@ public class UsuarioServiceImpl implements IUsuarioService {
     public boolean existsByEmail(String email) {
         // Verifica si un usuario con el email especificado existe
         return usuarioRepository.existsByEmail(email);
+    }
+
+    @Override
+    public String getLoggedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal() instanceof UserDetails userDetails) {
+            // Aquí puedes obtener más detalles sobre el usuario
+            return userDetails.getUsername();
+        }
+
+        throw new IllegalStateException("No se pudo obtener el usuario autenticado");
     }
 }

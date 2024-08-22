@@ -14,7 +14,8 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="container mt-5">
   <h2 class="text-center mb-4">Gestión de Formularios</h2>
-  <form action="#" method="post">
+  <form th:action="@{/add-form}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <div class="form-group">
       <label for="form-type">Selecciona el tipo de formulario:</label>
       <select class="form-control" id="form-type" name="formType" required>
@@ -22,7 +23,7 @@
         <option value="permiso">Formulario de Permiso</option>
         <option value="credito">Formulario de Aprobación de Crédito</option>
         <option value="descuento">Formulario de Descuento</option>
-        <option value="referral">Formulario de Referral</option>
+        <option value="referenciado">Formulario de Referral</option>
       </select>
     </div>
 

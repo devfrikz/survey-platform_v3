@@ -53,11 +53,21 @@
     <!-- Paginación (simulada para el ejemplo) -->
     <nav>
         <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            <!-- Link para la página anterior -->
+            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{/approvals(size=${size}, page=${currentPage - 1})}">&laquo;</a>
+            </li>
+
+            <!-- Links para cada página -->
+            <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                th:classappend="${i} == ${currentPage} ? 'active'">
+                <a class="page-link" th:href="@{/approvals(size=${size}, page=${i})}" th:text="${i + 1}">1</a>
+            </li>
+
+            <!-- Link para la página siguiente -->
+            <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{/approvals(size=${size}, page=${currentPage + 1})}">&raquo;</a>
+            </li>
         </ul>
     </nav>
 </div>
