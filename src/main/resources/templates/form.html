@@ -28,7 +28,7 @@
     </div>
 
     <!-- Campos del Formulario de Permiso -->
-    <div id="permiso-fields" class="form-fields">
+    <div id="permiso-fields" class="form-fields" style="display: none;">
       <div class="form-group">
         <label for="permiso-fecha">Fecha de Inicio:</label>
         <input type="date" class="form-control" id="permiso-fecha" name="permisoFecha">
@@ -40,7 +40,7 @@
     </div>
 
     <!-- Campos del Formulario de Aprobación de Crédito -->
-    <div id="credito-fields" class="form-fields">
+    <div id="credito-fields" class="form-fields" style="display: none;">
       <div class="form-group">
         <label for="credito-amount">Monto del Crédito:</label>
         <input type="number" class="form-control" id="credito-amount" name="creditoAmount">
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Campos del Formulario de Descuento -->
-    <div id="descuento-fields" class="form-fields">
+    <div id="descuento-fields" class="form-fields" style="display: none;">
       <div class="form-group">
         <label for="descuento-porcentaje">Porcentaje de Descuento:</label>
         <input type="number" class="form-control" id="descuento-porcentaje" name="descuentoPorcentaje">
@@ -64,7 +64,7 @@
     </div>
 
     <!-- Campos del Formulario de Referral -->
-    <div id="referral-fields" class="form-fields">
+    <div id="referral-fields" class="form-fields" style="display: none;">
       <div class="form-group">
         <label for="referral-nombre">Nombre del Cliente Referido:</label>
         <input type="text" class="form-control" id="referral-nombre" name="referralNombre">
@@ -82,15 +82,22 @@
 </div>
 
 <script>
-  // Script para mostrar/ocultar campos según el tipo de formulario seleccionado
-  document.getElementById('form-type').addEventListener('change', function () {
-    var formType = this.value;
+  document.addEventListener("DOMContentLoaded", function() {
+    // Ocultar todos los campos al cargar la página
     document.querySelectorAll('.form-fields').forEach(function (element) {
       element.style.display = 'none';
     });
-    if (formType) {
-      document.getElementById(formType + '-fields').style.display = 'block';
-    }
+
+    // Mostrar campos específicos cuando se selecciona un tipo de formulario
+    document.getElementById('form-type').addEventListener('change', function () {
+      var formType = this.value;
+      document.querySelectorAll('.form-fields').forEach(function (element) {
+        element.style.display = 'none';
+      });
+      if (formType) {
+        document.getElementById(formType + '-fields').style.display = 'block';
+      }
+    });
   });
 </script>
 </body>

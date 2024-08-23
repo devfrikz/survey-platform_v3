@@ -7,20 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";  // Retorna la vista login.html
-    }
-
     @GetMapping("/index")
     public String home(Model model) {
         model.addAttribute("mensaje", "¡Hola, Thymeleaf!");
         return "index";
-    }
-
-    @GetMapping("/login-success")
-    public String loginSuccess() {
-        return "redirect:/index";  // Redirige manualmente al índice después del login
     }
 
     @GetMapping("/error")

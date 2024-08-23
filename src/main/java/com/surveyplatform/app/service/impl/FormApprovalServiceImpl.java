@@ -2,12 +2,13 @@ package com.surveyplatform.app.service.impl;
 
 import com.surveyplatform.app.dto.FormularioDto;
 import com.surveyplatform.app.dto.SubmittedFormDto;
+import com.surveyplatform.app.exception.SurveyPlatformException;
 import com.surveyplatform.app.mapper.FormApprovalMapper;
 import com.surveyplatform.app.persistance.entities.Formulario;
 import com.surveyplatform.app.persistance.entities.FormularioRespuesta;
-import com.surveyplatform.app.persistance.repository.FormApprovalRepository;
-import com.surveyplatform.app.persistance.repository.FormRepository;
-import com.surveyplatform.app.persistance.repository.FormTypeRepository;
+import com.surveyplatform.app.persistance.repository.FormularioRespuestaRepository;
+import com.surveyplatform.app.persistance.repository.FormularioRepository;
+import com.surveyplatform.app.persistance.repository.FormularioTipoRepository;
 import com.surveyplatform.app.persistance.repository.ModuleRepository;
 import com.surveyplatform.app.persistance.repository.SucursalRepository;
 import com.surveyplatform.app.service.FormApprovalService;
@@ -26,15 +27,15 @@ import java.sql.Timestamp;
 @Slf4j
 public class FormApprovalServiceImpl implements FormApprovalService {
     private final SucursalRepository sucursalRepository;
-    private final FormRepository formRepository;
-    private final FormApprovalRepository formApprovalRepository;
+    private final FormularioRepository formularioRepository;
+    private final FormularioRespuestaRepository formularioRespuestaRepository;
     private final ModuleRepository moduleRepository;
-    private final FormTypeRepository formTypeRepository;
+    private final FormularioTipoRepository formularioTipoRepository;
 
     private final UsuarioService userService;
 
     public Page<FormularioDto> getPendingForms(Pageable pageable) {
-        var forms = formApprovalRepository.findAll(pageable);
+        var forms = formularioRespuestaRepository.findAll(pageable);
         var list = forms.getContent().stream().map(FormApprovalMapper.MAPPER::toDto).toList();
 
         return new PageImpl<>(list, pageable, forms.getTotalElements());
@@ -43,12 +44,10 @@ public class FormApprovalServiceImpl implements FormApprovalService {
     public void addForm(SubmittedFormDto submittedFormDto) {
         var loggedUser = userService.getLoggedUser();
 
-        var user = userService.findByEmail(loggedUser).orElseThrow();
-        var sucursal = sucursalRepository.findById(user.getSucursalId()).orElseThrow();
-
-        var formType = formTypeRepository.findByTipoIgnoreCase(submittedFormDto.getFormType()).orElseThrow();
-
-        var module = moduleRepository.findById(1L).orElseThrow();//TODO ver de donde obtener el modulo
+        var user = userService.findByEmail(loggedUser).orElseThrow(() -> new SurveyPlatformException("Usuario no encontrado", 404));
+        var sucursal = sucursalRepository.findById(user.getSucursalId()).orElseThrow(() -> new SurveyPlatformException("Sucursal no encontrada", 404));
+        var formType = formularioTipoRepository.findByTipoIgnoreCase(submittedFormDto.getFormType()).orElseThrow(() -> new SurveyPlatformException("Tipo de formulario no encontrado", 404));
+        var module = moduleRepository.findById(1L).orElseThrow(() -> new SurveyPlatformException("Modulo no encontrado", 404));//TODO ver de donde obtener el modulo
 
         var form = Formulario.builder()
                 .nombre(formType.getDescripcion())
@@ -57,7 +56,7 @@ public class FormApprovalServiceImpl implements FormApprovalService {
                 .tipo(formType)
                 .build();
 
-        var formSaved = formRepository.save(form);
+        var formSaved = formularioRepository.save(form);
 
         var formularioRespuesta = FormularioRespuesta.builder()
                 .formulario(formSaved)
@@ -75,12 +74,11 @@ public class FormApprovalServiceImpl implements FormApprovalService {
             case "referral" -> log.info("Guardando formulario de referido");
             default -> {
                 var message = "Tipo de formulario no soportado: " + submittedFormDto.getFormType();
-                throw new IllegalArgumentException(message);
+                throw new SurveyPlatformException(message, 400);
             }
         }
 
-        // Mapea el DTO a la entidad y guarda en la base de datos
-        formApprovalRepository.save(formularioRespuesta);
+        formularioRespuestaRepository.save(formularioRespuesta);
         log.info("Formulario guardado: {}", formularioRespuesta.getId());
     }
 }
