@@ -14,6 +14,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     Optional<Usuario> findByEmail(String email);
 
+    Optional<Usuario> findByUsernameOrEmail(String username, String email);
 
     List<Usuario> findByIdIn(List<Integer> userIds);
 
@@ -21,4 +22,3 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     Boolean existsByEmail(String email);
 }
-

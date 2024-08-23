@@ -28,15 +28,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Optional<Usuario> findByUsernameOrEmail(String usernameOrEmail) {
-        return Optional.empty();
+        return usuarioRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
     }
-
 
     @Override
     public Optional<Usuario> findByUsernameOrEmail(String username, String email) {
-        return Optional.empty();
+        return usuarioRepository.findByUsernameOrEmail(username, email);
     }
-
 
     @Override
     public boolean existsByUsername(String username) {

@@ -6,12 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -37,7 +34,7 @@ public class SecurityConfig {
                     for (String pattern : whiteList) {
                         auth.requestMatchers(new MvcRequestMatcher(introspector, pattern)).permitAll();
                     }
-                    auth.requestMatchers(authenticatedList).hasAnyRole("ROOT").anyRequest().authenticated();
+                    auth.requestMatchers(authenticatedList).hasRole("ADMIN").anyRequest().authenticated();
                 })
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -50,6 +47,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+
     // Configuración del PasswordEncoder
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -57,23 +55,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        // Fragmento de código comentado: Usuario en memoria para pruebas
-        /*
-        UserDetails user =
-                User.builder()
-                        .username("admin@test.com")
-                        .password(passwordEncoder.encode("admin"))
-                        .roles("ROOT")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
-        */
-
-        // Comentado para usar la base de datos en lugar de usuarios en memoria
-        // return new InMemoryUserDetailsManager();  // Aquí podrías dejarlo vacío si no quieres usar un usuario en memoria
-
-        // Aquí se debe retornar la implementación personalizada del servicio que consulta la base de datos
-        return new CustomUserDetailsService(); // Asegúrate de que esta clase está correctamente implementada
+    public UserDetailsService userDetailsService() {
+        return new CustomUserDetailsService();  // Implementación personalizada
     }
 }
