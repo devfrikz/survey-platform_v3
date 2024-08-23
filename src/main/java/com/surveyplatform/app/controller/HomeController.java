@@ -1,3 +1,4 @@
+/*
 package com.surveyplatform.app.controller;
 
 import org.springframework.stereotype.Controller;
@@ -29,3 +30,4 @@ public class HomeController {
     }
 
 }
+*/

@@ -1,3 +1,5 @@
+package com.surveyplatform.app.controller;
+
 import com.surveyplatform.app.persistance.entities.Usuario;
 import com.surveyplatform.app.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,15 +51,18 @@ public class AuthController {
     }
 
     @GetMapping("/index")
-    public String showIndex() {
+    public String showIndex(Model model) {
+        model.addAttribute("mensaje", "¡Hola, Thymeleaf!");
         return "index";
     }
 
-    // Fragmento comentado para referencia futura
-    /*
-    @GetMapping("/dashboard")
-    public String showDashboard() {
-        return "dashboard";
+    @GetMapping("/login-success")
+    public String loginSuccess() {
+        return "redirect:/index";  // Redirige manualmente al índice después del login
     }
-    */
+
+    @GetMapping("/error")
+    public String error() {
+        return "error";  // Retorna la vista error.html
+    }
 }
