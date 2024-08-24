@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,10 +15,10 @@ public class SubmittedFormDto {
     private String formType;
     private String permisoFecha;
     private Integer permisoDuracion;
-    private Double creditoAmount;
+    private BigDecimal creditoAmount;
     private String creditoCliente;
-    private Integer descuentoPorcentaje;
+    private BigDecimal descuentoPorcentaje;
     private String descuentoRazon;
-    private String referralNombre;
-    private String referralEmail;
+    private String nombreClienteReferenciado;
+    private String emailClienteReferenciado;
 }

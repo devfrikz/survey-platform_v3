@@ -1,8 +1,12 @@
-package com.surveyplatform.app.config;
+package com.surveyplatform.app.config.security;
 
+import com.surveyplatform.app.controller.handler.CustomAuthenticationFailureHandler;
 import com.surveyplatform.app.service.CustomUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,7 +18,10 @@ import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     private final String[] whiteList = {
             "/login",
@@ -38,6 +45,7 @@ public class SecurityConfig {
                 })
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .failureHandler(customAuthenticationFailureHandler)  // Usa el handler personalizado
                         .defaultSuccessUrl("/login-success", true)
                         .permitAll()
                 )
@@ -57,5 +65,12 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailsService();  // Implementación personalizada
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(userDetailsService);
+        return authenticationManagerBuilder.build();
     }
 }

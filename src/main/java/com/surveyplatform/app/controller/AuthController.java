@@ -50,19 +50,8 @@ public class AuthController {
         return "login";
     }
 
-    @GetMapping("/index")
-    public String showIndex(Model model) {
-        model.addAttribute("mensaje", "¡Hola, Thymeleaf!");
-        return "index";
-    }
-
     @GetMapping("/login-success")
     public String loginSuccess() {
         return "redirect:/index";  // Redirige manualmente al índice después del login
-    }
-
-    @GetMapping("/error")
-    public String error() {
-        return "error";  // Retorna la vista error.html
     }
 }

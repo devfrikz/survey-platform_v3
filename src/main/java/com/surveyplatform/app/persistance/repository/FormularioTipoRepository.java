@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface FormTypeRepository extends JpaRepository<FormularioTipo, Long> {
+public interface FormularioTipoRepository extends JpaRepository<FormularioTipo, Long> {
     Optional<FormularioTipo> findByTipoIgnoreCase(String formType);
 }
