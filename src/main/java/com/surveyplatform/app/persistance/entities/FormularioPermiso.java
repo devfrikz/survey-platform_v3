@@ -11,15 +11,19 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "formulario_permiso", schema = "crm")
+@Getter
+@Setter
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "formulario_permiso", schema = "crm")
 public class FormularioPermiso {
 
     @Id
@@ -35,36 +39,4 @@ public class FormularioPermiso {
 
     @Column(name = "duracion_dias")
     private Integer duracionDias;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Formulario getFormulario() {
-        return formulario;
-    }
-
-    public void setFormulario(Formulario formulario) {
-        this.formulario = formulario;
-    }
-
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public Integer getDuracionDias() {
-        return duracionDias;
-    }
-
-    public void setDuracionDias(Integer duracionDias) {
-        this.duracionDias = duracionDias;
-    }
 }
