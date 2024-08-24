@@ -1,20 +1,27 @@
 package com.surveyplatform.app.config.security;
 
+import com.surveyplatform.app.controller.handler.CustomAuthenticationFailureHandler;
+import com.surveyplatform.app.service.CustomUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     private final String[] whiteList = {
             "/login",
@@ -34,10 +41,11 @@ public class SecurityConfig {
                     for (String pattern : whiteList) {
                         auth.requestMatchers(new MvcRequestMatcher(introspector, pattern)).permitAll();
                     }
-                    auth.requestMatchers(authenticatedList).hasAnyRole("ROOT").anyRequest().authenticated();
+                    auth.requestMatchers(authenticatedList).hasRole("ADMIN").anyRequest().authenticated();
                 })
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .failureHandler(customAuthenticationFailureHandler)  // Usa el handler personalizado
                         .defaultSuccessUrl("/login-success", true)
                         .permitAll()
                 )
@@ -47,15 +55,22 @@ public class SecurityConfig {
         return http.build();
     }
 
+
+    // Configuración del PasswordEncoder
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("admin@test.com")
-                        .password("admin")
-                        .roles("ROOT")
-                        .build();
+        return new CustomUserDetailsService();  // Implementación personalizada
+    }
 
-        return new InMemoryUserDetailsManager(user);
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(userDetailsService);
+        return authenticationManagerBuilder.build();
     }
 }
