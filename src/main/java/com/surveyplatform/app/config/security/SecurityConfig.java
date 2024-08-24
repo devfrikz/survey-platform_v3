@@ -1,7 +1,8 @@
 package com.surveyplatform.app.config.security;
 
 import com.surveyplatform.app.controller.handler.CustomAuthenticationFailureHandler;
-import com.surveyplatform.app.service.CustomUserDetailsService;
+import com.surveyplatform.app.persistance.repository.UsuarioRepository;
+import com.surveyplatform.app.service.impl.CustomUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 public class SecurityConfig {
 
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+    private final UsuarioRepository usuarioRepository;
 
     private final String[] whiteList = {
             "/login",
@@ -55,7 +57,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     // Configuración del PasswordEncoder
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -64,13 +65,13 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();  // Implementación personalizada
+        return new CustomUserDetailsServiceImpl(usuarioRepository);  // Implementación personalizada
     }
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userDetailsService);
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         return authenticationManagerBuilder.build();
     }
 }
