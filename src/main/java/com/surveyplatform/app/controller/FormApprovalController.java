@@ -24,12 +24,12 @@ public class FormApprovalController {
     @PostMapping("/add-form")
     public String addForm(SubmittedFormDto submittedFormDto, Model model) {
         formApprovalService.addForm(submittedFormDto);
-        return "form";  // Retorna la vista add-form.html
+        return "form";
     }
 
     @GetMapping("/approvals")
     public String getApprovalPage(Model model,
-                                  @RequestParam(name = "size", defaultValue = "10") int size,
+                                  @RequestParam(name = "size", defaultValue = "5") int size,
                                   @RequestParam(name = "page", defaultValue = "0") int page) {
         var pageable = Pageable.ofSize(size).withPage(page);
         var formularioPage = formApprovalService.getPendingForms(pageable);

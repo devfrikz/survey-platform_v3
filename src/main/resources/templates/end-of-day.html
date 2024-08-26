@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End of Day Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container mt-5">
+    <h3 class="text-center mb-4">End of Day Objectives Achieved.</h3>
+    <form th:action="@{/submit-end-of-day}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        <h4>Brand Building</h4>
+
+        <div class="form-group">
+            <label for="customerDeliveriesPhotos">Customer Deliveries Photos Published:</label>
+            <select class="form-control" id="customerDeliveriesPhotos" name="customerDeliveriesPhotos">
+                <option value="">Select an option</option>
+                <option value="Yes">Yes</option>
+                <option value="None today">None today</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="colleaguePostsShared">Number of Colleague Posts Shared:</label>
+            <input type="number" class="form-control" id="colleaguePostsShared" name="colleaguePostsShared" min="0" max="9999999">
+        </div>
+
+        <div class="form-group">
+            <label for="customerTradeInsPhotos">Customer Trade Ins Photos Published:</label>
+            <select class="form-control" id="customerTradeInsPhotos" name="customerTradeInsPhotos">
+                <option value="">Select an option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="sharedContentFound">Shared Content Found on Internet:</label>
+            <select class="form-control" id="sharedContentFound" name="sharedContentFound">
+                <option value="">Select an option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+
+        <h4>Self Marketing Facebook Market Place</h4>
+
+        <div id="facebookMarketPlaceSection">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="vehicle">Vehicle:</label>
+                    <input type="text" class="form-control" id="vehicle" name="facebookMarketPlace[0].vehicle">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="make">Make:</label>
+                    <input type="text" class="form-control" id="make" name="facebookMarketPlace[0].make">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="model">Model:</label>
+                    <input type="text" class="form-control" id="model" name="facebookMarketPlace[0].model">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="stockNumber">Stock Number:</label>
+                    <input type="text" class="form-control" id="stockNumber" name="facebookMarketPlace[0].stockNumber">
+                </div>
+            </div>
+            <!-- Add more rows as needed -->
+        </div>
+
+        <h4>Self Generated Prospects added to the CRM</h4>
+
+        <div id="crmProspectsSection">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="prospectFirstName">First Name:</label>
+                    <input type="text" class="form-control" id="prospectFirstName" name="crmProspects[0].firstName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="prospectLastName">Last Name:</label>
+                    <input type="text" class="form-control" id="prospectLastName" name="crmProspects[0].lastName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="crmCustomerNumber">CRM Customer Number:</label>
+                    <input type="number" class="form-control" id="crmCustomerNumber" name="crmProspects[0].crmCustomerNumber" min="0" max="9999999">
+                </div>
+            </div>
+            <!-- Add more rows as needed -->
+        </div>
+
+        <h4>Dealership Contribution & Today's Goals Achieved</h4>
+
+        <div class="form-group">
+            <label for="newCarsLeads">New Cars Leads Assigned Today:</label>
+            <input type="number" class="form-control" id="newCarsLeads" name="newCarsLeads" min="0" max="9999999">
+        </div>
+
+        <div class="form-group">
+            <label for="preOwnedLeads">Pre Owned Leads Assigned Today:</label>
+            <input type="number" class="form-control" id="preOwnedLeads" name="preOwnedLeads" min="0" max="9999999">
+        </div>
+
+        <div class="form-group">
+            <label for="newVehiclesDelivered">New Vehicles Delivered Today:</label>
+            <input type="number" class="form-control" id="newVehiclesDelivered" name="newVehiclesDelivered" min="0" max="9999999">
+        </div>
+
+        <div class="form-group">
+            <label for="newVehiclesLeased">New Vehicles Leased For The Month:</label>
+            <input type="number" class="form-control" id="newVehiclesLeased" name="newVehiclesLeased" min="0" max="9999999">
+        </div>
+
+        <div class="form-group">
+            <label for="personalAverageSSI">Personal Average SSI MTD:</label>
+            <input type="number" class="form-control" id="personalAverageSSI" name="personalAverageSSI" min="0" max="9999999">
+        </div>
+
+        <div class="form-group">
+            <label for="newVehicleLastSaleDay">New Vehicle Last Sale Day:</label>
+            <input type="text" class="form-control" id="newVehicleLastSaleDay" name="newVehicleLastSaleDay">
+        </div>
+
+        <div class="form-group">
+            <label for="preOwnedVehiclesDelivered">Pre Owned Vehicles Delivered:</label>
+            <input type="number" class="form-control" id="preOwnedVehiclesDelivered" name="preOwnedVehiclesDelivered" min="0" max="9999999">
+        </div>
+
+        <div class="form-group">
+            <label for="dpFinalsSold">DP Finals Sold:</label>
+            <input type="number" class="form-control" id="dpFinalsSold" name="dpFinalsSold" min="0" max="9999999">
+        </div>
+
+        <div class="form-group text-center mt-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

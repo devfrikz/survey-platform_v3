@@ -18,7 +18,7 @@
         <table class="table table-striped table-bordered approval-table">
             <thead class="thead-light">
             <tr>
-                <th>#</th>
+                <th>Item Id</th>
                 <th>Form Type</th>
                 <th>Employee</th>
                 <th>Date Submitted</th>
@@ -29,7 +29,7 @@
             <tbody>
             <!-- Iterar sobre la lista de formularioDtos -->
             <tr th:each="formulario, iterStat : ${formularios}">
-                <td th:text="${iterStat.count}">1</td>
+                <td th:text="${formulario.id}">1</td>
                 <td th:text="${formulario.tipo}">Permission Request</td>
                 <td th:text="${formulario.empleado}">John Doe</td>
                 <td th:text="${formulario.fechaEnvio}">2023-08-19</td>
@@ -50,7 +50,6 @@
         </table>
     </div>
 
-    <!-- Paginación (simulada para el ejemplo) -->
     <nav>
         <ul class="pagination justify-content-center">
             <!-- Link para la página anterior -->
@@ -72,7 +71,6 @@
     </nav>
 </div>
 
-<!-- Scripts opcionales para manejar acciones de aprobación/rechazo -->
 <script>
     document.querySelectorAll('.btn-success').forEach(button => {
         button.addEventListener('click', function () {

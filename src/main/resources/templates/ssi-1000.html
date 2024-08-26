@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSI 1000</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container mt-5">
+    <h3 class="text-center mb-4">SSI 1000 - Perfect Delivery</h3>
+    <form th:action="@{/submit-ssi-1000}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        <div class="form-group">
+            <label for="guestNameFirst">Guest Name</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" id="guestNameFirst" name="guestNameFirst" class="form-control" placeholder="First" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="guestNameLast" name="guestNameLast" class="form-control" placeholder="Last" required>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mt-4 mb-3"><strong>Dealership Experience Completely Satisfied</strong></h2>
+        <h2 class="mb-4"><strong>COMPLETE PERFECT TEN</strong></h2>
+
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="vehicleCondition" name="vehicleCondition" value="VEHICLE IN PERFECT CONDITION AND CLEAN.">
+                <label class="form-check-label" for="vehicleCondition">
+                    VEHICLE IN PERFECT CONDITION AND CLEAN.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="fullTank" name="fullTank" value="VEHICLE HAS FULL TANK OF FUEL.">
+                <label class="form-check-label" for="fullTank">
+                    VEHICLE HAS FULL TANK OF FUEL.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="jeepWave" name="jeepWave" value="JEEP WAVE PROGRAM DESCRIBED IN FULL DETAIL IF APPLICABLE.">
+                <label class="form-check-label" for="jeepWave">
+                    JEEP WAVE PROGRAM DESCRIBED IN FULL DETAIL IF APPLICABLE.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="poddedVehicle" name="poddedVehicle" value="VEHICLE IS PODDED.">
+                <label class="form-check-label" for="poddedVehicle">
+                    VEHICLE IS PODDED.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="pairPhone" name="pairPhone" value="PAIR CELL PHONE(S) WITH BLUETOOTH.">
+                <label class="form-check-label" for="pairPhone">
+                    PAIR CELL PHONE(S) WITH BLUETOOTH.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="carplayAndroidAuto" name="carplayAndroidAuto" value="DOWNLOAD AND CONNECT APPLE CARPLAY/ANDROID AUTO.">
+                <label class="form-check-label" for="carplayAndroidAuto">
+                    DOWNLOAD AND CONNECT APPLE CARPLAY/ANDROID AUTO.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="serviceKeyDrop" name="serviceKeyDrop" value="SHOW GUEST SERVICE KEY DROP OFF BOX.">
+                <label class="form-check-label" for="serviceKeyDrop">
+                    SHOW GUEST SERVICE KEY DROP OFF BOX.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="serviceWalk" name="serviceWalk" value="SERVICE WALK AND INTRODUCTION TO SERVICE ADVISOR.">
+                <label class="form-check-label" for="serviceWalk">
+                    SERVICE WALK AND INTRODUCTION TO SERVICE ADVISOR.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="osPlusForm" name="osPlusForm" value="OS+ FORM IS COMPLETE.">
+                <label class="form-check-label" for="osPlusForm">
+                    OS+ FORM IS COMPLETE.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="surveyExplanation" name="surveyExplanation" value="EXPLANATION OF BRAND PURCHASED SALES EXPERIENCE SURVEY COMPLETE.">
+                <label class="form-check-label" for="surveyExplanation">
+                    EXPLANATION OF BRAND PURCHASED SALES EXPERIENCE SURVEY COMPLETE.
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="gdprConsent">GDPR Consent</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gdprConsent" name="gdprConsent" value="By checking this box you agree to the terms and conditions of our privacy policy." required>
+                <label class="form-check-label" for="gdprConsent">
+                    By checking this box you <a href="https://deeryusa.com/privacy-policy/" target="_blank"><span style="color:#3F00FF">agree to the terms and conditions</span></a> of our privacy policy.
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="privacyConsent">Privacy Policy Consent</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="privacyConsent" name="privacyConsent" value="ACKNOWLEDGMENT AND CONSENT" required>
+                <label class="form-check-label" for="privacyConsent">
+                    By checking this box you <a href="/privacy-policy" target="_blank"><span style="color:#3F00FF">agree to the terms and conditions</span></a> of our privacy policy.
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group text-center mt-4">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

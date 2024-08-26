@@ -14,6 +14,11 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" th:href="@{/create-form}" style="font-family: 'Arial', sans-serif; font-size: 16px;">Formularios</a>
                         <a class="dropdown-item" th:href="@{/approvals}" style="font-family: 'Arial', sans-serif; font-size: 16px;">Aprobaciones</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/daily-planner}" style="font-family: 'Arial', sans-serif; font-size: 16px;">Daily Planner</a>
+                        <a class="dropdown-item" th:href="@{/customer-needs}" style="font-family: 'Arial', sans-serif; font-size: 16px;">Customer Needs</a>
+                        <a class="dropdown-item" th:href="@{/delivery-checklist}" style="font-family: 'Arial', sans-serif; font-size: 16px;">Delivery Checklist</a>
+                        <a class="dropdown-item" th:href="@{/end-of-day}" style="font-family: 'Arial', sans-serif; font-size: 16px;">End of the Day</a>
                     </div>
                 </li>
             </ul>
@@ -47,4 +52,3 @@
     <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
     </form>
 </nav>
-
