@@ -19,12 +19,12 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 
+@Entity
 @Getter
 @Setter
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name = "formulario_credito", schema = "crm")
 public class FormularioCredito {
     @Id

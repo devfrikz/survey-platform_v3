@@ -17,12 +17,12 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+@Entity
 @Getter
 @Setter
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name = "formulario_referenciado", schema = "crm")
 public class FormularioReferenciado {
     @Id

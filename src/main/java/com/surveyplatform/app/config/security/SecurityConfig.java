@@ -2,10 +2,12 @@ package com.surveyplatform.app.config.security;
 
 import com.surveyplatform.app.controller.handler.CustomAuthenticationFailureHandler;
 import com.surveyplatform.app.persistance.repository.UsuarioRepository;
+import com.surveyplatform.app.service.CustomUserDetailsService;
 import com.surveyplatform.app.service.impl.CustomUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -64,7 +66,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    @Primary
+    public CustomUserDetailsService userDetailsService() {
         return new CustomUserDetailsServiceImpl(usuarioRepository);  // Implementación personalizada
     }
 
