@@ -17,12 +17,12 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Entity
 @Getter
 @Setter
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name = "formulario_permiso", schema = "crm")
 public class FormularioPermiso {
 

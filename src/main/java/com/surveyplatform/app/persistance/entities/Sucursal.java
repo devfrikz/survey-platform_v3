@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@Builder(toBuilder = true)
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@NoArgsConstructor
 @Table(name = "sucursal", schema = "seguridad")
 public class Sucursal {
 

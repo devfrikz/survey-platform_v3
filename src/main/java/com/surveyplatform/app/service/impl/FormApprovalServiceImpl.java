@@ -69,6 +69,7 @@ public class FormApprovalServiceImpl implements FormApprovalService {
                 .descripcion(submittedFormDto.getFormType())
                 .modulo(module)
                 .tipo(formType)
+                .usuario(user)
                 .build();
 
         var formSaved = formularioRepository.save(form);
