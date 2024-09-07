@@ -2,6 +2,7 @@ package com.surveyplatform.app.persistance.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,15 +16,26 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String username;
+
     private String password;
+
     private String email;
+
     @Column(name = "nombre_completo")
     private String nombreCompleto;
-    @Column(name = "sucursal_id")
-    private Long sucursalId;
-    @Column(name = "rol_id")
-    private Long rolId;
-    private Boolean activo;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sucursal_id", referencedColumnName = "id")
+    private Sucursal sucursal;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_rol",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Rol> roles;  // Relación Many-to-Many con roles
+
+    private Boolean activo;
 }

@@ -2,6 +2,7 @@ package com.surveyplatform.app.persistance.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,6 +16,7 @@ public class Sucursal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nombre;
 
     @ManyToOne
@@ -25,4 +27,6 @@ public class Sucursal {
     @JoinColumn(name = "pais_id", referencedColumnName = "id")
     private Pais pais;
 
+    @OneToMany(mappedBy = "sucursal", fetch = FetchType.LAZY)
+    private Set<Usuario> usuarios;  // Relación con Usuarios
 }

@@ -10,15 +10,7 @@ import com.surveyplatform.app.persistance.entities.FormularioDescuento;
 import com.surveyplatform.app.persistance.entities.FormularioPermiso;
 import com.surveyplatform.app.persistance.entities.FormularioReferenciado;
 import com.surveyplatform.app.persistance.entities.FormularioRespuesta;
-import com.surveyplatform.app.persistance.repository.FormularioCreditoRepository;
-import com.surveyplatform.app.persistance.repository.FormularioDescuentoRepository;
-import com.surveyplatform.app.persistance.repository.FormularioPermisoRepository;
-import com.surveyplatform.app.persistance.repository.FormularioReferenciadoRepository;
-import com.surveyplatform.app.persistance.repository.FormularioRespuestaRepository;
-import com.surveyplatform.app.persistance.repository.FormularioRepository;
-import com.surveyplatform.app.persistance.repository.FormularioTipoRepository;
-import com.surveyplatform.app.persistance.repository.ModuleRepository;
-import com.surveyplatform.app.persistance.repository.SucursalRepository;
+import com.surveyplatform.app.persistance.repository.*;
 import com.surveyplatform.app.service.FormApprovalService;
 import com.surveyplatform.app.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +28,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Slf4j
 public class FormApprovalServiceImpl implements FormApprovalService {
+
     private final FormularioReferenciadoRepository formularioReferenciadoRepository;
     private final SucursalRepository sucursalRepository;
     private final ModuleRepository moduleRepository;
@@ -48,22 +41,55 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
     private final UsuarioService userService;
 
+    // Obtener formularios pendientes
     public Page<FormularioDto> getPendingForms(Pageable pageable) {
-        var forms = formularioRespuestaRepository.findAll(pageable);
-        var list = forms.getContent().stream().map(FormApprovalMapper.MAPPER::toDto).toList();
+        var formularioRespuestas = formularioRespuestaRepository.findAll(pageable);
 
-        return new PageImpl<>(list, pageable, forms.getTotalElements());
+        // Mapeo directo desde FormularioRespuesta a FormularioDto
+        var list = formularioRespuestas.getContent().stream()
+                .map(FormApprovalMapper.MAPPER::toDto)
+                .toList();
+
+        return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
+    }
+
+    // Obtener formularios filtrados por sucursal y rol
+    public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable, Long sucursalId, Long rolId) {
+        var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndUsuarioRolId(sucursalId, rolId, pageable);
+
+        // Mapear directamente FormularioRespuesta a FormularioDto
+        var list = formularioRespuestas.getContent().stream()
+                .map(FormApprovalMapper.MAPPER::toDto)
+                .toList();
+
+        return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
     }
 
     @Transactional
     public void addForm(SubmittedFormDto submittedFormDto) {
         var loggedUser = userService.getLoggedUser();
 
-        var user = userService.findByEmail(loggedUser).orElseThrow(() -> new SurveyPlatformException("Usuario no encontrado", 404));
-        var sucursal = sucursalRepository.findById(user.getSucursalId()).orElseThrow(() -> new SurveyPlatformException("Sucursal no encontrada", 404));
-        var formType = formularioTipoRepository.findByTipoIgnoreCase(submittedFormDto.getFormType()).orElseThrow(() -> new SurveyPlatformException("Tipo de formulario no encontrado", 404));
-        var module = moduleRepository.findById(1L).orElseThrow(() -> new SurveyPlatformException("Modulo no encontrado", 404));//TODO ver de donde obtener el modulo
+        // Buscar el usuario en la base de datos
+        var user = userService.findByEmail(loggedUser)
+                .orElseThrow(() -> new SurveyPlatformException("Usuario no encontrado", 404));
 
+        // Acceder directamente a la sucursal desde el usuario
+        var sucursal = user.getSucursal();  // Esto accede a la relación ManyToOne en la entidad Usuario
+
+        // Verificar si la sucursal existe
+        if (sucursal == null) {
+            throw new SurveyPlatformException("Sucursal no encontrada para el usuario", 404);
+        }
+
+        // Encontrar el tipo de formulario basado en la descripción
+        var formType = formularioTipoRepository.findByTipoIgnoreCase(submittedFormDto.getFormType())
+                .orElseThrow(() -> new SurveyPlatformException("Tipo de formulario no encontrado", 404));
+
+        // Encontrar el módulo asociado al formulario
+        var module = moduleRepository.findById(1L)
+                .orElseThrow(() -> new SurveyPlatformException("Modulo no encontrado", 404)); // TODO: Ver de dónde obtener el módulo
+
+        // Crear el formulario
         var form = Formulario.builder()
                 .nombre(formType.getDescripcion())
                 .descripcion(submittedFormDto.getFormType())
@@ -74,15 +100,17 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
         var formSaved = formularioRepository.save(form);
 
+        // Crear la respuesta del formulario asociada al usuario y la sucursal
         var formularioRespuesta = FormularioRespuesta.builder()
                 .formulario(formSaved)
                 .usuario(user)
-                .sucursal(sucursal)
-                .datos("")//TODO chequear para que es este campo
+                .sucursal(sucursal)  // Asignar la sucursal directamente desde el usuario
+                .datos("") // TODO: Chequear para qué es este campo
                 .createdAt(new Timestamp(System.currentTimeMillis()))
                 .updatedAt(new Timestamp(System.currentTimeMillis()))
                 .build();
 
+        // Lógica de guardado dependiendo del tipo de formulario (permiso, crédito, descuento, etc.)
         switch (submittedFormDto.getFormType()) {
             case "permiso" -> {
                 var formularioPermiso = FormularioPermiso.builder()
@@ -91,7 +119,7 @@ public class FormApprovalServiceImpl implements FormApprovalService {
                         .fechaInicio(LocalDate.parse(submittedFormDto.getPermisoFecha()))
                         .build();
                 formularioPermisoRepository.save(formularioPermiso);
-                log.info("Guardando formulario de permiso");
+                log.info("Guardando formulario de permiso para el usuario: {}", user.getNombreCompleto());
             }
             case "credito" -> {
                 var formularioCredito = FormularioCredito.builder()
@@ -100,7 +128,7 @@ public class FormApprovalServiceImpl implements FormApprovalService {
                         .nombreCliente(submittedFormDto.getCreditoCliente())
                         .build();
                 formularioCreditoRepository.save(formularioCredito);
-                log.info("Guardando formulario de crédito");
+                log.info("Guardando formulario de crédito para el cliente: {}", submittedFormDto.getCreditoCliente());
             }
             case "descuento" -> {
                 var formularioDescuento = FormularioDescuento.builder()
@@ -118,7 +146,7 @@ public class FormApprovalServiceImpl implements FormApprovalService {
                         .correoCliente(submittedFormDto.getEmailClienteReferenciado())
                         .build();
                 formularioReferenciadoRepository.save(formularioReferido);
-                log.info("Guardando formulario de referido");
+                log.info("Guardando formulario de cliente referido: {}", submittedFormDto.getNombreClienteReferenciado());
             }
             default -> {
                 var message = "Tipo de formulario no soportado: " + submittedFormDto.getFormType();
@@ -126,7 +154,8 @@ public class FormApprovalServiceImpl implements FormApprovalService {
             }
         }
 
+        // Guardar la respuesta del formulario
         formularioRespuestaRepository.save(formularioRespuesta);
-        log.info("Formulario guardado: {}", formularioRespuesta.getId());
+        log.info("Formulario guardado con ID: {}", formularioRespuesta.getId());
     }
 }
