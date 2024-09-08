@@ -45,10 +45,14 @@ public class AuthController {
             }
         } catch (Exception e) {
             model.addAttribute("error", "Ocurrió un error durante la autenticación. Por favor, inténtelo de nuevo.");
+            // Imprimir log en consola o enviar a un servicio de logueo
+            e.printStackTrace();
         }
 
-        return "login";
+        return "login";  // Regresar al login si ocurre un error
     }
+
+
 
     @GetMapping("/login-success")
     public String loginSuccess() {
