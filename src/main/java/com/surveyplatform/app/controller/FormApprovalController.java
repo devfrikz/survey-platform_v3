@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.surveyplatform.app.persistance.entities.Rol;
+
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,8 +40,15 @@ public class FormApprovalController {
             Usuario user = userOpt.get();
             var pageable = Pageable.ofSize(size).withPage(page);
 
-            // Filtrar formularios por sucursal y rol del usuario
-            var formularioPage = formApprovalService.getPendingFormsBySucursalAndRol(user.getSucursal(), user.getRoles(), pageable);
+            // Convertir los roles a una lista de IDs de tipo Long
+            var roleIds = user.getRoles().stream()
+                    .map(Rol::getId)  // Asegúrate de que los IDs sean de tipo Long
+                    .collect(Collectors.toList());
+
+            // Llamar al servicio con los argumentos correctos
+            var formularioPage = formApprovalService.getPendingFormsBySucursalAndRol(pageable, Long.valueOf(user.getSucursal().getId()), roleIds);
+
+
 
             // Añadir los formularios filtrados al modelo para ser mostrados en la vista
             model.addAttribute("formularios", formularioPage.getContent());
@@ -52,6 +62,7 @@ public class FormApprovalController {
         // Si no hay usuario autenticado o hay algún error, redirigir a la página de error
         return "error";
     }
+
 
     @PostMapping("/add-form")
     public String addForm(SubmittedFormDto submittedFormDto, Model model) {
