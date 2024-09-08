@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -53,17 +54,21 @@ public class FormApprovalServiceImpl implements FormApprovalService {
         return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
     }
 
-    // Obtener formularios filtrados por sucursal y rol
-    public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable, Long sucursalId, Long rolId) {
-        var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndUsuarioRolId(sucursalId, rolId, pageable);
+    // Obtener formularios filtrados por sucursal y lista de IDs de roles
+    @Override
+    public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable, Long sucursalId, List<Long> roleIds) {
+        // Usar el nuevo método findBySucursalIdAndRoleIds
+        var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(sucursalId, roleIds, pageable);
 
-        // Mapear directamente FormularioRespuesta a FormularioDto
+        // Mapear FormularioRespuesta a FormularioDto
         var list = formularioRespuestas.getContent().stream()
                 .map(FormApprovalMapper.MAPPER::toDto)
                 .toList();
 
         return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
     }
+
+
 
     @Transactional
     public void addForm(SubmittedFormDto submittedFormDto) {
