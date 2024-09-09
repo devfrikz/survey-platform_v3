@@ -11,7 +11,6 @@ import com.surveyplatform.app.persistance.entities.FormularioPermiso;
 import com.surveyplatform.app.persistance.entities.FormularioReferenciado;
 import com.surveyplatform.app.persistance.entities.FormularioRespuesta;
 import com.surveyplatform.app.persistance.entities.Rol;
-import com.surveyplatform.app.persistance.entities.Usuario;
 import com.surveyplatform.app.persistance.repository.*;
 import com.surveyplatform.app.service.FormApprovalService;
 import com.surveyplatform.app.service.UsuarioService;
@@ -25,9 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,8 +39,9 @@ public class FormApprovalServiceImpl implements FormApprovalService {
     private final FormularioDescuentoRepository formularioDescuentoRepository;
     private final FormularioCreditoRepository formularioCreditoRepository;
     private final FormularioPermisoRepository formularioPermisoRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    private final UsuarioService userService;
+    private final UsuarioService usuarioService;
 
     // Obtener formularios pendientes
     public Page<FormularioDto> getPendingForms(Pageable pageable) {
@@ -61,8 +58,8 @@ public class FormApprovalServiceImpl implements FormApprovalService {
     // Obtener formularios filtrados por sucursal y lista de IDs de roles
     @Override
     public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable) {
-        var username = userService.getLoggedUser();
-        var userOpt = userService.findByUsername(username);
+        var username = usuarioService.getLoggedUser();
+        var userOpt = usuarioRepository.findByUsername(username);
 
         if (userOpt.isPresent()) {
             var user = userOpt.get();
@@ -86,10 +83,10 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
     @Transactional
     public void addForm(SubmittedFormDto submittedFormDto) {
-        var loggedUser = userService.getLoggedUser();
+        var loggedUser = usuarioService.getLoggedUser();
 
         // Buscar el usuario en la base de datos
-        var user = userService.findByEmail(loggedUser)
+        var user = usuarioRepository.findByEmail(loggedUser)
                 .orElseThrow(() -> new SurveyPlatformException("Usuario no encontrado", 404));
 
         // Acceder directamente a la sucursal desde el usuario
