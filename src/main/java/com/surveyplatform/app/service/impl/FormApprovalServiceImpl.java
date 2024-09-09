@@ -10,6 +10,8 @@ import com.surveyplatform.app.persistance.entities.FormularioDescuento;
 import com.surveyplatform.app.persistance.entities.FormularioPermiso;
 import com.surveyplatform.app.persistance.entities.FormularioReferenciado;
 import com.surveyplatform.app.persistance.entities.FormularioRespuesta;
+import com.surveyplatform.app.persistance.entities.Rol;
+import com.surveyplatform.app.persistance.entities.Usuario;
 import com.surveyplatform.app.persistance.repository.*;
 import com.surveyplatform.app.service.FormApprovalService;
 import com.surveyplatform.app.service.UsuarioService;
@@ -24,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -56,19 +60,29 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
     // Obtener formularios filtrados por sucursal y lista de IDs de roles
     @Override
-    public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable, Long sucursalId, List<Long> roleIds) {
-        // Usar el nuevo método findBySucursalIdAndRoleIds
-        var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(sucursalId, roleIds, pageable);
+    public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable) {
+        var username = userService.getLoggedUser();
+        var userOpt = userService.findByUsername(username);
 
-        // Mapear FormularioRespuesta a FormularioDto
-        var list = formularioRespuestas.getContent().stream()
-                .map(FormApprovalMapper.MAPPER::toDto)
-                .toList();
+        if (userOpt.isPresent()) {
+            var user = userOpt.get();
 
-        return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
+            // Convertir los roles a una lista de IDs de tipo Long
+            var roleIds = user.getRoles().stream()
+                    .map(Rol::getId)
+                    .toList();
+            var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), roleIds, pageable);
+
+            // Mapear FormularioRespuesta a FormularioDto
+            var list = formularioRespuestas.getContent().stream()
+                    .map(FormApprovalMapper.MAPPER::toDto)
+                    .toList();
+
+            return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
+        }
+
+        throw new SurveyPlatformException("Usuario no encontrado", 404);
     }
-
-
 
     @Transactional
     public void addForm(SubmittedFormDto submittedFormDto) {

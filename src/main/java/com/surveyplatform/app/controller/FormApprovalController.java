@@ -33,22 +33,9 @@ public class FormApprovalController {
     public String getApprovalPage(Model model,
                                   @RequestParam(name = "size", defaultValue = "5") int size,
                                   @RequestParam(name = "page", defaultValue = "0") int page) {
-        String username = usuarioService.getLoggedUser();  // Obtener el usuario autenticado
-        Optional<Usuario> userOpt = usuarioService.findByUsername(username);
-
-        if (userOpt.isPresent()) {
-            Usuario user = userOpt.get();
+        try {
             var pageable = Pageable.ofSize(size).withPage(page);
-
-            // Convertir los roles a una lista de IDs de tipo Long
-            var roleIds = user.getRoles().stream()
-                    .map(Rol::getId)  // Asegúrate de que los IDs sean de tipo Long
-                    .collect(Collectors.toList());
-
-            // Llamar al servicio con los argumentos correctos
-            var formularioPage = formApprovalService.getPendingFormsBySucursalAndRol(pageable, Long.valueOf(user.getSucursal().getId()), roleIds);
-
-
+            var formularioPage = formApprovalService.getPendingFormsBySucursalAndRol(pageable);
 
             // Añadir los formularios filtrados al modelo para ser mostrados en la vista
             model.addAttribute("formularios", formularioPage.getContent());
@@ -56,13 +43,11 @@ public class FormApprovalController {
             model.addAttribute("totalPages", formularioPage.getTotalPages());
             model.addAttribute("size", size);
 
-            return "approval";  // Retorna la vista approval.html
+            return "approval";
+        } catch (Exception e) {
+            return "error";
         }
-
-        // Si no hay usuario autenticado o hay algún error, redirigir a la página de error
-        return "error";
     }
-
 
     @PostMapping("/add-form")
     public String addForm(SubmittedFormDto submittedFormDto, Model model) {
