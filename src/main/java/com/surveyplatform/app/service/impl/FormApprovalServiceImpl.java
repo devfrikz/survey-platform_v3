@@ -61,18 +61,17 @@ public class FormApprovalServiceImpl implements FormApprovalService {
             var roleIds = usuarioRepository.findRoleIdsByUsernameOrEmail(user.getUsername(), user.getEmail());
 
             try {
-//                var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), roleIds, pageable);
-//                var list = new ArrayList<FormularioDto>();
-//
-//                formularioRespuestas.getContent().forEach(formularioRespuesta -> {
-//                    var formDto = FormApprovalMapper.MAPPER.toDto(formularioRespuesta);
-//                    formDto.setEmpleado(user.getNombreCompleto());
-//                    list.add(formDto);
-//                });
-//
-//
-//                return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
-                throw new SurveyPlatformException("Error al obtener los formularios", 500);
+                var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), roleIds, pageable);
+                var list = new ArrayList<FormularioDto>();
+
+                formularioRespuestas.getContent().forEach(formularioRespuesta -> {
+                    var formDto = FormApprovalMapper.MAPPER.toDto(formularioRespuesta);
+                    formDto.setEmpleado(user.getNombreCompleto());
+                    list.add(formDto);
+                });
+
+
+                return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
             } catch (Exception e) {
                 throw new SurveyPlatformException("Error al obtener los formularios", 500);
             }
