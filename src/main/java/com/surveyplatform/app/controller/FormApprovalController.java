@@ -2,7 +2,6 @@ package com.surveyplatform.app.controller;
 
 import com.surveyplatform.app.dto.SubmittedFormDto;
 import com.surveyplatform.app.exception.SurveyPlatformException;
-import com.surveyplatform.app.persistance.entities.Usuario;
 import com.surveyplatform.app.service.FormApprovalService;
 import com.surveyplatform.app.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -12,11 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.surveyplatform.app.persistance.entities.Rol;
-
-
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor

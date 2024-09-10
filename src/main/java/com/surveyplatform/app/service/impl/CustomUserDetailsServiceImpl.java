@@ -31,12 +31,10 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 
         var roles = usuarioRepository.findRoleNamesByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
-        var userSearched = User.builder()
+        return User.builder()
                 .username(usuario.getUsername())
                 .password(usuario.getPassword())
                 .roles(roles.toArray(String[]::new))
                 .build();
-
-        return userSearched;
     }
 }

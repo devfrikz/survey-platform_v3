@@ -25,7 +25,7 @@ public class ManagementController {
     }
 
     @GetMapping("/ssi-1000")
-    public String  showSSi1000() {
+    public String showSSi1000() {
         return "ssi-1000";
     }
 
