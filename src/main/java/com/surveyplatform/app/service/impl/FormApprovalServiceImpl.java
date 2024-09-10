@@ -31,7 +31,6 @@ import java.time.LocalDate;
 public class FormApprovalServiceImpl implements FormApprovalService {
 
     private final FormularioReferenciadoRepository formularioReferenciadoRepository;
-    private final SucursalRepository sucursalRepository;
     private final ModuleRepository moduleRepository;
     private final FormularioRepository formularioRepository;
     private final FormularioTipoRepository formularioTipoRepository;
@@ -65,8 +64,9 @@ public class FormApprovalServiceImpl implements FormApprovalService {
             var user = userOpt.get();
 
             // Convertir los roles a una lista de IDs de tipo Long
-            var roleIds = user.getRoles().stream()
-                    .map(Rol::getId)
+            var roleIds = usuarioRepository.findRoleIdsByUsernameOrEmail(user.getUsername(), user.getEmail())
+                    .stream()
+                    .map(Long::valueOf)
                     .toList();
             var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), roleIds, pageable);
 

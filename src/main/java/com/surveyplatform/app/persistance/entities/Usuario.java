@@ -35,7 +35,7 @@ public class Usuario {
             name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Rol> roles;  // Relación Many-to-Many con roles
+    private Set<Rol> roles;
 
     private Boolean activo;
 }

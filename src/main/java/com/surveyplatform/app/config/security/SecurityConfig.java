@@ -37,14 +37,30 @@ public class SecurityConfig {
             "/login-success"
     };
 
+    private static final String[] ADMIN_LIST = {
+            "/approvals",
+            "/daily-planner",
+            "/customer-needs"
+    };
+
+    private static final String[] GERENTE_LIST = {
+            "/approvals"
+    };
+
+    private static final String[] VENTAS_LIST = {
+            "/daily-planner",
+            "/customer-needs"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(WHITE_LIST).permitAll();
                     auth
-                            .requestMatchers("/approvals").hasRole("GERENTE")  // Solo gerentes acceden a aprobaciones
-                            .requestMatchers("/daily-planner", "/customer-needs").hasRole("VENTAS")  // Solo ventas accede a estos
+                            .requestMatchers(ADMIN_LIST).hasRole("ADMIN")  // Admin puede acceder sin restricciones
+                            .requestMatchers(GERENTE_LIST).hasRole("GERENTE")  // Solo gerentes acceden a aprobaciones
+                            .requestMatchers(VENTAS_LIST).hasRole("VENTAS")  // Solo ventas accede a estos
                             .requestMatchers(AUTHENTICATED_LIST).authenticated()
                             .anyRequest().authenticated();
                 })
