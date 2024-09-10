@@ -1,6 +1,7 @@
 package com.surveyplatform.app.controller;
 
 import com.surveyplatform.app.dto.SubmittedFormDto;
+import com.surveyplatform.app.exception.SurveyPlatformException;
 import com.surveyplatform.app.persistance.entities.Usuario;
 import com.surveyplatform.app.service.FormApprovalService;
 import com.surveyplatform.app.service.UsuarioService;
@@ -44,8 +45,8 @@ public class FormApprovalController {
             model.addAttribute("size", size);
 
             return "approval";
-        } catch (Exception e) {
-            return "error";
+        } catch (SurveyPlatformException e) {
+            throw new SurveyPlatformException(e.getMessage(), e.getCode());
         }
     }
 

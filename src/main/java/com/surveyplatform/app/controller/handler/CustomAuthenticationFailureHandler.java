@@ -26,8 +26,8 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
             throws IOException {
 
-        HttpErrorInfoDto httpErrorInfoJson = FormatUtils.httpErrorInfoFormatted(HttpStatus.FORBIDDEN, request, exception);
-        log.error(httpErrorInfoJson.toString());
+        var httpErrorInfoJson = FormatUtils.httpErrorInfoFormatted(HttpStatus.FORBIDDEN, request, exception);
+        log.error(httpErrorInfoJson);
         log.error(Arrays.toString(exception.getStackTrace()));
 
         request.setAttribute(STATUS, HttpStatus.INTERNAL_SERVER_ERROR);

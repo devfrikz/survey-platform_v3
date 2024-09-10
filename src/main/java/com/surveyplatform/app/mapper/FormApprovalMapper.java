@@ -26,18 +26,8 @@ public interface FormApprovalMapper {
             @Mapping(source = "formulario.tipo.tipo", target = "tipo"),
             @Mapping(source = "aprobado", target = "estado"),
             @Mapping(source = "createdAt", target = "fechaEnvio", qualifiedByName = "mapTimestampToLocalDate"),
-            @Mapping(source = "usuario.nombreCompleto", target = "empleado")
     })
     FormularioDto toDto(FormularioRespuesta model);
-
-    @Mappings({
-            @Mapping(source = "modulo", target = "formulario.modulo.nombre"),
-            @Mapping(source = "tipo", target = "formulario.tipo.tipo"),
-            @Mapping(source = "estado", target = "aprobado"),
-            @Mapping(source = "fechaEnvio", target = "createdAt", qualifiedByName = "mapLocalDateToTimestamp"),
-            @Mapping(source = "empleado", target = "usuario.nombreCompleto")
-    })
-    FormularioRespuesta toEntity(FormularioDto dto);
 
     @Named("mapTimestampToLocalDate")
     static LocalDate mapTimestampToLocalDate(Timestamp timestamp) {

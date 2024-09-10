@@ -10,8 +10,15 @@ import com.surveyplatform.app.persistance.entities.FormularioDescuento;
 import com.surveyplatform.app.persistance.entities.FormularioPermiso;
 import com.surveyplatform.app.persistance.entities.FormularioReferenciado;
 import com.surveyplatform.app.persistance.entities.FormularioRespuesta;
-import com.surveyplatform.app.persistance.entities.Rol;
-import com.surveyplatform.app.persistance.repository.*;
+import com.surveyplatform.app.persistance.repository.FormularioCreditoRepository;
+import com.surveyplatform.app.persistance.repository.FormularioDescuentoRepository;
+import com.surveyplatform.app.persistance.repository.FormularioPermisoRepository;
+import com.surveyplatform.app.persistance.repository.FormularioReferenciadoRepository;
+import com.surveyplatform.app.persistance.repository.FormularioRepository;
+import com.surveyplatform.app.persistance.repository.FormularioRespuestaRepository;
+import com.surveyplatform.app.persistance.repository.FormularioTipoRepository;
+import com.surveyplatform.app.persistance.repository.ModuleRepository;
+import com.surveyplatform.app.persistance.repository.UsuarioRepository;
 import com.surveyplatform.app.service.FormApprovalService;
 import com.surveyplatform.app.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -42,19 +50,6 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
     private final UsuarioService usuarioService;
 
-    // Obtener formularios pendientes
-    public Page<FormularioDto> getPendingForms(Pageable pageable) {
-        var formularioRespuestas = formularioRespuestaRepository.findAll(pageable);
-
-        // Mapeo directo desde FormularioRespuesta a FormularioDto
-        var list = formularioRespuestas.getContent().stream()
-                .map(FormApprovalMapper.MAPPER::toDto)
-                .toList();
-
-        return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
-    }
-
-    // Obtener formularios filtrados por sucursal y lista de IDs de roles
     @Override
     public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable) {
         var username = usuarioService.getLoggedUser();
@@ -63,19 +58,24 @@ public class FormApprovalServiceImpl implements FormApprovalService {
         if (userOpt.isPresent()) {
             var user = userOpt.get();
 
-            // Convertir los roles a una lista de IDs de tipo Long
-            var roleIds = usuarioRepository.findRoleIdsByUsernameOrEmail(user.getUsername(), user.getEmail())
-                    .stream()
-                    .map(Long::valueOf)
-                    .toList();
-            var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), roleIds, pageable);
+            var roleIds = usuarioRepository.findRoleIdsByUsernameOrEmail(user.getUsername(), user.getEmail());
 
-            // Mapear FormularioRespuesta a FormularioDto
-            var list = formularioRespuestas.getContent().stream()
-                    .map(FormApprovalMapper.MAPPER::toDto)
-                    .toList();
-
-            return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
+            try {
+//                var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), roleIds, pageable);
+//                var list = new ArrayList<FormularioDto>();
+//
+//                formularioRespuestas.getContent().forEach(formularioRespuesta -> {
+//                    var formDto = FormApprovalMapper.MAPPER.toDto(formularioRespuesta);
+//                    formDto.setEmpleado(user.getNombreCompleto());
+//                    list.add(formDto);
+//                });
+//
+//
+//                return new PageImpl<>(list, pageable, formularioRespuestas.getTotalElements());
+                throw new SurveyPlatformException("Error al obtener los formularios", 500);
+            } catch (Exception e) {
+                throw new SurveyPlatformException("Error al obtener los formularios", 500);
+            }
         }
 
         throw new SurveyPlatformException("Usuario no encontrado", 404);
@@ -85,27 +85,21 @@ public class FormApprovalServiceImpl implements FormApprovalService {
     public void addForm(SubmittedFormDto submittedFormDto) {
         var loggedUser = usuarioService.getLoggedUser();
 
-        // Buscar el usuario en la base de datos
         var user = usuarioRepository.findByEmail(loggedUser)
                 .orElseThrow(() -> new SurveyPlatformException("Usuario no encontrado", 404));
 
-        // Acceder directamente a la sucursal desde el usuario
-        var sucursal = user.getSucursal();  // Esto accede a la relación ManyToOne en la entidad Usuario
+        var sucursal = user.getSucursal();
 
-        // Verificar si la sucursal existe
         if (sucursal == null) {
             throw new SurveyPlatformException("Sucursal no encontrada para el usuario", 404);
         }
 
-        // Encontrar el tipo de formulario basado en la descripción
         var formType = formularioTipoRepository.findByTipoIgnoreCase(submittedFormDto.getFormType())
                 .orElseThrow(() -> new SurveyPlatformException("Tipo de formulario no encontrado", 404));
 
-        // Encontrar el módulo asociado al formulario
         var module = moduleRepository.findById(1L)
                 .orElseThrow(() -> new SurveyPlatformException("Modulo no encontrado", 404)); // TODO: Ver de dónde obtener el módulo
 
-        // Crear el formulario
         var form = Formulario.builder()
                 .nombre(formType.getDescripcion())
                 .descripcion(submittedFormDto.getFormType())
@@ -116,17 +110,15 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
         var formSaved = formularioRepository.save(form);
 
-        // Crear la respuesta del formulario asociada al usuario y la sucursal
         var formularioRespuesta = FormularioRespuesta.builder()
                 .formulario(formSaved)
-                .usuario(user)
-                .sucursal(sucursal)  // Asignar la sucursal directamente desde el usuario
+                .usuario(Long.valueOf(user.getId()))
+                .sucursal(sucursal)
                 .datos("") // TODO: Chequear para qué es este campo
                 .createdAt(new Timestamp(System.currentTimeMillis()))
                 .updatedAt(new Timestamp(System.currentTimeMillis()))
                 .build();
 
-        // Lógica de guardado dependiendo del tipo de formulario (permiso, crédito, descuento, etc.)
         switch (submittedFormDto.getFormType()) {
             case "permiso" -> {
                 var formularioPermiso = FormularioPermiso.builder()
@@ -170,7 +162,6 @@ public class FormApprovalServiceImpl implements FormApprovalService {
             }
         }
 
-        // Guardar la respuesta del formulario
         formularioRespuestaRepository.save(formularioRespuesta);
         log.info("Formulario guardado con ID: {}", formularioRespuesta.getId());
     }

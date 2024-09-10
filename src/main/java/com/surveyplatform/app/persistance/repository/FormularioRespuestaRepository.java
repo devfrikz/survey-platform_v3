@@ -11,10 +11,19 @@ import java.util.List;
 
 public interface FormularioRespuestaRepository extends JpaRepository<FormularioRespuesta, Long> {
 
-    // Usar una consulta JPQL para filtrar por sucursal y lista de IDs de roles
-    @Query("SELECT fr FROM FormularioRespuesta fr " +
-            "JOIN fr.usuario u " +
-            "JOIN u.roles r " +
-            "WHERE fr.sucursal.id = :sucursalId AND r.id IN :roleIds")
+    @Query(value = "SELECT DISTINCT fr.* " +
+            "FROM crm.formulario_respuesta fr " +
+            "JOIN seguridad.usuario u ON fr.usuario_id = u.id " +
+            "JOIN seguridad.usuario_rol ur ON u.id = ur.usuario_id " +
+            "JOIN seguridad.rol r ON ur.rol_id = r.id " +
+            "WHERE fr.sucursal_id = :sucursalId AND r.id IN :roleIds",
+            countQuery = "SELECT COUNT(DISTINCT fr.id) " +
+                    "FROM crm.formulario_respuesta fr " +
+                    "JOIN seguridad.usuario u ON fr.usuario_id = u.id " +
+                    "JOIN seguridad.usuario_rol ur ON u.id = ur.usuario_id " +
+                    "JOIN seguridad.rol r ON ur.rol_id = r.id " +
+                    "WHERE fr.sucursal_id = :sucursalId AND r.id IN :roleIds",
+            nativeQuery = true)
     Page<FormularioRespuesta> findBySucursalIdAndRoleIds(@Param("sucursalId") Long sucursalId, @Param("roleIds") List<Long> roleIds, Pageable pageable);
+
 }

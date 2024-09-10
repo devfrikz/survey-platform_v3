@@ -1,18 +1,17 @@
 package com.surveyplatform.app.controller.handler;
 
-import com.surveyplatform.app.dto.HttpErrorInfoDto;
 import com.surveyplatform.app.exception.SurveyPlatformException;
 import com.surveyplatform.app.utils.FormatUtils;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 
 @RestControllerAdvice
 @Slf4j
@@ -21,49 +20,51 @@ public class ExceptionControllerHandler {
     public static final String STATUS = "status";
     public static final String ERROR = "error";
     public static final String MESSAGE = "message";
-    public static final String URL_ERROR = "/survey-platform/error";
 
     @ExceptionHandler(value = {Exception.class})
     @ResponseBody
-    public void handleException(Exception exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpErrorInfoDto httpErrorInfoJson = FormatUtils.httpErrorInfoFormatted(HttpStatus.INTERNAL_SERVER_ERROR, request, exception);
-        log.error(httpErrorInfoJson.toString());
-        log.error(Arrays.toString(exception.getStackTrace()));
+    public ModelAndView handleException(Exception exception, HttpServletRequest request) {
+        var httpErrorInfoDto = FormatUtils.httpErrorInfoFormatted(HttpStatus.INTERNAL_SERVER_ERROR, request, exception);
+        var modelAndView = new ModelAndView(ERROR);
 
-        request.setAttribute(STATUS, HttpStatus.INTERNAL_SERVER_ERROR);
-        request.setAttribute(ERROR, exception.getCause().getMessage());
-        request.setAttribute(MESSAGE, exception.getMessage());
-        response.sendRedirect(URL_ERROR);
+        log.error(httpErrorInfoDto);
+        log.error("Exception occurred", exception);
+
+        modelAndView.addObject(STATUS, Objects.requireNonNull(modelAndView.getStatus()).value());
+        modelAndView.addObject(MESSAGE, exception.getMessage());
+
+        return modelAndView;
     }
 
     @ExceptionHandler(value = {SurveyPlatformException.class})
     @ResponseBody
-    public void handleServiceException(SurveyPlatformException exception, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpErrorInfoDto httpErrorInfoJson;
+    public ModelAndView handleServiceException(SurveyPlatformException exception, HttpServletRequest request) {
+        var httpErrorInfoDto = "";
+        var modelAndView = new ModelAndView(ERROR);
 
         switch (exception.getCode()) {
             case 400 -> {
-                httpErrorInfoJson = FormatUtils.httpErrorInfoFormatted(HttpStatus.BAD_REQUEST, request, exception);
-                log.error(httpErrorInfoJson.toString());
-                log.error(Arrays.toString(exception.getStackTrace()));
-                request.setAttribute(STATUS, HttpStatus.BAD_REQUEST);
+                httpErrorInfoDto = FormatUtils.httpErrorInfoFormatted(HttpStatus.BAD_REQUEST, request, exception);
+                modelAndView.setStatus(HttpStatus.BAD_REQUEST);
             }
             case 404 -> {
-                httpErrorInfoJson = FormatUtils.httpErrorInfoFormatted(HttpStatus.NOT_FOUND, request, exception);
-                log.error(httpErrorInfoJson.toString());
-                log.error(Arrays.toString(exception.getStackTrace()));
-                request.setAttribute(STATUS, HttpStatus.NOT_FOUND);
+                httpErrorInfoDto = FormatUtils.httpErrorInfoFormatted(HttpStatus.NOT_FOUND, request, exception);
+                modelAndView.setStatus(HttpStatus.NOT_FOUND);
             }
             default -> {
-                httpErrorInfoJson = FormatUtils.httpErrorInfoFormatted(HttpStatus.INTERNAL_SERVER_ERROR, request, exception);
-                log.error(httpErrorInfoJson.toString());
-                log.error(Arrays.toString(exception.getStackTrace()));
-                request.setAttribute(STATUS, HttpStatus.INTERNAL_SERVER_ERROR);
+                httpErrorInfoDto = FormatUtils.httpErrorInfoFormatted(HttpStatus.INTERNAL_SERVER_ERROR, request, exception);
+                modelAndView.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
-        request.setAttribute(ERROR, exception.getCause().getMessage());
-        request.setAttribute(MESSAGE, exception.getMessage());
-        response.sendRedirect(URL_ERROR);
+
+        log.error(httpErrorInfoDto);
+        log.error("Exception occurred", exception);
+
+        modelAndView.addObject(STATUS, Objects.requireNonNull(modelAndView.getStatus()).value());
+        modelAndView.addObject(MESSAGE, exception.getMessage());
+
+        return modelAndView;
     }
+
 
 }
