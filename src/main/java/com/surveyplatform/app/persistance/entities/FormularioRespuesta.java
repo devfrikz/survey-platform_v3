@@ -40,14 +40,13 @@ public class FormularioRespuesta {
     private Timestamp createdAt;
     @Column(name="updated_at")
     private Timestamp updatedAt;
+    @Column(name = "usuario_id", nullable = false)
+    private Long usuario;
 
     @ManyToOne
     @JoinColumn(name = "formulario_id", nullable = false)
     private Formulario formulario;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "sucursal_id", nullable = false)

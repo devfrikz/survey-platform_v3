@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
     private final UsuarioRepository usuarioRepository;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
@@ -27,10 +29,12 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 
         Usuario usuario = usuarioOpt.get();
 
+        var roles = usuarioRepository.findRoleNamesByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
+
         return User.builder()
                 .username(usuario.getUsername())
                 .password(usuario.getPassword())
-                .roles("ADMIN")  // Ajusta el rol según tu lógica
+                .roles(roles.toArray(String[]::new))
                 .build();
     }
 }

@@ -1,8 +1,6 @@
 package com.surveyplatform.app.controller.handler;
 
-import com.surveyplatform.app.dto.HttpErrorInfoDto;
 import com.surveyplatform.app.utils.FormatUtils;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +24,8 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
             throws IOException {
 
-        HttpErrorInfoDto httpErrorInfoJson = FormatUtils.httpErrorInfoFormatted(HttpStatus.FORBIDDEN, request, exception);
-        log.error(httpErrorInfoJson.toString());
+        var httpErrorInfoJson = FormatUtils.httpErrorInfoFormatted(HttpStatus.FORBIDDEN, request, exception);
+        log.error(httpErrorInfoJson);
         log.error(Arrays.toString(exception.getStackTrace()));
 
         request.setAttribute(STATUS, HttpStatus.INTERNAL_SERVER_ERROR);

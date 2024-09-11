@@ -1,5 +1,7 @@
 package com.surveyplatform.app.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.surveyplatform.app.dto.HttpErrorInfoDto;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -10,11 +12,17 @@ public class FormatUtils {
 
     private FormatUtils(){}
 
-    public static HttpErrorInfoDto httpErrorInfoFormatted(HttpStatus status, HttpServletRequest request, Exception ex){
-        final String path = request.getRequestURI();
-        final String message = ex.getMessage();
-        log.debug("Returning HttpStatus: {} for path: {} , message: {} ", status, path, message);
-        return new HttpErrorInfoDto(status, path, message);
-    }
+    public static String httpErrorInfoFormatted(HttpStatus status, HttpServletRequest request, Exception ex) {
+        var objectMapper = new ObjectMapper();
+        var path = request.getRequestURI();
+        var message = ex.getMessage();
+        var httpErrorInfoDto = new HttpErrorInfoDto(status, path, message);
 
+        try {
+            return objectMapper.writeValueAsString(httpErrorInfoDto);
+        } catch (JsonProcessingException e) {
+            log.error("Error serializing HttpErrorInfoDto", e);
+            return "{message: \"Error serializing HttpErrorInfoDto\"}";
+        }
+    }
 }
