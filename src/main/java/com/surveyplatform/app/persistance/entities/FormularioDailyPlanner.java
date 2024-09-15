@@ -1,5 +1,6 @@
 package com.surveyplatform.app.persistance.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +22,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -58,72 +61,24 @@ public class FormularioDailyPlanner {
     @Column(name = "plus_or_minus_goal", nullable = false)
     private Integer plusOrMinusGoal;
 
-    @Column(name = "appointment_first_name", nullable = false)
-    private String appointmentFirstName;
-
-    @Column(name = "appointment_last_name", nullable = false)
-    private String appointmentLastName;
-
-    @Column(name = "appointment_vehicle", nullable = false)
-    private String appointmentVehicle;
-
-    @Column(name = "appointment_time", nullable = false)
-    private LocalTime appointmentTime;
-
-    @Column(name = "visit_first_name", nullable = false)
-    private String visitFirstName;
-
-    @Column(name = "visit_last_name", nullable = false)
-    private String visitLastName;
-
-    @Column(name = "visit_vehicle", nullable = false)
-    private String visitVehicle;
-
-    @Column(name = "deal_requirement", nullable = false, length = Integer.MAX_VALUE)
-    private String dealRequirement;
-
-    @Column(name = "fb_stock_number", nullable = false, length = 50)
-    private String fbStockNumber;
-
-    @Column(name = "fb_link", nullable = false, length = Integer.MAX_VALUE)
-    private String fbLink;
-
-    @Column(name = "fb_vehicle_type", nullable = false)
-    private String fbVehicleType;
-
-    @Column(name = "fb_listing_price", nullable = false, length = 50)
-    private String fbListingPrice;
-
-    @Column(name = "trade_in_year", nullable = false)
-    private Integer tradeInYear;
-
-    @Column(name = "trade_in_make", nullable = false)
-    private String tradeInMake;
-
-    @Column(name = "trade_in_model", nullable = false)
-    private String tradeInModel;
-
-    @Column(name = "trade_in_mileage", nullable = false)
-    private Integer tradeInMileage;
-
-    @Column(name = "trade_in_stock_number", nullable = false)
-    private Integer tradeInStockNumber;
-
-    @Column(name = "trade_in_date_acquired", nullable = false)
-    private LocalDate tradeInDateAcquired;
-
-    @Column(name = "referral_first_name", nullable = false)
-    private String referralFirstName;
-
-    @Column(name = "referral_last_name", nullable = false)
-    private String referralLastName;
-
-    @Column(name = "referral_reason", nullable = false, length = 50)
-    private String referralReason;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "formulario_id")
     private Formulario formulario;
+
+    @OneToMany(mappedBy = "formularioDailyPlanner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Vehicle> vehicles;
+
+    @OneToMany(mappedBy = "formularioDailyPlanner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ShowroomVisit> showroomVisits;
+
+    @OneToMany(mappedBy = "formularioDailyPlanner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FbMarketplaceVehicle> fbMarketplaceVehicles;
+
+    @OneToMany(mappedBy = "formularioDailyPlanner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TradeIn> tradeIns;
+
+    @OneToMany(mappedBy = "formularioDailyPlanner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Referral> referrals;
 
 }
