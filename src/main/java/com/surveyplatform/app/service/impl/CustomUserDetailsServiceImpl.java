@@ -27,14 +27,14 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
             throw new UsernameNotFoundException("Usuario no encontrado con username o email: " + usernameOrEmail);
         }
 
-        Usuario usuario = usuarioOpt.get();
+        Usuario user = usuarioOpt.get();
 
-        var roles = usuarioRepository.findRoleNamesByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
+        var userRoleList = user.getUsuarioRoles().stream().map(item -> item.getRol().getNombre()).toList();
 
         return User.builder()
-                .username(usuario.getUsername())
-                .password(usuario.getPassword())
-                .roles(roles.toArray(String[]::new))
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .roles(userRoleList.toArray(String[]::new))
                 .build();
     }
 }

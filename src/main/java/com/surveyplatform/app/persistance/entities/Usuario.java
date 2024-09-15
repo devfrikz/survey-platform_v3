@@ -1,7 +1,11 @@
 package com.surveyplatform.app.persistance.entities;
 
+import com.surveyplatform.app.persistance.entities.manytomany.UsuarioRol;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,6 +33,9 @@ public class Usuario {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sucursal_id", referencedColumnName = "id")
     private Sucursal sucursal;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UsuarioRol> usuarioRoles = new ArrayList<>();
 
     private Boolean activo;
 }

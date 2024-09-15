@@ -10,6 +10,7 @@ import com.surveyplatform.app.persistance.entities.FormularioDescuento;
 import com.surveyplatform.app.persistance.entities.FormularioPermiso;
 import com.surveyplatform.app.persistance.entities.FormularioReferenciado;
 import com.surveyplatform.app.persistance.entities.FormularioRespuesta;
+import com.surveyplatform.app.persistance.entities.manytomany.UsuarioRol;
 import com.surveyplatform.app.persistance.repository.FormularioCreditoRepository;
 import com.surveyplatform.app.persistance.repository.FormularioDescuentoRepository;
 import com.surveyplatform.app.persistance.repository.FormularioPermisoRepository;
@@ -58,10 +59,10 @@ public class FormApprovalServiceImpl implements FormApprovalService {
         if (userOpt.isPresent()) {
             var user = userOpt.get();
 
-            var roleIds = usuarioRepository.findRoleIdsByUsernameOrEmail(user.getUsername(), user.getEmail());
+            var userRoleList = user.getUsuarioRoles().stream().map(item -> item.getRol().getId()).toList();
 
             try {
-                var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), roleIds, pageable);
+                var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), userRoleList, pageable);
                 var list = new ArrayList<FormularioDto>();
 
                 formularioRespuestas.getContent().forEach(formularioRespuesta -> {
