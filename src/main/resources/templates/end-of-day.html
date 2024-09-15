@@ -9,134 +9,160 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script th:src="@{/end-of-day.js}"></script>
 </head>
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 <div class="container mt-5">
-    <h3 class="text-center mb-4">End of Day Objectives Achieved.</h3>
+    <h3 class="text-center mb-4">End of Day Objectives Achieved</h3>
     <form th:action="@{/submit-end-of-day}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-        <h4>Brand Building</h4>
-
-        <div class="form-group">
-            <label for="customerDeliveriesPhotos">Customer Deliveries Photos Published:</label>
-            <select class="form-control" id="customerDeliveriesPhotos" name="customerDeliveriesPhotos">
-                <option value="">Select an option</option>
-                <option value="Yes">Yes</option>
-                <option value="None today">None today</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="colleaguePostsShared">Number of Colleague Posts Shared:</label>
-            <input type="number" class="form-control" id="colleaguePostsShared" name="colleaguePostsShared" min="0" max="9999999">
-        </div>
-
-        <div class="form-group">
-            <label for="customerTradeInsPhotos">Customer Trade Ins Photos Published:</label>
-            <select class="form-control" id="customerTradeInsPhotos" name="customerTradeInsPhotos">
-                <option value="">Select an option</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="sharedContentFound">Shared Content Found on Internet:</label>
-            <select class="form-control" id="sharedContentFound" name="sharedContentFound">
-                <option value="">Select an option</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-
-        <h4>Self Marketing Facebook Market Place</h4>
-
-        <div id="facebookMarketPlaceSection">
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="vehicle">Vehicle:</label>
-                    <input type="text" class="form-control" id="vehicle" name="facebookMarketPlaceVehicle">
+        <!-- Brand Building Section -->
+        <div class="card mb-4">
+            <div class="card-header">Brand Building</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="customerDeliveriesPhotos">Customer Deliveries Photos Published:</label>
+                    <select class="form-control" id="customerDeliveriesPhotos" name="customerDeliveriesPhotos">
+                        <option value="">Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="None today">None today</option>
+                    </select>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="make">Make:</label>
-                    <input type="text" class="form-control" id="make" name="facebookMarketPlaceMake">
+                <div class="form-group">
+                    <label for="colleaguePostsShared">Number of Colleague Posts Shared:</label>
+                    <input type="number" class="form-control" id="colleaguePostsShared" name="colleaguePostsShared" min="0" max="9999999">
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="model">Model:</label>
-                    <input type="text" class="form-control" id="model" name="facebookMarketPlaceModel">
+                <div class="form-group">
+                    <label for="customerTradeInsPhotos">Customer Trade Ins Photos Published:</label>
+                    <select class="form-control" id="customerTradeInsPhotos" name="customerTradeInsPhotos">
+                        <option value="">Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="stockNumber">Stock Number:</label>
-                    <input type="text" class="form-control" id="stockNumber" name="facebookMarketPlaceStockNumber">
+                <div class="form-group">
+                    <label for="sharedContentFound">Shared Content Found on Internet:</label>
+                    <select class="form-control" id="sharedContentFound" name="sharedContentFound">
+                        <option value="">Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
                 </div>
             </div>
-            <!-- Add more rows as needed -->
         </div>
 
-        <h4>Self Generated Prospects added to the CRM</h4>
+        <!-- Self Marketing Facebook Market Place Section -->
+        <div class="card mb-4">
+            <div class="card-header">Self Marketing Facebook Market Place</div>
+            <div class="card-body">
+                <!-- Container for multiple Facebook Marketplace entries -->
+                <div id="facebook-marketplace-container">
+                    <div class="facebook-marketplace-entry mb-3">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label>Vehicle:</label>
+                                <input type="text" class="form-control" name="facebookMarketPlace[0].vehicle" required data-toggle="tooltip" data-placement="top">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Make:</label>
+                                <input type="text" class="form-control" name="facebookMarketPlace[0].make" required data-toggle="tooltip" data-placement="top">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Model:</label>
+                                <input type="text" class="form-control" name="facebookMarketPlace[0].model" required data-toggle="tooltip" data-placement="top">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Stock Number:</label>
+                                <input type="text" class="form-control" name="facebookMarketPlace[0].stockNumber" required data-toggle="tooltip" data-placement="top">
+                            </div>
+                        </div>
+                        <!-- Remove button -->
+                        <button type="button" class="btn btn-danger mt-2" onclick="removeFacebookMarketPlaceEntry(this)">Remove Entry</button>
+                    </div>
+                </div>
 
-        <div id="crmProspectsSection">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="prospectFirstName">First Name:</label>
-                    <input type="text" class="form-control" id="prospectFirstName" name="crmProspectFirstName">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="prospectLastName">Last Name:</label>
-                    <input type="text" class="form-control" id="prospectLastName" name="crmProspectLastName">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="crmCustomerNumber">CRM Customer Number:</label>
-                    <input type="number" class="form-control" id="crmCustomerNumber" name="crmProspectNumber" min="0" max="9999999">
+                <!-- Button to add more Facebook Marketplace entries -->
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="addFacebookMarketPlaceEntry()">Add Another Entry</button>
                 </div>
             </div>
-            <!-- Add more rows as needed -->
         </div>
 
-        <h4>Dealership Contribution & Today's Goals Achieved</h4>
+        <!-- CRM Prospects Section -->
+        <div class="card mb-4">
+            <div class="card-header">Self Generated Prospects added to the CRM</div>
+            <div class="card-body">
+                <!-- Container for multiple CRM Prospects entries -->
+                <div id="crm-prospects-container">
+                    <div class="crm-prospect-entry mb-3">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>First Name:</label>
+                                <input type="text" class="form-control" name="crmProspects[0].prospectFirstName" required data-toggle="tooltip" data-placement="top">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Last Name:</label>
+                                <input type="text" class="form-control" name="crmProspects[0].prospectLastName" required data-toggle="tooltip" data-placement="top">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>CRM Customer Number:</label>
+                                <input type="number" class="form-control" name="crmProspects[0].crmCustomerNumber" min="0" max="9999999" required data-toggle="tooltip" data-placement="top">
+                            </div>
+                        </div>
+                        <!-- Remove button -->
+                        <button type="button" class="btn btn-danger mt-2" onclick="removeCrmProspectEntry(this)">Remove Entry</button>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="newCarsLeads">New Cars Leads Assigned Today:</label>
-            <input type="number" class="form-control" id="newCarsLeads" name="newCarsLeads" min="0" max="9999999">
+                <!-- Button to add more CRM Prospects entries -->
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="addCrmProspectEntry()">Add Another Entry</button>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="preOwnedLeads">Pre Owned Leads Assigned Today:</label>
-            <input type="number" class="form-control" id="preOwnedLeads" name="preOwnedLeads" min="0" max="9999999">
+        <!-- Dealership Contribution & Today's Goals Achieved Section -->
+        <div class="card mb-4">
+            <div class="card-header">Dealership Contribution & Today's Goals Achieved</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="newCarsLeads">New Cars Leads Assigned Today:</label>
+                    <input type="number" class="form-control" id="newCarsLeads" name="newCarsLeads" min="0" max="9999999">
+                </div>
+                <div class="form-group">
+                    <label for="preOwnedLeads">Pre Owned Leads Assigned Today:</label>
+                    <input type="number" class="form-control" id="preOwnedLeads" name="preOwnedLeads" min="0" max="9999999">
+                </div>
+                <div class="form-group">
+                    <label for="newVehiclesDelivered">New Vehicles Delivered Today:</label>
+                    <input type="number" class="form-control" id="newVehiclesDelivered" name="newVehiclesDelivered" min="0" max="9999999">
+                </div>
+                <div class="form-group">
+                    <label for="newVehiclesLeased">New Vehicles Leased For The Month:</label>
+                    <input type="number" class="form-control" id="newVehiclesLeased" name="newVehiclesLeased" min="0" max="9999999">
+                </div>
+                <div class="form-group">
+                    <label for="personalAverageSSI">Personal Average SSI MTD:</label>
+                    <input type="number" class="form-control" id="personalAverageSSI" name="personalAverageSSI" min="0" max="9999999">
+                </div>
+                <div class="form-group">
+                    <label for="newVehicleLastSaleDay">New Vehicle Last Sale Day:</label>
+                    <input type="date" class="form-control" id="newVehicleLastSaleDay" name="newVehicleLastSaleDay">
+                </div>
+                <div class="form-group">
+                    <label for="preOwnedVehiclesDelivered">Pre Owned Vehicles Delivered:</label>
+                    <input type="number" class="form-control" id="preOwnedVehiclesDelivered" name="preOwnedVehiclesDelivered" min="0" max="9999999">
+                </div>
+                <div class="form-group">
+                    <label for="dpFinalsSold">DP Finals Sold:</label>
+                    <input type="number" class="form-control" id="dpFinalsSold" name="dpFinalsSold" min="0" max="9999999">
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="newVehiclesDelivered">New Vehicles Delivered Today:</label>
-            <input type="number" class="form-control" id="newVehiclesDelivered" name="newVehiclesDelivered" min="0" max="9999999">
-        </div>
-
-        <div class="form-group">
-            <label for="newVehiclesLeased">New Vehicles Leased For The Month:</label>
-            <input type="number" class="form-control" id="newVehiclesLeased" name="newVehiclesLeased" min="0" max="9999999">
-        </div>
-
-        <div class="form-group">
-            <label for="personalAverageSSI">Personal Average SSI MTD:</label>
-            <input type="number" class="form-control" id="personalAverageSSI" name="personalAverageSSI" min="0" max="9999999">
-        </div>
-
-        <div class="form-group">
-            <label for="newVehicleLastSaleDay">New Vehicle Last Sale Day:</label>
-            <input type="text" class="form-control" id="newVehicleLastSaleDay" name="newVehicleLastSaleDay">
-        </div>
-
-        <div class="form-group">
-            <label for="preOwnedVehiclesDelivered">Pre Owned Vehicles Delivered:</label>
-            <input type="number" class="form-control" id="preOwnedVehiclesDelivered" name="preOwnedVehiclesDelivered" min="0" max="9999999">
-        </div>
-
-        <div class="form-group">
-            <label for="dpFinalsSold">DP Finals Sold:</label>
-            <input type="number" class="form-control" id="dpFinalsSold" name="dpFinalsSold" min="0" max="9999999">
-        </div>
-
+        <!-- Submit Button -->
         <div class="form-group text-center mt-4">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

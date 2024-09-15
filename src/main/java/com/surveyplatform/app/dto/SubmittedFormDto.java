@@ -62,16 +62,8 @@ public class SubmittedFormDto {
     private Integer colleaguePostsShared;
     private String customerTradeInsPhotos;
     private String sharedContentFound;
-
-    private String facebookMarketPlaceVehicle;
-    private String facebookMarketPlaceMake;
-    private String facebookMarketPlaceModel;
-    private String facebookMarketPlaceStockNumber;
-
-    private String crmProspectFirstName;
-    private String crmProspectLastName;
-    private Integer crmProspectNumber;
-
+    private List<FacebookMarketPlaceDto> facebookMarketPlace;
+    private List<CrmProspectDto> crmProspects;
     private Integer newCarsLeads;
     private Integer preOwnedLeads;
     private Integer newVehiclesDelivered;
@@ -106,7 +98,6 @@ public class SubmittedFormDto {
     private Integer tracking;
     private Integer goal;
     private Integer plusOrMinusGoal;
-
     private List<VehicleDto> vehicles;
     private List<ShowroomVisitDto> showroomVisits;
     private List<FbMarketplaceVehicleDto> fbMarketplaceVehicles;

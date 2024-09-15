@@ -71,7 +71,7 @@ public class ManagementServiceImpl implements ManagementService {
     @Transactional
     public void submitEndOfDay(SubmittedFormDto submittedFormDto) {
         var formSaved = saveSalesForm();
-        var formulario = ManagementMapper.MAPPER.toEndOfDayEntity(submittedFormDto);
+        var formulario = ManagementMapper.MAPPER.toFormularioEndOfDayEntityWithDetails(submittedFormDto);
         formulario.setFormulario(formSaved);
         formularioEndOfDayRepository.save(formulario);
     }
