@@ -42,7 +42,7 @@ public class ManagementServiceImpl implements ManagementService {
     @Transactional
     public void submitDailyPlanner(SubmittedFormDto submittedFormDto) {
         var formSaved = saveSalesForm();
-        var formulario = ManagementMapper.MAPPER.toDailyPlannerEntity(submittedFormDto);
+        var formulario = ManagementMapper.MAPPER.toDailyPlannerEntityWithDetails(submittedFormDto);
         formulario.setFormulario(formSaved);
 
         formularioDailyPlannerRepository.save(formulario);
@@ -71,7 +71,7 @@ public class ManagementServiceImpl implements ManagementService {
     @Transactional
     public void submitEndOfDay(SubmittedFormDto submittedFormDto) {
         var formSaved = saveSalesForm();
-        var formulario = ManagementMapper.MAPPER.toEndOfDayEntity(submittedFormDto);
+        var formulario = ManagementMapper.MAPPER.toFormularioEndOfDayEntityWithDetails(submittedFormDto);
         formulario.setFormulario(formSaved);
         formularioEndOfDayRepository.save(formulario);
     }
@@ -97,6 +97,7 @@ public class ManagementServiceImpl implements ManagementService {
                 .modulo(module)
                 .tipo(formType)
                 .usuario(usuario)
+                .sucursal(usuario.getSucursal())
                 .build();
 
         return formularioRepository.save(form);

@@ -1,5 +1,6 @@
 package com.surveyplatform.app.persistance.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +20,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -43,27 +46,6 @@ public class FormularioEndOfDay {
 
     @Column(name = "shared_content_found", nullable = false, length = 50)
     private String sharedContentFound;
-
-    @Column(name = "vehicle")
-    private String vehicle;
-
-    @Column(name = "make")
-    private String make;
-
-    @Column(name = "model")
-    private String model;
-
-    @Column(name = "stock_number", length = 50)
-    private String stockNumber;
-
-    @Column(name = "prospect_first_name")
-    private String prospectFirstName;
-
-    @Column(name = "prospect_last_name")
-    private String prospectLastName;
-
-    @Column(name = "crm_customer_number")
-    private Integer crmCustomerNumber;
 
     @Column(name = "new_cars_leads")
     private Integer newCarsLeads;
@@ -93,5 +75,11 @@ public class FormularioEndOfDay {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "formulario_id")
     private Formulario formulario;
+
+    @OneToMany(mappedBy = "formularioEndOfDay", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FacebookMarketPlace> facebookMarketPlaceEntries;
+
+    @OneToMany(mappedBy = "formularioEndOfDay", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CrmProspect> crmProspects;
 
 }

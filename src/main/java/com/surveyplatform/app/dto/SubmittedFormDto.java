@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -61,16 +62,8 @@ public class SubmittedFormDto {
     private Integer colleaguePostsShared;
     private String customerTradeInsPhotos;
     private String sharedContentFound;
-
-    private String facebookMarketPlaceVehicle;
-    private String facebookMarketPlaceMake;
-    private String facebookMarketPlaceModel;
-    private String facebookMarketPlaceStockNumber;
-
-    private String crmProspectFirstName;
-    private String crmProspectLastName;
-    private Integer crmProspectNumber;
-
+    private List<FacebookMarketPlaceDto> facebookMarketPlace;
+    private List<CrmProspectDto> crmProspects;
     private Integer newCarsLeads;
     private Integer preOwnedLeads;
     private Integer newVehiclesDelivered;
@@ -105,29 +98,11 @@ public class SubmittedFormDto {
     private Integer tracking;
     private Integer goal;
     private Integer plusOrMinusGoal;
-    private String appointmentFirstName;
-    private String appointmentLastName;
-    private String appointmentVehicle;
-    private String appointmentHour;
-    private String appointmentMinute;
-    private String appointmentAmPm;
-    private String visitFirstName;
-    private String visitLastName;
-    private String visitVehicle;
-    private String dealRequirement;
-    private String fbStockNumber;
-    private String fbLink;
-    private String fbVehicleType;
-    private String fbListingPrice;
-    private Integer tradeInYear;
-    private String tradeInMake;
-    private String tradeInModel;
-    private Integer tradeInMileage;
-    private String tradeInStockNumber;
-    private String tradeInDateAcquired;
-    private String referralFirstName;
-    private String referralLastName;
-    private String referralReason;
+    private List<VehicleDto> vehicles;
+    private List<ShowroomVisitDto> showroomVisits;
+    private List<FbMarketplaceVehicleDto> fbMarketplaceVehicles;
+    private List<TradeInDto> tradeIns;
+    private List<ReferralDto> referrals;
 
     // Campos adicionales del formulario Delivery Checklist
     private String customerName;

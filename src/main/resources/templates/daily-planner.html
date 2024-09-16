@@ -9,6 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script th:src="@{/daily-planner.js}"></script>
 </head>
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
@@ -17,210 +19,297 @@
     <form th:action="@{/submit-daily-planner}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-        <!-- Campo de Fecha -->
-        <div class="form-group">
-            <label for="field_x13es2">Date</label>
-            <input type="date" id="field_x13es2" name="date" class="form-control" maxlength="10" required>
-        </div>
-
-        <!-- Campo Delivered up to date -->
-        <div class="form-group">
-            <label for="field_acsfb2">Delivered up to date</label>
-            <input type="number" id="field_acsfb2" name="deliveredUpToDate" class="form-control" min="-1000" max="9999999" step="any" required>
-        </div>
-
-        <!-- Campo Days gone -->
-        <div class="form-group">
-            <label for="field_hg1jg2">Days gone</label>
-            <input type="number" id="field_hg1jg2" name="daysGone" class="form-control" min="-1000" max="9999999" step="any" required>
-        </div>
-
-        <!-- Campo Average sold per day -->
-        <div class="form-group">
-            <label for="field_7wwjj2">Average sold per day</label>
-            <input type="number" id="field_7wwjj2" name="averageSoldPerDay" class="form-control" min="-1000" max="9999999" step="any" required>
-        </div>
-
-        <!-- Campo Days this month -->
-        <div class="form-group">
-            <label for="field_q7tdp2">Days this month</label>
-            <input type="number" id="field_q7tdp2" name="daysThisMonth" class="form-control" min="0" max="31" step="any" required>
-        </div>
-
-        <!-- Campo Tracking -->
-        <div class="form-group">
-            <label for="field_8dqoy2">Tracking</label>
-            <input type="number" id="field_8dqoy2" name="tracking" class="form-control" min="-100" max="9999999" step="any" required>
-        </div>
-
-        <!-- Campo Goal -->
-        <div class="form-group">
-            <label for="field_89fwp2">Goal</label>
-            <input type="number" id="field_89fwp2" name="goal" class="form-control" min="-100" max="9999999" step="any" required>
-        </div>
-
-        <!-- Campo Plus or Minus Goal -->
-        <div class="form-group">
-            <label for="field_g3xem2">Plus or Minus Goal</label>
-            <input type="number" id="field_g3xem2" name="plusOrMinusGoal" class="form-control" min="-100" max="9999999" step="any" required>
-        </div>
-
-        <!-- Confirmed Appointments Section -->
-        <h3 class="mb-4">Confirmed Appointments for today.</h3>
-        <div class="form-group">
-            <label for="appointmentName">Name</label>
-            <div class="row">
-                <div class="col-md-6">
-                    <input type="text" id="appointmentFirstName" name="appointmentFirstName" class="form-control" placeholder="First" required>
+        <!-- General Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">General Information</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" class="form-control" maxlength="10" required
+                           data-toggle="tooltip" data-placement="top">
                 </div>
-                <div class="col-md-6">
-                    <input type="text" id="appointmentLastName" name="appointmentLastName" class="form-control" placeholder="Last" required>
+                <div class="form-group">
+                    <label for="deliveredUpToDate">Delivered up to date</label>
+                    <input type="number" id="deliveredUpToDate" name="deliveredUpToDate" class="form-control"
+                           min="-1000" max="9999999" step="any" required data-toggle="tooltip" data-placement="top">
+                </div>
+                <div class="form-group">
+                    <label for="daysGone">Days gone</label>
+                    <input type="number" id="daysGone" name="daysGone" class="form-control" min="-1000" max="9999999"
+                           step="any" required data-toggle="tooltip" data-placement="top">
+                </div>
+                <div class="form-group">
+                    <label for="averageSoldPerDay">Average sold per day</label>
+                    <input type="number" id="averageSoldPerDay" name="averageSoldPerDay" class="form-control"
+                           min="-1000" max="9999999" step="any" required data-toggle="tooltip" data-placement="top">
+                </div>
+                <div class="form-group">
+                    <label for="daysThisMonth">Days this month</label>
+                    <input type="number" id="daysThisMonth" name="daysThisMonth" class="form-control" min="0" max="31"
+                           step="any" required data-toggle="tooltip" data-placement="top">
+                </div>
+                <div class="form-group">
+                    <label for="tracking">Tracking</label>
+                    <input type="number" id="tracking" name="tracking" class="form-control" min="-100" max="9999999"
+                           step="any" required data-toggle="tooltip" data-placement="top">
+                </div>
+                <div class="form-group">
+                    <label for="goal">Goal</label>
+                    <input type="number" id="goal" name="goal" class="form-control" min="-100" max="9999999" step="any"
+                           required data-toggle="tooltip" data-placement="top">
+                </div>
+                <div class="form-group">
+                    <label for="plusOrMinusGoal">Plus or Minus Goal</label>
+                    <input type="number" id="plusOrMinusGoal" name="plusOrMinusGoal" class="form-control" min="-100"
+                           max="9999999" step="any" required data-toggle="tooltip" data-placement="top">
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="appointmentVehicle">Vehicle</label>
-            <input type="text" id="appointmentVehicle" name="appointmentVehicle" class="form-control" required>
-        </div>
+        <!-- Confirmed Appointments for today Section -->
+        <div class="card mb-4">
+            <div class="card-header">Confirmed Appointments for Today</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Name</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="vehicles[0].name"
+                                   class="form-control" placeholder="First" required data-toggle="tooltip"
+                                   data-placement="top">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="vehicles[0].lastName" class="form-control"
+                                   placeholder="Last" required data-toggle="tooltip" data-placement="top">
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="appointmentTime">Time</label>
-            <div class="row">
-                <div class="col-md-4">
-                    <select id="appointmentHour" name="appointmentHour" class="form-control" required>
-                        <option value="">Hour</option>
-                        <option value="12">12</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                    </select>
+                <!-- Section for adding multiple vehicles -->
+                <div id="vehicle-container">
+                    <div class="vehicle-entry mb-3">
+                        <div class="form-group">
+                            <label>Vehicle</label>
+                            <input type="text" name="vehicles[0].vehicle" class="form-control" required
+                                   data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>Time</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="number" name="vehicles[0].hour" class="form-control" min="1" max="12"
+                                           placeholder="Hour" required data-toggle="tooltip" data-placement="top">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="number" name="vehicles[0].minute" class="form-control" min="0" max="59"
+                                           placeholder="Minute" required data-toggle="tooltip" data-placement="top">
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="vehicles[0].amPm" class="form-control" required data-toggle="tooltip"
+                                            data-placement="top">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Remove button -->
+                        <button type="button" class="btn btn-danger mt-2" onclick="removeVehicle(this)">Remove Vehicle
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <select id="appointmentMinute" name="appointmentMinute" class="form-control" required>
-                        <option value="">Minute</option>
-                        <option value="00">00</option>
-                        <option value="30">30</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <select id="appointmentAmPm" name="appointmentAmPm" class="form-control" required>
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select>
+
+                <!-- Button to add more vehicles -->
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="addVehicle()">Add Another Vehicle</button>
                 </div>
             </div>
         </div>
 
         <!-- Active Showroom Visits Section -->
-        <h3 class="mb-4">List the active showroom visits you will call to make a deal</h3>
-        <div class="form-group">
-            <label for="visitName">Name</label>
-            <div class="row">
-                <div class="col-md-6">
-                    <input type="text" id="visitFirstName" name="visitFirstName" class="form-control" placeholder="First" required>
+        <div class="card mb-4">
+            <div class="card-header">Active Showroom Visits</div>
+            <div class="card-body">
+                <!-- Container for multiple showroom visits -->
+                <div id="showroom-visit-container">
+                    <div class="showroom-visit-entry mb-3">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="showroomVisits[0].visitFirstName" class="form-control"
+                                           placeholder="First" required data-toggle="tooltip" data-placement="top">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="showroomVisits[0].visitLastName" class="form-control"
+                                           placeholder="Last" required data-toggle="tooltip" data-placement="top">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Vehicle</label>
+                            <input type="text" name="showroomVisits[0].visitVehicle" class="form-control" required
+                                   data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>What will it take to make the deal?</label>
+                            <input type="text" name="showroomVisits[0].dealRequirement" class="form-control" required
+                                   data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <!-- Remove button -->
+                        <button type="button" class="btn btn-danger mt-2" onclick="removeShowroomVisit(this)">Remove
+                            Visit
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <input type="text" id="visitLastName" name="visitLastName" class="form-control" placeholder="Last" required>
+
+                <!-- Button to add more showroom visits -->
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="addShowroomVisit()">Add Another Showroom
+                        Visit
+                    </button>
                 </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="visitVehicle">Vehicle</label>
-            <input type="text" id="visitVehicle" name="visitVehicle" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="dealRequirement">What will it take to make the deal?</label>
-            <input type="text" id="dealRequirement" name="dealRequirement" class="form-control" required>
         </div>
 
         <!-- Vehicles for Facebook Marketplace Section -->
-        <h3 class="mb-4">Vehicles you will list on Facebook Marketplace today</h3>
-        <div class="form-group">
-            <label for="fbStockNumber">Stock Number</label>
-            <input type="text" id="fbStockNumber" name="fbStockNumber" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="fbLink">FB marketplace link</label>
-            <input type="url" id="fbLink" name="fbLink" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="fbVehicleType">Vehicle Type</label>
-            <input type="text" id="fbVehicleType" name="fbVehicleType" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="fbListingPrice">Listing Price</label>
-            <input type="text" id="fbListingPrice" name="fbListingPrice" class="form-control" required>
-        </div>
-
-        <!-- Own Trade-ins Section -->
-        <h3 class="mb-4">Own trade-ins to list on co-branded Facebook Marketplace</h3>
-        <div class="form-group">
-            <label for="tradeInYear">Year</label>
-            <input type="number" id="tradeInYear" name="tradeInYear" class="form-control" min="0" max="9999" required>
-        </div>
-
-        <div class="form-group">
-            <label for="tradeInMake">Make</label>
-            <input type="text" id="tradeInMake" name="tradeInMake" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="tradeInModel">Model</label>
-            <input type="text" id="tradeInModel" name="tradeInModel" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="tradeInMileage">Mileage</label>
-            <input type="number" id="tradeInMileage" name="tradeInMileage" class="form-control" min="0" max="9999999" step="any" required>
-        </div>
-
-        <div class="form-group">
-            <label for="tradeInStockNumber">Stock number</label>
-            <input type="number" id="tradeInStockNumber" name="tradeInStockNumber" class="form-control" min="0" max="9999999" required>
-        </div>
-
-        <div class="form-group">
-            <label for="tradeInDateAcquired">Date acquired</label>
-            <input type="text" id="tradeInDateAcquired" name="tradeInDateAcquired" class="form-control" maxlength="10" required>
-        </div>
-
-        <!-- Referrals Section -->
-        <h3 class="mb-4">Referrals to contact</h3>
-        <div class="form-group">
-            <label for="referralName">Name</label>
-            <div class="row">
-                <div class="col-md-6">
-                    <input type="text" id="referralFirstName" name="referralFirstName" class="form-control" placeholder="First" required>
+        <div class="card mb-4">
+            <div class="card-header">Vehicles for Facebook Marketplace</div>
+            <div class="card-body">
+                <!-- Container for multiple Facebook Marketplace vehicles -->
+                <div id="fb-marketplace-container">
+                    <div class="fb-marketplace-entry mb-3">
+                        <div class="form-group">
+                            <label>Stock Number</label>
+                            <input type="text" name="fbMarketplaceVehicles[0].fbStockNumber" class="form-control"
+                                   required data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>FB Marketplace Link</label>
+                            <input type="url" name="fbMarketplaceVehicles[0].fbLink" class="form-control" required
+                                   data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>Vehicle Type</label>
+                            <input type="text" name="fbMarketplaceVehicles[0].fbVehicleType" class="form-control"
+                                   required data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>Listing Price</label>
+                            <input type="text" name="fbMarketplaceVehicles[0].fbListingPrice" class="form-control"
+                                   required data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <!-- Remove button -->
+                        <button type="button" class="btn btn-danger mt-2" onclick="removeFbMarketplaceVehicle(this)">
+                            Remove Vehicle
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <input type="text" id="referralLastName" name="referralLastName" class="form-control" placeholder="Last" required>
+
+                <!-- Button to add more Facebook Marketplace vehicles -->
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="addFbMarketplaceVehicle()">Add Another
+                        Vehicle
+                    </button>
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="referralReason">Reason for contact</label>
-            <select id="referralReason" name="referralReason" class="form-control" required>
-                <option value="introduction">Introduction</option>
-                <option value="set-up-appointment">Set up appointment</option>
-            </select>
+        <!-- Own Trade-ins Section -->
+        <div class="card mb-4">
+            <div class="card-header">Own Trade-ins</div>
+            <div class="card-body">
+                <!-- Container for multiple Trade-ins -->
+                <div id="trade-in-container">
+                    <div class="trade-in-entry mb-3">
+                        <div class="form-group">
+                            <label>Year</label>
+                            <input type="number" name="tradeIns[0].tradeInYear" class="form-control" min="0" max="9999"
+                                   required data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>Make</label>
+                            <input type="text" name="tradeIns[0].tradeInMake" class="form-control" required
+                                   data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>Model</label>
+                            <input type="text" name="tradeIns[0].tradeInModel" class="form-control" required
+                                   data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>Mileage</label>
+                            <input type="number" name="tradeIns[0].tradeInMileage" class="form-control" min="0"
+                                   max="9999999" step="any" required data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>Stock number</label>
+                            <input type="text" name="tradeIns[0].tradeInStockNumber" class="form-control" required
+                                   data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <div class="form-group">
+                            <label>Date acquired</label>
+                            <input type="text" name="tradeIns[0].tradeInDateAcquired" class="form-control"
+                                   maxlength="10" required data-toggle="tooltip" data-placement="top">
+                        </div>
+                        <!-- Remove button -->
+                        <button type="button" class="btn btn-danger mt-2" onclick="removeTradeIn(this)">Remove
+                            Trade-in
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Button to add more Trade-ins -->
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="addTradeIn()">Add Another Trade-in</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Botón de Enviar -->
+        <!-- Referrals to Contact Section -->
+        <div class="card mb-4">
+            <div class="card-header">Referrals to Contact</div>
+            <div class="card-body">
+                <!-- Container for multiple referrals -->
+                <div id="referral-container">
+                    <div class="referral-entry mb-3">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="referrals[0].referralFirstName" class="form-control"
+                                           placeholder="First" required data-toggle="tooltip" data-placement="top">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="referrals[0].referralLastName" class="form-control"
+                                           placeholder="Last" required data-toggle="tooltip" data-placement="top">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Reason for contact</label>
+                            <select name="referrals[0].referralReason" class="form-control" required
+                                    data-toggle="tooltip" data-placement="top">
+                                <option value="introduction">Introduction</option>
+                                <option value="set-up-appointment">Set up appointment</option>
+                            </select>
+                        </div>
+                        <!-- Remove button -->
+                        <button type="button" class="btn btn-danger mt-2" onclick="removeReferral(this)">Remove
+                            Referral
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Button to add more referrals -->
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="addReferral()">Add Another Referral
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
         <div class="form-group text-center mt-4">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
