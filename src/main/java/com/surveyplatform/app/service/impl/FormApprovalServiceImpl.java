@@ -165,4 +165,24 @@ public class FormApprovalServiceImpl implements FormApprovalService {
         formularioRespuestaRepository.save(formularioRespuesta);
         log.info("Formulario guardado con ID: {}", formularioRespuesta.getId());
     }
+
+    @Override
+    public void approveForm(Long formId) {
+        var formRespuesta = formularioRespuestaRepository.findById(formId)
+                .orElseThrow(() -> new SurveyPlatformException("Formulario no encontrado", 404));
+
+        formRespuesta.setAprobado(true);
+        formularioRespuestaRepository.save(formRespuesta);
+    }
+
+    @Override
+    public void rejectForm(Long formId) {
+        var formRespuesta = formularioRespuestaRepository.findById(formId)
+                .orElseThrow(() -> new SurveyPlatformException("Formulario no encontrado", 404));
+
+        formRespuesta.setAprobado(false);
+        formularioRespuestaRepository.save(formRespuesta);
+    }
+
+
 }

@@ -35,15 +35,15 @@
                 <td th:text="${formulario.fechaEnvio}">2023-08-19</td>
                 <td>
                     <span th:if="${formulario.estado == null || !formulario.estado || formulario.estado}"
-                        th:text="${formulario.estado == null ? 'Pending' : (formulario.estado ? 'Approved' : 'Rejected')}"
-                        th:classappend="${formulario.estado == null ? 'pending' : (formulario.estado ? 'approved' : 'rejected')}">
+                        th:text="${formulario.estado == null ? 'Pendiente' : (formulario.estado ? 'Aprobado' : 'Rechazado')}"
+                        th:classappend="${formulario.estado == null ? 'Pendiente' : (formulario.estado ? 'Aprobado' : 'Rechazado')}">
                         Pending
                     </span>
 
                 </td>
                 <td>
-                    <button class="btn btn-success btn-sm" th:attr="data-id=${formulario.id}">Approve</button>
-                    <button class="btn btn-danger btn-sm" th:attr="data-id=${formulario.id}">Reject</button>
+                    <button class="btn btn-success btn-sm" th:attr="data-id=${formulario.id}" th:if="${formulario.estado == null}">Aprobar</button>
+                    <button class="btn btn-danger btn-sm" th:attr="data-id=${formulario.id}" th:if="${formulario.estado == null}">Rechazar</button>
                 </td>
             </tr>
             </tbody>
@@ -70,12 +70,18 @@
         </ul>
     </nav>
 </div>
-
+<form name = "approvalForm" method="post"th:action="@{/approve-form}">
+    <input type="hidden" name="formId">
+</form>
+<form name = "rejectionForm" method="post" th:action="@{/reject-form}">
+    <input type="hidden" name="formId">
 <script>
     document.querySelectorAll('.btn-success').forEach(button => {
         button.addEventListener('click', function () {
             const id = this.getAttribute('data-id');
             console.log('Approve form with ID:', id);
+            document.approvalForm.formId.value = id;
+            document.approvalForm.submit();
         });
     });
 
@@ -83,6 +89,8 @@
         button.addEventListener('click', function () {
             const id = this.getAttribute('data-id');
             console.log('Reject form with ID:', id);
+            document.rejectionForm.formId.value = id;
+            document.rejectionForm.submit();
         });
     });
 </script>

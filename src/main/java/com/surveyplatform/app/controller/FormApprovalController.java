@@ -47,4 +47,16 @@ public class FormApprovalController {
         formApprovalService.addForm(submittedFormDto);
         return "form";
     }
+
+    @PostMapping("/approve-form")
+    public String approveForm(@RequestParam("formId") Long formId) {
+        formApprovalService.approveForm(formId);
+        return "redirect:/approvals";
+    }
+
+    @PostMapping("/reject-form")
+    public String rejectForm(@RequestParam("formId") Long formId) {
+        formApprovalService.rejectForm(formId);
+        return "redirect:/approvals";
+    }
 }
