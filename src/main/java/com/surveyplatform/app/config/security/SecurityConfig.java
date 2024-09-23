@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
@@ -24,6 +26,7 @@ public class SecurityConfig {
 
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
     private final UsuarioRepository usuarioRepository;
+    private final CustomUserDetailsService customUserDetailsService;
 
     private static final String[] WHITE_LIST = {
             "/login",
@@ -31,7 +34,7 @@ public class SecurityConfig {
             "/error"
     };
 
-    private static final String[] AUTHENTICATED_LIST = {
+    private static final String[] GENERAL_LIST = {
             "/",
             "/index",
             "/login-success"
@@ -61,7 +64,7 @@ public class SecurityConfig {
                             .requestMatchers(ADMIN_LIST).hasRole("ADMIN")  // Admin puede acceder sin restricciones
                             .requestMatchers(GERENTE_LIST).hasRole("GERENTE")  // Solo gerentes acceden a aprobaciones
                             .requestMatchers(VENTAS_LIST).hasRole("VENTAS")  // Solo ventas accede a estos
-                            .requestMatchers(AUTHENTICATED_LIST).authenticated()
+                            .requestMatchers(GENERAL_LIST).authenticated()
                             .anyRequest().authenticated();
                 })
                 .formLogin(form -> form
@@ -89,10 +92,20 @@ public class SecurityConfig {
         return new CustomUserDetailsServiceImpl(usuarioRepository);
     }
 
+//    @Bean
+//    public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
+//        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+//        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//        return authenticationManagerBuilder.build();
+//    }
+
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-        return authenticationManagerBuilder.build();
+    public AuthenticationManager authenticationManager(HttpSecurity http) {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(customUserDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        authProvider.setHideUserNotFoundExceptions(false);
+
+        return new ProviderManager(authProvider);
     }
 }
