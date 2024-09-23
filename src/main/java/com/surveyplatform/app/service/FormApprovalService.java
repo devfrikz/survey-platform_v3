@@ -11,4 +11,8 @@ public interface FormApprovalService {
     void addForm(SubmittedFormDto submittedFormDto);
 
     Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable);
+
+    void approveForm(Long formId);
+
+    void rejectForm(Long formId);
 }
