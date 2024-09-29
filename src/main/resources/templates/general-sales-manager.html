@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Manager Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <style>
+        .sigWrapper {
+            border: 1px solid #cccccc;
+            height: 150px;
+            max-width: 400px;
+        }
+
+        .sigPad {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        canvas {
+            touch-action: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container mt-5">
+    <h2>Sales Manager Form</h2>
+    <form enctype="multipart/form-data" method="post" id="form_generalsalesmanager"
+          th:action="@{/submit-general-sales-manager}">
+        <div class="card mb-4">
+            <div class="card-header">General Information</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="dealership_name">Name of Dealership</label>
+                    <input type="text" id="dealership_name" name="item_meta[71]" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="website_url">Website/URL</label>
+                    <input type="url" id="website_url" name="item_meta[72]" class="form-control" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="item_meta[73][first]" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="item_meta[73][last]" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="position">Your Position</label>
+                        <input type="text" id="position" name="item_meta[74]" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="item_meta[75]" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="item_meta[76]" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Store New Vehicles Sales Met? -->
+        <div class="card mb-4">
+            <div class="card-header">Store New Vehicles Sales Met?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storeNewVehiclesSalesMet"
+                               id="store_new_vehicles_sales_met_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="store_new_vehicles_sales_met_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storeNewVehiclesSalesMet"
+                               id="store_new_vehicles_sales_met_no"
+                               value="No" required>
+                        <label class="form-check-label" for="store_new_vehicles_sales_met_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storeNewVehiclesSalesMet"
+                               id="store_new_vehicles_sales_met_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="store_new_vehicles_sales_met_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Please specify if the store new vehicles sales targets were met.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Store Pre Owned Vehicle Sales Met -->
+        <div class="card mb-4">
+            <div class="card-header">Store Pre Owned Vehicle Sales Met</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storePreOwnedVehicleSalesMet"
+                               id="store_pre_owned_vehicle_sales_met_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="store_pre_owned_vehicle_sales_met_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storePreOwnedVehicleSalesMet"
+                               id="store_pre_owned_vehicle_sales_met_no"
+                               value="No" required>
+                        <label class="form-check-label" for="store_pre_owned_vehicle_sales_met_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storePreOwnedVehicleSalesMet"
+                               id="store_pre_owned_vehicle_sales_met_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="store_pre_owned_vehicle_sales_met_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Store Pre Owned Vehicle Sales Met cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recon Time at 4 Days for the Month -->
+        <div class="card mb-4">
+            <div class="card-header">Recon Time at 4 Days for the Month</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reconTimeAt4DaysForTheMonth"
+                               id="recon_time_at_4_days_for_the_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="recon_time_at_4_days_for_the_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reconTimeAt4DaysForTheMonth"
+                               id="recon_time_at_4_days_for_the_month_no"
+                               value="No" required>
+                        <label class="form-check-label" for="recon_time_at_4_days_for_the_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reconTimeAt4DaysForTheMonth"
+                               id="recon_time_at_4_days_for_the_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="recon_time_at_4_days_for_the_month_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Recon time at 4 days for the month cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Store Finance Departments Objectives Met -->
+        <div class="card mb-4">
+            <div class="card-header">Store Finance Departments Objectives Met</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storeFinanceObjectivesMet"
+                               id="store_finance_objectives_met_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="store_finance_objectives_met_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storeFinanceObjectivesMet"
+                               id="store_finance_objectives_met_no"
+                               value="No" required>
+                        <label class="form-check-label" for="store_finance_objectives_met_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="storeFinanceObjectivesMet"
+                               id="store_finance_objectives_met_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="store_finance_objectives_met_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Store finance department objectives cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- New Vehicle Inventory in Line for Next Ninety Days -->
+        <div class="card mb-4">
+            <div class="card-header">New Vehicle Inventory in Line for Next Ninety Days</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newVehicleInventoryNext90Days"
+                               id="new_vehicle_inventory_next_90_days_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="new_vehicle_inventory_next_90_days_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newVehicleInventoryNext90Days"
+                               id="new_vehicle_inventory_next_90_days_no"
+                               value="No" required>
+                        <label class="form-check-label" for="new_vehicle_inventory_next_90_days_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newVehicleInventoryNext90Days"
+                               id="new_vehicle_inventory_next_90_days_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="new_vehicle_inventory_next_90_days_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">New vehicle inventory status for the next ninety days cannot be
+                        blank.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pre-owned Vehicle Inventory in Line for Next Sixty Days -->
+        <div class="card mb-4">
+            <div class="card-header">Pre-owned Vehicle Inventory in Line for Next Sixty Days</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="preOwnedVehicleInventoryNext60Days"
+                               id="pre_owned_vehicle_inventory_next_60_days_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="pre_owned_vehicle_inventory_next_60_days_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="preOwnedVehicleInventoryNext60Days"
+                               id="pre_owned_vehicle_inventory_next_60_days_no"
+                               value="No" required>
+                        <label class="form-check-label" for="pre_owned_vehicle_inventory_next_60_days_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="preOwnedVehicleInventoryNext60Days"
+                               id="pre_owned_vehicle_inventory_next_60_days_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="pre_owned_vehicle_inventory_next_60_days_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Pre-owned vehicle inventory status for the next sixty days cannot be
+                        blank.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- All Co-op Ad Dollars Applied For? -->
+        <div class="card mb-4">
+            <div class="card-header">All Co-op Ad Dollars Applied For?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allCoOpAdDollarsAppliedFor"
+                               id="all_co_op_ad_dollars_applied_for_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="all_co_op_ad_dollars_applied_for_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allCoOpAdDollarsAppliedFor"
+                               id="all_co_op_ad_dollars_applied_for_no"
+                               value="No" required>
+                        <label class="form-check-label" for="all_co_op_ad_dollars_applied_for_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allCoOpAdDollarsAppliedFor"
+                               id="all_co_op_ad_dollars_applied_for_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="all_co_op_ad_dollars_applied_for_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Co-op ad dollars application status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- All Advertising Compliant with State Laws? -->
+        <div class="card mb-4">
+            <div class="card-header">All Advertising Compliant with State Laws?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="advertisingCompliantWithStateLaws"
+                               id="advertising_compliant_with_state_laws_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="advertising_compliant_with_state_laws_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="advertisingCompliantWithStateLaws"
+                               id="advertising_compliant_with_state_laws_no"
+                               value="No" required>
+                        <label class="form-check-label" for="advertising_compliant_with_state_laws_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="advertisingCompliantWithStateLaws"
+                               id="advertising_compliant_with_state_laws_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="advertising_compliant_with_state_laws_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Advertising compliance status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Ad Plan Ready for the Following Month? -->
+        <div class="card mb-4">
+            <div class="card-header">Ad Plan Ready for the Following Month?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="adPlanReadyForNextMonth"
+                               id="ad_plan_ready_for_next_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="ad_plan_ready_for_next_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="adPlanReadyForNextMonth"
+                               id="ad_plan_ready_for_next_month_no"
+                               value="No" required>
+                        <label class="form-check-label" for="ad_plan_ready_for_next_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="adPlanReadyForNextMonth"
+                               id="ad_plan_ready_for_next_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="ad_plan_ready_for_next_month_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Ad plan status for the next month cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Website Review Conducted? -->
+        <div class="card mb-4">
+            <div class="card-header">Website Review Conducted?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="websiteReviewConducted"
+                               id="website_review_conducted_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="website_review_conducted_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="websiteReviewConducted"
+                               id="website_review_conducted_no"
+                               value="No" required>
+                        <label class="form-check-label" for="website_review_conducted_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="websiteReviewConducted"
+                               id="website_review_conducted_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="website_review_conducted_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Website review status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Performance Review Conducted with New Car Managers? -->
+        <div class="card mb-4">
+            <div class="card-header">Performance Review Conducted with New Car Managers?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewNewCarManagers"
+                               id="performance_review_new_car_managers_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="performance_review_new_car_managers_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewNewCarManagers"
+                               id="performance_review_new_car_managers_no"
+                               value="No" required>
+                        <label class="form-check-label" for="performance_review_new_car_managers_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewNewCarManagers"
+                               id="performance_review_new_car_managers_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="performance_review_new_car_managers_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Performance review status with new car managers cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Performance Review Conducted with Pre-owned Sales Managers? -->
+        <div class="card mb-4">
+            <div class="card-header">Performance Review Conducted with Pre-owned Sales Managers?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewPreOwnedSalesManagers"
+                               id="performance_review_pre_owned_sales_managers_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="performance_review_pre_owned_sales_managers_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewPreOwnedSalesManagers"
+                               id="performance_review_pre_owned_sales_managers_no"
+                               value="No" required>
+                        <label class="form-check-label" for="performance_review_pre_owned_sales_managers_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewPreOwnedSalesManagers"
+                               id="performance_review_pre_owned_sales_managers_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="performance_review_pre_owned_sales_managers_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Performance review status with pre-owned sales managers cannot be
+                        blank.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Performance Review Conducted with Finance Director/Managers? -->
+        <div class="card mb-4">
+            <div class="card-header">Performance Review Conducted with Finance Director/Managers?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewFinanceManagers"
+                               id="performance_review_finance_managers_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="performance_review_finance_managers_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewFinanceManagers"
+                               id="performance_review_finance_managers_no"
+                               value="No" required>
+                        <label class="form-check-label" for="performance_review_finance_managers_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewFinanceManagers"
+                               id="performance_review_finance_managers_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="performance_review_finance_managers_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Performance review status with finance director/managers cannot be
+                        blank.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Performance Review Conducted with Internet Sales Manager? -->
+        <div class="card mb-4">
+            <div class="card-header">Performance Review Conducted with Internet Sales Manager?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewInternetSalesManager"
+                               id="performance_review_internet_sales_manager_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="performance_review_internet_sales_manager_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewInternetSalesManager"
+                               id="performance_review_internet_sales_manager_no"
+                               value="No" required>
+                        <label class="form-check-label" for="performance_review_internet_sales_manager_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="performanceReviewInternetSalesManager"
+                               id="performance_review_internet_sales_manager_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="performance_review_internet_sales_manager_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Performance review status with Internet Sales Manager cannot be
+                        blank.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Statement Review performed for previous month -->
+        <div class="card mb-4">
+            <div class="card-header">Financial Statement Review performed for previous month</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="financialStatementReviewPerformedForPreviousMonth"
+                               id="financial_statement_review_performed_for_previous_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="financial_statement_review_performed_for_previous_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="financialStatementReviewPerformedForPreviousMonth"
+                               id="financial_statement_review_performed_for_previous_month_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="financial_statement_review_performed_for_previous_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="financialStatementReviewPerformedForPreviousMonth"
+                               id="financial_statement_review_performed_for_previous_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="financial_statement_review_performed_for_previous_month_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Financial Statement Review performed for previous month cannot be
+                        blank.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Initiatives Established -->
+        <div class="card mb-4">
+            <div class="card-header">Training Initiatives Established for Following Month</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="trainingInitiativesEstablished"
+                               id="training_initiatives_established_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="training_initiatives_established_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="trainingInitiativesEstablished"
+                               id="training_initiatives_established_no"
+                               value="No" required>
+                        <label class="form-check-label" for="training_initiatives_established_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="trainingInitiativesEstablished"
+                               id="training_initiatives_established_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="training_initiatives_established_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Training initiatives cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coaching Sessions Conducted -->
+        <div class="card mb-4">
+            <div class="card-header">Coaching Sessions Conducted with Every Member of the Sales Team</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="coachingSessionsConducted"
+                               id="coaching_sessions_conducted_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="coaching_sessions_conducted_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="coachingSessionsConducted"
+                               id="coaching_sessions_conducted_no"
+                               value="No" required>
+                        <label class="form-check-label" for="coaching_sessions_conducted_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="coachingSessionsConducted"
+                               id="coaching_sessions_conducted_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="coaching_sessions_conducted_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Coaching sessions cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSI Scores Achieved for the Month? -->
+        <div class="card mb-4">
+            <div class="card-header">CSI Scores Achieved for the Month?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="csiScoresAchievedForTheMonth" id="csi_scores_achieved_for_the_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="csi_scores_achieved_for_the_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="csiScoresAchievedForTheMonth" id="csi_scores_achieved_for_the_month_no"
+                               value="No" required>
+                        <label class="form-check-label" for="csi_scores_achieved_for_the_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="csiScoresAchievedForTheMonth" id="csi_scores_achieved_for_the_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="csi_scores_achieved_for_the_month_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Please specify if the CSI scores were achieved for the month.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goals Set for the Following Month -->
+        <div class="card mb-4">
+            <div class="card-header">Goals Set for the Following Month</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="goalsSetForTheFollowingMonth"
+                               id="goals_set_for_the_following_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="goals_set_for_the_following_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="goalsSetForTheFollowingMonth"
+                               id="goals_set_for_the_following_month_no"
+                               value="No" required>
+                        <label class="form-check-label" for="goals_set_for_the_following_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="goalsSetForTheFollowingMonth"
+                               id="goals_set_for_the_following_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="goals_set_for_the_following_month_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Goals cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goals and Budgets for Following Month Communicated to Team? -->
+        <div class="card mb-4">
+            <div class="card-header">Goals and Budgets for Following Month Communicated to Team?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="goalsAndBudgetsCommunicatedToTeam"
+                               id="goals_and_budgets_communicated_to_team_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="goals_and_budgets_communicated_to_team_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="goalsAndBudgetsCommunicatedToTeam"
+                               id="goals_and_budgets_communicated_to_team_no"
+                               value="No" required>
+                        <label class="form-check-label" for="goals_and_budgets_communicated_to_team_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="goalsAndBudgetsCommunicatedToTeam"
+                               id="goals_and_budgets_communicated_to_team_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="goals_and_budgets_communicated_to_team_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Goals and budgets communication status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Areas for Sales Operations Improvement - Growth for Following Month? -->
+        <div class="card mb-4">
+            <div class="card-header">Areas for Sales Operations Improvement - Growth for Following Month?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="salesOperationsImprovementGrowth"
+                               id="sales_operations_improvement_growth_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="sales_operations_improvement_growth_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="salesOperationsImprovementGrowth"
+                               id="sales_operations_improvement_growth_no"
+                               value="No" required>
+                        <label class="form-check-label" for="sales_operations_improvement_growth_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="salesOperationsImprovementGrowth"
+                               id="sales_operations_improvement_growth_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="sales_operations_improvement_growth_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Areas for sales operations improvement cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Self Improvement Material Read or Heard During the Month? -->
+        <div class="card mb-4">
+            <div class="card-header">Self Improvement Material Read or Heard During the Month?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="selfImprovementMaterial"
+                               id="self_improvement_material_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="self_improvement_material_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="selfImprovementMaterial"
+                               id="self_improvement_material_no"
+                               value="No" required>
+                        <label class="form-check-label" for="self_improvement_material_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="selfImprovementMaterial"
+                               id="self_improvement_material_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="self_improvement_material_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Self improvement material status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Teamwork Improvement Strategies for Previous Month? -->
+        <div class="card mb-4">
+            <div class="card-header">Teamwork Improvement Strategies for Previous Month?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="teamworkImprovementStrategies"
+                               id="teamwork_improvement_strategies_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="teamwork_improvement_strategies_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="teamworkImprovementStrategies"
+                               id="teamwork_improvement_strategies_no"
+                               value="No" required>
+                        <label class="form-check-label" for="teamwork_improvement_strategies_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="teamworkImprovementStrategies"
+                               id="teamwork_improvement_strategies_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="teamwork_improvement_strategies_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Teamwork improvement strategies status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Teamwork Improvement Strategies for the Following Month? -->
+        <div class="card mb-4">
+            <div class="card-header">Teamwork Improvement Strategies for the Following Month?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="teamworkImprovementStrategiesNextMonth"
+                               id="teamwork_improvement_strategies_next_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="teamwork_improvement_strategies_next_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="teamworkImprovementStrategiesNextMonth"
+                               id="teamwork_improvement_strategies_next_month_no"
+                               value="No" required>
+                        <label class="form-check-label" for="teamwork_improvement_strategies_next_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="teamworkImprovementStrategiesNextMonth"
+                               id="teamwork_improvement_strategies_next_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="teamwork_improvement_strategies_next_month_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Teamwork improvement strategies status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Morale Improvement Strategies for the Previous Month? -->
+        <div class="card mb-4">
+            <div class="card-header">Morale Improvement Strategies for the Previous Month?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="moraleImprovementStrategiesPreviousMonth"
+                               id="morale_improvement_strategies_previous_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="morale_improvement_strategies_previous_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="moraleImprovementStrategiesPreviousMonth"
+                               id="morale_improvement_strategies_previous_month_no"
+                               value="No" required>
+                        <label class="form-check-label" for="morale_improvement_strategies_previous_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="moraleImprovementStrategiesPreviousMonth"
+                               id="morale_improvement_strategies_previous_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="morale_improvement_strategies_previous_month_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Morale improvement strategies status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Morale Improvement Strategies for the Following Month? -->
+        <div class="card mb-4">
+            <div class="card-header">Morale Improvement Strategies for the Following Month?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="moraleImprovementStrategiesNextMonth"
+                               id="morale_improvement_strategies_next_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="morale_improvement_strategies_next_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="moraleImprovementStrategiesNextMonth"
+                               id="morale_improvement_strategies_next_month_no"
+                               value="No" required>
+                        <label class="form-check-label" for="morale_improvement_strategies_next_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="moraleImprovementStrategiesNextMonth"
+                               id="morale_improvement_strategies_next_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="morale_improvement_strategies_next_month_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Morale improvement strategies status cannot be blank.</div>
+                </div>
+            </div>
+        </div>
+        <!-- 3 Areas for Self Improvement? -->
+        <div class="card mb-4">
+            <div class="card-header">3 Areas for Self Improvement?</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="threeAreasForSelfImprovement"
+                               id="three_areas_for_self_improvement_yes"
+                               value="Yes" required>
+                        <label class="form-check-label" for="three_areas_for_self_improvement_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="threeAreasForSelfImprovement"
+                               id="three_areas_for_self_improvement_no"
+                               value="No" required>
+                        <label class="form-check-label" for="three_areas_for_self_improvement_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="threeAreasForSelfImprovement"
+                               id="three_areas_for_self_improvement_na"
+                               value="N/A" required>
+                        <label class="form-check-label" for="three_areas_for_self_improvement_na">N/A</label>
+                    </div>
+                    <div class="invalid-feedback">Please select if you have identified 3 areas for self improvement.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">Signature</div>
+            <div class="card-body">
+                <div>
+                    <p><strong>By my signature I attest that the information I am providing is accurate and
+                        truthful.</strong></p>
+                    <div class="sigPad">
+                        <div class="sigWrapper">
+                            <canvas id="signatureCanvas"></canvas>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" id="clearSignature">Clear</button>
+                            <button type="button" id="saveSignature">Save</button>
+                        </div>
+                        <div id="signatureError" class="invalid-feedback">Por favor, firma antes de enviar el
+                            formulario.
+                        </div>
+                        <!-- Campo oculto para la firma -->
+                        <input type="hidden" id="signatureData" name="signatureData">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Configurar el canvas para capturar firmas
+            const canvas = document.getElementById('signatureCanvas');
+            const signaturePad = new SignaturePad(canvas);
+
+            const clearButton = document.getElementById('clearSignature');
+            const saveButton = document.getElementById('saveSignature');
+            const signatureDataInput = document.getElementById('signatureData');
+            const signatureError = document.getElementById('signatureError');  // El div donde mostramos el mensaje de error
+
+            // Asegurarse de que el tamaño del canvas sea correcto
+            function resizeCanvas() {
+                const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext('2d').scale(ratio, ratio);
+            }
+
+            // Llamar a resizeCanvas para ajustar el tamaño
+            resizeCanvas();
+
+            // Limpiar el canvas cuando el botón Clear es presionado
+            clearButton.addEventListener('click', function () {
+                signaturePad.clear();
+                canvas.classList.remove('is-invalid');
+                signatureError.style.display = 'none';  // Ocultamos el mensaje de error si se limpia
+            });
+
+            // Guardar la firma en un campo hidden en formato base64
+            saveButton.addEventListener('click', function () {
+                if (signaturePad.isEmpty()) {
+                    alert("Please provide a signature first.");
+                } else {
+                      // Captura la firma en formato base64
+                    signatureDataInput.value = signaturePad.toDataURL();  // Asigna el valor en el campo hidden
+                }
+            });
+
+            // Validar que la firma no esté vacía antes de enviar el formulario
+            document.getElementById("form_generalsalesmanager").addEventListener('submit', function (event) {
+                if (signaturePad.isEmpty()) {
+                    event.preventDefault();
+                    canvas.classList.add('is-invalid');
+                    signatureError.style.display = 'block';  // Mostrar el mensaje de error
+                } else {
+                    canvas.classList.remove('is-invalid');
+                    signatureError.style.display = 'none';  // Ocultar el mensaje de error
+                    document.getElementById('signatureData').value = signaturePad.toDataURL();
+
+                    if(document.getElementById('signatureData').value === ''){
+                        event.preventDefault();
+                        canvas.classList.add('is-invalid');
+                        signatureError.style.display = 'block';  // Mostrar el mensaje de error
+                    }
+                }
+            });
+        </script>
+        <div class="form-group">
+            <label>By using this form you agree with the storage and handling of your data by this website <span
+                    class="text-danger">*</span></label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="consentAcknowledgment" id="consent_acknowledge"
+                       required>
+                <label class="form-check-label" for="consent_acknowledge">ACKNOWLEDGMENT AND CONSENT</label>
+            </div>
+            <div class="invalid-feedback">Please acknowledge consent.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

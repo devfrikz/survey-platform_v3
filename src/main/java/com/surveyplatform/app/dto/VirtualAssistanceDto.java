@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@ToString(includeFieldNames = true)
 public class VirtualAssistanceDto {
+    //General Management
     private String dealershipName;
     private String websiteUrl;
     private String firstName;
@@ -42,6 +41,32 @@ public class VirtualAssistanceDto {
     private String setNewGoal;
     private String developedRecognitionProgram;
     private String achievedProfitability;
+    //General sales Manager
+    private String storeNewVehiclesSalesMet;
+    private String storePreOwnedVehicleSalesMet;
+    private String reconTimeAt4DaysForTheMonth;
+    private String storeFinanceObjectivesMet;
+    private String newVehicleInventoryNext90Days;
+    private String preOwnedVehicleInventoryNext60Days;
+    private String allCoOpAdDollarsAppliedFor;
+    private String advertisingCompliantWithStateLaws;
+    private String adPlanReadyForNextMonth;
+    private String websiteReviewConducted;
+    private String performanceReviewNewCarManagers;
+    private String performanceReviewPreOwnedSalesManagers;
+    private String performanceReviewFinanceManagers;
+    private String performanceReviewInternetSalesManager;
+    private String goalsSetForTheFollowingMonth;
+    private String goalsAndBudgetsCommunicatedToTeam;
+    private String salesOperationsImprovementGrowth;
+    private String selfImprovementMaterial;
+    private String teamworkImprovementStrategies;
+    private String teamworkImprovementStrategiesNextMonth;
+    private String moraleImprovementStrategiesPreviousMonth;
+    private String moraleImprovementStrategiesNextMonth;
+    private String threeAreasForSelfImprovement;
+
+    //Common fields
     private String signatureData;
     private String consentAcknowledgment;
 
