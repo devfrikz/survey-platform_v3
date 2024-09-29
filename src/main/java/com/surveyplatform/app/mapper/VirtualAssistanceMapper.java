@@ -3,6 +3,7 @@ package com.surveyplatform.app.mapper;
 import com.surveyplatform.app.dto.VirtualAssistanceDto;
 import com.surveyplatform.app.persistance.entities.FormularioGeneralManagement;
 import com.surveyplatform.app.persistance.entities.FormularioGeneralSalesManager;
+import com.surveyplatform.app.persistance.entities.FormularioNewCarSalesManager;
 import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistant;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,8 +15,6 @@ public interface VirtualAssistanceMapper {
     VirtualAssistanceMapper MAPPER = Mappers.getMapper(VirtualAssistanceMapper.class);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "romiReportAnalyzed", source = "romi")
-    @Mapping(target = "correctiveActionSet", source = "correctiveAction")
     FormularioGeneralManagement toEntityFormularioGeneralManagement(VirtualAssistanceDto dto);
 
     @Mapping(target = "id", ignore = true)
@@ -23,4 +22,7 @@ public interface VirtualAssistanceMapper {
 
     @Mapping(target = "id", ignore = true)
     FormularioGeneralSalesManager toEntityFormularioGeneralSalesManager(VirtualAssistanceDto dto);
+
+    @Mapping(target = "id", ignore = true)
+    FormularioNewCarSalesManager toEntityNewCarSalesManager(VirtualAssistanceDto dto);
 }

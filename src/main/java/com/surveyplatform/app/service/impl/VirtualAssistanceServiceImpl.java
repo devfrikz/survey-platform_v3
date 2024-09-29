@@ -4,7 +4,7 @@ import com.surveyplatform.app.dto.VirtualAssistanceDto;
 import com.surveyplatform.app.mapper.VirtualAssistanceMapper;
 import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistant;
 import com.surveyplatform.app.persistance.repository.FormularioGeneralSalesManagerRepository;
-import com.surveyplatform.app.persistance.repository.FormularioTipoRepository;
+import com.surveyplatform.app.persistance.repository.FormulariotoNewCarSalesManagerRepository;
 import com.surveyplatform.app.persistance.repository.FormularioGeneralManagementRepository;
 import com.surveyplatform.app.persistance.repository.FormularioVirtualAssistantRepository;
 import com.surveyplatform.app.service.FormularioService;
@@ -18,13 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
-    private final FormularioTipoRepository formularioTipoRepository;
     private final FormularioGeneralManagementRepository formularioGeneralManagementRepository;
     private final FormularioGeneralSalesManagerRepository formularioGeneralSalesManagerRepository;
     private final FormularioVirtualAssistantRepository formularioVirtualAssistantRepository;
+    private final FormulariotoNewCarSalesManagerRepository formulariotoNewCarSalesManagerRepository;
+
     private final FormularioService formularioService;
 
+    public static final String SUBMITTED_FORM = "Submitted form: {}";
     private static final Long VIRTUAL_FORM_TYPE = 6L;
+
     @Override
     @Transactional
     public void submitGeneralManagement(VirtualAssistanceDto virtualAssistanceDto) {
@@ -32,7 +35,7 @@ public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
         var formularioGeneralManagement = VirtualAssistanceMapper.MAPPER.toEntityFormularioGeneralManagement(virtualAssistanceDto);
         formularioGeneralManagement.setFormularioVirtualAssistant(virtualAssistance);
         formularioGeneralManagementRepository.save(formularioGeneralManagement);
-       log.info("Submitted form: {}", virtualAssistanceDto);
+       log.info(SUBMITTED_FORM, virtualAssistanceDto);
     }
 
     @Override
@@ -43,7 +46,18 @@ public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
         formularioGeneralSalesManager.setFormularioVirtualAssistant(virtualAssistance);
 
         formularioGeneralSalesManagerRepository.save(formularioGeneralSalesManager);
-        log.info("Submitted form: {}", virtualAssistanceDto);
+        log.info(SUBMITTED_FORM, virtualAssistanceDto);
+    }
+
+    @Override
+    @Transactional
+    public void submitSalesManagerEvaluation(VirtualAssistanceDto virtualAssistanceDto) {
+        var virtualAssistance = saveVirtualAssistant(virtualAssistanceDto);
+        var formularioSalesManagerEvaluation = VirtualAssistanceMapper.MAPPER.toEntityNewCarSalesManager(virtualAssistanceDto);
+        formularioSalesManagerEvaluation.setFormularioVirtualAssistance(virtualAssistance);
+
+        formulariotoNewCarSalesManagerRepository.save(formularioSalesManagerEvaluation);
+        log.info(SUBMITTED_FORM, virtualAssistanceDto);
     }
 
     private FormularioVirtualAssistant saveVirtualAssistant(VirtualAssistanceDto virtualAssistanceDto) {

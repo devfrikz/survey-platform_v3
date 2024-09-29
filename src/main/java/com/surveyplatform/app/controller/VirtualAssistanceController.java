@@ -25,6 +25,17 @@ public class VirtualAssistanceController {
         return "general-management";
     }
 
+    @GetMapping("/new-car-sales-manager")
+    public String newCarSalesManager() {
+        return "new-car-sales-manager";
+    }
+
+    @PostMapping("/submit-new-car-sales-manager")
+    public String submitNewCarSalesManager(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+        virtualAssistanceService.submitSalesManagerEvaluation(virtualAssistanceDto);
+        return "new-car-sales-manager";
+    }
+
     @GetMapping("/general-sales-manager")
     public String generalSalesManager() {
         return "general-sales-manager";
