@@ -1,7 +1,9 @@
 package com.surveyplatform.app.mapper;
 
 import com.surveyplatform.app.dto.VirtualAssistanceDto;
-import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistance;
+import com.surveyplatform.app.persistance.entities.FormularioGeneralManagement;
+import com.surveyplatform.app.persistance.entities.FormularioGeneralSalesManager;
+import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistant;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -14,7 +16,11 @@ public interface VirtualAssistanceMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "romiReportAnalyzed", source = "romi")
     @Mapping(target = "correctiveActionSet", source = "correctiveAction")
-    FormularioVirtualAssistance toEntity(VirtualAssistanceDto dto);
+    FormularioGeneralManagement toEntityFormularioGeneralManagement(VirtualAssistanceDto dto);
 
-    VirtualAssistanceDto toDto(FormularioVirtualAssistance entity);
+    @Mapping(target = "id", ignore = true)
+    FormularioVirtualAssistant toEntityFormularioVirtualAssistant(VirtualAssistanceDto dto);
+
+    @Mapping(target = "id", ignore = true)
+    FormularioGeneralSalesManager toEntityFormularioGeneralSalesManager(VirtualAssistanceDto dto);
 }

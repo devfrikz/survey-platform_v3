@@ -32,6 +32,7 @@ public class VirtualAssistanceController {
 
     @PostMapping("/submit-general-sales-manager")
     public String submitGeneralSalesManager(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+        virtualAssistanceService.submitGeneralSalesManager(virtualAssistanceDto);
         return "general-sales-manager";
     }
 
