@@ -4,6 +4,7 @@ import com.surveyplatform.app.dto.VirtualAssistanceDto;
 import com.surveyplatform.app.mapper.VirtualAssistanceMapper;
 import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistant;
 import com.surveyplatform.app.persistance.repository.FormularioGeneralSalesManagerRepository;
+import com.surveyplatform.app.persistance.repository.FormularioSalesManagerPreOwnedRepository;
 import com.surveyplatform.app.persistance.repository.FormulariotoNewCarSalesManagerRepository;
 import com.surveyplatform.app.persistance.repository.FormularioGeneralManagementRepository;
 import com.surveyplatform.app.persistance.repository.FormularioVirtualAssistantRepository;
@@ -22,6 +23,7 @@ public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
     private final FormularioGeneralSalesManagerRepository formularioGeneralSalesManagerRepository;
     private final FormularioVirtualAssistantRepository formularioVirtualAssistantRepository;
     private final FormulariotoNewCarSalesManagerRepository formulariotoNewCarSalesManagerRepository;
+    private final FormularioSalesManagerPreOwnedRepository formularioSalesManagerPreOwnedRepository;
 
     private final FormularioService formularioService;
 
@@ -57,6 +59,17 @@ public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
         formularioSalesManagerEvaluation.setFormularioVirtualAssistance(virtualAssistance);
 
         formulariotoNewCarSalesManagerRepository.save(formularioSalesManagerEvaluation);
+        log.info(SUBMITTED_FORM, virtualAssistanceDto);
+    }
+
+    @Override
+    @Transactional
+    public void submitSalesManagerPreOwned(VirtualAssistanceDto virtualAssistanceDto) {
+        var virtualAssistance = saveVirtualAssistant(virtualAssistanceDto);
+        var formularioSalesManagerPreOwned = VirtualAssistanceMapper.MAPPER.toEntityFormularioSalesManagerPreOwned(virtualAssistanceDto);
+        formularioSalesManagerPreOwned.setFormularioVirtualAssistance(virtualAssistance);
+
+        formularioSalesManagerPreOwnedRepository.save(formularioSalesManagerPreOwned);
         log.info(SUBMITTED_FORM, virtualAssistanceDto);
     }
 
