@@ -79,7 +79,7 @@
                     <div class="form-group col-md-4">
                         <label for="phone">Phone</label>
                         <input type="tel" id="phone" name="phone" class="form-control"
-                               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required data-toggle="tooltip" data-placement="top">
+                               pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required data-toggle="tooltip" data-placement="top">
                     </div>
                 </div>
             </div>
@@ -669,7 +669,8 @@
             <div class="card-header">Signature</div>
             <div class="card-body">
                 <div>
-                    <p><strong>By my signature I attest that the information I am providing is accurate and truthful.</strong></p>
+                    <p><strong>By my signature I attest that the information I am providing is accurate and
+                        truthful.</strong></p>
                     <div class="sigPad">
                         <div class="sigWrapper">
                             <canvas id="signatureCanvas"></canvas>
@@ -678,8 +679,11 @@
                             <button type="button" id="clearSignature">Clear</button>
                             <button type="button" id="saveSignature">Save</button>
                         </div>
-                        <!-- Agregamos un div para mostrar el error como lo hace el navegador -->
-                        <div id="signatureError" class="invalid-feedback">Por favor, firma antes de enviar el formulario.</div>
+                        <div id="signatureError" class="invalid-feedback">Por favor, firma antes de enviar el
+                            formulario.
+                        </div>
+                        <!-- Campo oculto para la firma -->
+                        <input type="hidden" id="signatureData" name="signatureData">
                     </div>
                 </div>
             </div>
@@ -708,7 +712,6 @@
             // Limpiar el canvas cuando el botón Clear es presionado
             clearButton.addEventListener('click', function () {
                 signaturePad.clear();
-                // Eliminar el estado de error si se limpia el canvas
                 canvas.classList.remove('is-invalid');
                 signatureError.style.display = 'none';  // Ocultamos el mensaje de error si se limpia
             });
@@ -720,27 +723,25 @@
                 } else {
                     const signatureData = signaturePad.toDataURL();  // Captura la firma en formato base64
                     signatureDataInput.value = signatureData;  // Asigna el valor en el campo hidden
-                    console.log("Firma guardada:", signatureData);  // Puedes ver la firma en la consola
                 }
             });
 
             // Validar que la firma no esté vacía antes de enviar el formulario
-            document.getElementById('form_generalmanager').addEventListener('submit', function (event) {
-                // Validar si el canvas está vacío
+            document.getElementById("form_generalmanager").addEventListener('submit', function (event) {
                 if (signaturePad.isEmpty()) {
-                    // Detener el envío del formulario
                     event.preventDefault();
-
-                    // Agregar clases de error al canvas para estilos visuales
                     canvas.classList.add('is-invalid');
                     signatureError.style.display = 'block';  // Mostrar el mensaje de error
                 } else {
-                    // Si la firma está completa, limpiar cualquier mensaje de error
                     canvas.classList.remove('is-invalid');
                     signatureError.style.display = 'none';  // Ocultar el mensaje de error
-
-                    // Guardar la firmaen formato base64 en el campo hidden
                     document.getElementById('signatureData').value = signaturePad.toDataURL();
+
+                    if(document.getElementById('signatureData').value === ''){
+                        event.preventDefault();
+                        canvas.classList.add('is-invalid');
+                        signatureError.style.display = 'block';  // Mostrar el mensaje de error
+                    }
                 }
             });
         </script>

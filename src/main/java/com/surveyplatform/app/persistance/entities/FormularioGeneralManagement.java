@@ -17,33 +17,12 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @Setter
 @Entity
-@Table(name = "formulario_virtual_assistance", schema = "crm")
-public class FormularioVirtualAssistance {
+@Table(name = "formulario_general_management", schema = "crm")
+public class FormularioGeneralManagement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @Column(name = "dealership_name")
-    private String dealershipName;
-
-    @Column(name = "website_url")
-    private String websiteUrl;
-
-    @Column(name = "first_name", length = 100)
-    private String firstName;
-
-    @Column(name = "last_name", length = 100)
-    private String lastName;
-
-    @Column(name = "position", length = 100)
-    private String position;
-
-    @Column(name = "email", length = 100)
-    private String email;
-
-    @Column(name = "phone", length = 15)
-    private String phone;
 
     @Column(name = "reviewed_contracts", length = 3)
     private String reviewedContracts;
@@ -122,7 +101,7 @@ public class FormularioVirtualAssistance {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "formulario_id", nullable = false)
-    private Formulario formulario;
+    @JoinColumn(name = "formulario_virtual_assistance_id", nullable = false)
+    private FormularioVirtualAssistant formularioVirtualAssistant;
 
 }
