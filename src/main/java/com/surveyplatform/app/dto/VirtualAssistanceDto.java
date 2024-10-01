@@ -1,5 +1,6 @@
 package com.surveyplatform.app.dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,9 +31,9 @@ public class VirtualAssistanceDto {
     private String reviewedMarketing;
     private String compliance;
     private String gatheredVirtualAssistantSurveys;
-    private String romi;
+    private String romiReportAnalyzed;
     private String reviewedForecast;
-    private String correctiveAction;
+    private String correctiveActionSet;
     private String developedMarketingStrategies;
     private String developedMarketingWithVendors;
     private String ensuredTrainingStandards;
@@ -71,7 +72,83 @@ public class VirtualAssistanceDto {
     private String moraleImprovementStrategiesNextMonth;
     private String threeAreasForSelfImprovement;
 
+    //New Car Sales Manager
+    private String conductedOneOnOnesDaily;
+    private String calledBackUnsoldTrafficDaily;
+    private String allSalesTeamMembersFactoryCertified;
+    private String allSalesTeamMemberMetProductKnowledgeProficiency;
+    private String customerSatisfactionScoresMetFactoryStandards;
+    private String threeDayFollowUpCompleted;
+    private String conductedTwoTrainingSessionsPerWeek;
+    private String sixtyDealsClosedRequirementMet;
+    private String conductedWalkaroundPresentationTraining;
+    private String reviewedPhoneUpsCallTrackingDaily;
+    private String conductedTwoPhoneTrainingSessions;
+    private String providedMotivationalMaterial;
+    private String maintainedInventoryLevels;
+    private String merchandisedAgedInventory;
+    private String developedSalesContests;
+    private String reviewedInternetResponseTime;
+    private String reviewedInternetLostSales;
+    private String reviewedInternetMerchandising;
+    private String assistedSalesStaffInProspecting;
+    private String createdSalesCallListsForEquityCustomers;
+    private String createdCallBackListsForLeaseContracts;
+    private String createdCallBackListsForTradeInBuyBackOffers;
+    private String securedGoogleReviews;
+    private String securedFacebookLikes;
+    private String ensuredSalesStaffComplianceWithTechnology;
+    private String distributedGoodPressArticles;
+    private String praisedIndividualsPublicly;
+    private String documentedPerformanceIssues;
+    private String advertisingAndPromotionsShared;
+    private String pricedVehiclesOnInternet;
+    private String ensuredSpecialOffersPostedOnWebsite;
+    private String updatedPersonnelOnWebsite;
+    private String zeroTurnoverOnSalesTeam;
+    private String saveADealConductedDaily;
+    private String earlyIntroductionToCustomers;
 
+    //Sales Manager Pre-Owned
+    private String tradeAcquisition60PercentAppraisals;
+    private String zeroVehiclesOver90Days;
+    private String usedVehiclesAverageDaysInInventory;
+    private String vehiclesAcquisitionToMerchandising;
+    private String allCarfaxAutochecksConducted;
+    private String inventoryMixedAlignedWithRateOfSale;
+    private String wholesaleGainForMonth;
+    private String metFactoryRequirementsForCertifiedVehicles;
+    private String allVehiclesPricedWeeklyOnInternet;
+    private String allSpecialsUpdatedOnInternet;
+    private String ninetyPercentVehiclesHavePhotosOnInternet;
+    private String allSalesStaffMetInTechnologyRequirements;
+    private String allAgedInventoryDisposedAtAuction;
+    private String policyExpensesDidNotExceed1PercentGross;
+    private String zeroLotDamageForMonth;
+    private String driverLicensesCheckedBeforeTestDrives;
+    private String allLoanerAgreementsSigned;
+    private String allTestDrivesAccompaniedBySalesperson;
+    private String conductedTrainingSessionsTwoPerWeek;
+    private String reviewedUnsoldLeadsDaily;
+    private String reviewedPhoneUpsDaily;
+    private String conductedPhoneUpTraining;
+    private String allAgedInventoryProperlyDisplayed;
+    private String establishedSalesContests;
+    private String followedPricingGuidelinesToPromoteFastTurn;
+    private String achievedDepartmentUnitsPerformanceGoal;
+    private String achievedDepartmentGrossGoal;
+    private String achieved10CarsPerSalespersonAverage;
+    private String areThereAnyTitlesMissing;
+    private String hasAPhysicalInventoryBeenConducted;
+    private String allStateGuidelinesForAdvertisingFollowed;
+    private String allSoldDealsWorksheetsSavedInFiles;
+    private String truthAndLendingDisclosuresFollowed;
+    private String allSafetyInspectionsConductedPriorToOffering;
+    private String allDisclosuresHavePricingClearlyMarked;
+    private String allVehiclesOfferedHaveTitlesInStore;
+    private String allCarfaxAutochecksReviewedAndSignedCopyKept;
+    private String customerRequestedToSpeakToPreviousCustomer;
+    private String sixtyDealsClosedForMonth;
 
     //Common fields
     private String signatureData;

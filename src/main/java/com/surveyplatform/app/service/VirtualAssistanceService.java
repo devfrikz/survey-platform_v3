@@ -8,4 +8,10 @@ public interface VirtualAssistanceService {
 
     @Transactional
     void submitGeneralSalesManager(VirtualAssistanceDto virtualAssistanceDto);
+
+    @Transactional
+    void submitSalesManagerEvaluation(VirtualAssistanceDto virtualAssistanceDto);
+
+    @Transactional
+    void submitSalesManagerPreOwned(VirtualAssistanceDto virtualAssistanceDto);
 }

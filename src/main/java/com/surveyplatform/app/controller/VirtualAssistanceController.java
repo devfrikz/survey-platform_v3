@@ -36,4 +36,25 @@ public class VirtualAssistanceController {
         return "general-sales-manager";
     }
 
+    @GetMapping("/new-car-sales-manager")
+    public String newCarSalesManager() {
+        return "new-car-sales-manager";
+    }
+
+    @PostMapping("/submit-new-car-sales-manager")
+    public String submitNewCarSalesManager(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+        virtualAssistanceService.submitSalesManagerEvaluation(virtualAssistanceDto);
+        return "new-car-sales-manager";
+    }
+
+    @GetMapping("/sales-manager-pre-owned")
+    public String salesManagerPreOwned() {
+        return "sales-manager-pre-owned";
+    }
+
+    @PostMapping("/submit-sales-manager-pre-owned")
+    public String submitSalesManagerPreOwned(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+        virtualAssistanceService.submitSalesManagerPreOwned(virtualAssistanceDto);
+        return "sales-manager-pre-owned";
+    }
 }

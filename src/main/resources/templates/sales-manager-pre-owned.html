@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Manager Pre-Owned</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <style>
+        .sigWrapper {
+            border: 1px solid #cccccc;
+            height: 150px;
+            max-width: 400px;
+        }
+
+        .sigPad {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        canvas {
+            touch-action: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container mt-5">
+    <h2>Sales Manager Pre-Owned</h2>
+    <form enctype="multipart/form-data" method="post" id="form_generalsalesmanager"
+          th:action="@{/submit-sales-manager-pre-owned}">
+        <div class="card mb-4">
+            <div class="card-header">General Information</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="dealership_name">Name of Dealership</label>
+                    <input type="text" id="dealership_name" name="dealershipName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="website_url">Website/URL</label>
+                    <input type="url" id="website_url" name="websiteUrl" class="form-control" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="firstName" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="lastName" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="position">Your Position</label>
+                        <input type="text" id="position" name="position" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trade Acquisition - 60% of all appraisals. -->
+        <div class="card mb-4">
+            <div class="card-header">Trade Acquisition - 60% of all appraisals.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tradeAcquisition60PercentAppraisals"
+                               id="tradeAcquisition60OfAllAppraisals_yes" value="Yes" required>
+                        <label class="form-check-label" for="tradeAcquisition60OfAllAppraisals_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tradeAcquisition60PercentAppraisals"
+                               id="tradeAcquisition60OfAllAppraisals_no" value="No" required>
+                        <label class="form-check-label" for="tradeAcquisition60OfAllAppraisals_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tradeAcquisition60PercentAppraisals"
+                               id="tradeAcquisition60OfAllAppraisals_na" value="N/A" required>
+                        <label class="form-check-label" for="tradeAcquisition60OfAllAppraisals_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Zero vehicles over 90 days. -->
+        <div class="card mb-4">
+            <div class="card-header">Zero vehicles over 90 days.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="zeroVehiclesOver90Days"
+                               id="zeroVehiclesOver90Days_yes" value="Yes" required>
+                        <label class="form-check-label" for="zeroVehiclesOver90Days_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="zeroVehiclesOver90Days"
+                               id="zeroVehiclesOver90Days_no" value="No" required>
+                        <label class="form-check-label" for="zeroVehiclesOver90Days_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="zeroVehiclesOver90Days"
+                               id="zeroVehiclesOver90Days_na" value="N/A" required>
+                        <label class="form-check-label" for="zeroVehiclesOver90Days_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Used vehicles average days in inventory - 22 days. -->
+        <div class="card mb-4">
+            <div class="card-header">Used vehicles average days in inventory - 22 days.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="usedVehiclesAverageDaysInInventory"
+                               id="usedVehiclesAverageDaysInInventory_yes" value="Yes" required>
+                        <label class="form-check-label" for="usedVehiclesAverageDaysInInventory_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="usedVehiclesAverageDaysInInventory"
+                               id="usedVehiclesAverageDaysInInventory_no" value="No" required>
+                        <label class="form-check-label" for="usedVehiclesAverageDaysInInventory_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="usedVehiclesAverageDaysInInventory"
+                               id="usedVehiclesAverageDaysInInventory_na" value="N/A" required>
+                        <label class="form-check-label" for="usedVehiclesAverageDaysInInventory_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Vehicles from acquisition to merchandising 4 days average. -->
+        <div class="card mb-4">
+            <div class="card-header">Vehicles from acquisition to merchandising 4 days average.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="vehiclesAcquisitionToMerchandising"
+                               id="vehiclesFromAcquisitionToMerchandising_yes" value="Yes" required>
+                        <label class="form-check-label" for="vehiclesFromAcquisitionToMerchandising_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="vehiclesAcquisitionToMerchandising"
+                               id="vehiclesFromAcquisitionToMerchandising_no" value="No" required>
+                        <label class="form-check-label" for="vehiclesFromAcquisitionToMerchandising_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="vehiclesAcquisitionToMerchandising"
+                               id="vehiclesFromAcquisitionToMerchandising_na" value="N/A" required>
+                        <label class="form-check-label" for="vehiclesFromAcquisitionToMerchandising_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Were all carfax/autochecks conducted on every trade in/purchase. -->
+        <div class="card mb-4">
+            <div class="card-header">Were all carfax/autochecks conducted on every trade in/purchase.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allCarfaxAutochecksConducted"
+                               id="wereAllCarfaxAutochecksConductedOnEveryTradeInPurchase_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="wereAllCarfaxAutochecksConductedOnEveryTradeInPurchase_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allCarfaxAutochecksConducted"
+                               id="wereAllCarfaxAutochecksConductedOnEveryTradeInPurchase_no" value="No" required>
+                        <label class="form-check-label"
+                               for="wereAllCarfaxAutochecksConductedOnEveryTradeInPurchase_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allCarfaxAutochecksConducted"
+                               id="wereAllCarfaxAutochecksConductedOnEveryTradeInPurchase_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="wereAllCarfaxAutochecksConductedOnEveryTradeInPurchase_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Inventory mixed aligned with rate of sale. -->
+        <div class="card mb-4">
+            <div class="card-header">Inventory mixed aligned with rate of sale.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inventoryMixedAlignedWithRateOfSale"
+                               id="inventoryMixedAlignedWithRateOfSale_yes" value="Yes" required>
+                        <label class="form-check-label" for="inventoryMixedAlignedWithRateOfSale_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inventoryMixedAlignedWithRateOfSale"
+                               id="inventoryMixedAlignedWithRateOfSale_no" value="No" required>
+                        <label class="form-check-label" for="inventoryMixedAlignedWithRateOfSale_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inventoryMixedAlignedWithRateOfSale"
+                               id="inventoryMixedAlignedWithRateOfSale_na" value="N/A" required>
+                        <label class="form-check-label" for="inventoryMixedAlignedWithRateOfSale_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wholesale gain for the month. -->
+        <div class="card mb-4">
+            <div class="card-header">Wholesale gain for the month.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="wholesaleGainForMonth"
+                               id="wholesaleGainForTheMonth_yes" value="Yes" required>
+                        <label class="form-check-label" for="wholesaleGainForTheMonth_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="wholesaleGainForMonth"
+                               id="wholesaleGainForTheMonth_no" value="No" required>
+                        <label class="form-check-label" for="wholesaleGainForTheMonth_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="wholesaleGainForMonth"
+                               id="wholesaleGainForTheMonth_na" value="N/A" required>
+                        <label class="form-check-label" for="wholesaleGainForTheMonth_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Met factory requirements for sale of certified vehicles. -->
+        <div class="card mb-4">
+            <div class="card-header">Met factory requirements for sale of certified vehicles.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="metFactoryRequirementsForCertifiedVehicles"
+                               id="metFactoryRequirementsForCertifiedVehicles_yes" value="Yes" required>
+                        <label class="form-check-label" for="metFactoryRequirementsForCertifiedVehicles_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="metFactoryRequirementsForCertifiedVehicles"
+                               id="metFactoryRequirementsForCertifiedVehicles_no" value="No" required>
+                        <label class="form-check-label" for="metFactoryRequirementsForCertifiedVehicles_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="metFactoryRequirementsForCertifiedVehicles"
+                               id="metFactoryRequirementsForCertifiedVehicles_na" value="N/A" required>
+                        <label class="form-check-label" for="metFactoryRequirementsForCertifiedVehicles_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- All vehicles priced weekly on the Internet to keep up with market changes. -->
+        <div class="card mb-4">
+            <div class="card-header">All vehicles priced weekly on the Internet to keep up with market changes.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allVehiclesPricedWeeklyOnInternet"
+                               id="allVehiclesPricedWeeklyOnTheInternet_yes" value="Yes" required>
+                        <label class="form-check-label" for="allVehiclesPricedWeeklyOnTheInternet_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allVehiclesPricedWeeklyOnInternet"
+                               id="allVehiclesPricedWeeklyOnTheInternet_no" value="No" required>
+                        <label class="form-check-label" for="allVehiclesPricedWeeklyOnTheInternet_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allVehiclesPricedWeeklyOnInternet"
+                               id="allVehiclesPricedWeeklyOnTheInternet_na" value="N/A" required>
+                        <label class="form-check-label" for="allVehiclesPricedWeeklyOnTheInternet_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- All specials updated in the Internet. -->
+        <div class="card mb-4">
+            <div class="card-header">All specials updated in the Internet.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allSpecialsUpdatedOnInternet"
+                               id="allSpecialsUpdatedInTheInternet_yes" value="Yes" required>
+                        <label class="form-check-label" for="allSpecialsUpdatedInTheInternet_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allSpecialsUpdatedOnInternet"
+                               id="allSpecialsUpdatedInTheInternet_no" value="No" required>
+                        <label class="form-check-label" for="allSpecialsUpdatedInTheInternet_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allSpecialsUpdatedOnInternet"
+                               id="allSpecialsUpdatedInTheInternet_na" value="N/A" required>
+                        <label class="form-check-label" for="allSpecialsUpdatedInTheInternet_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 90% percent of vehicles have photos on the Internet. -->
+        <div class="card mb-4">
+            <div class="card-header">90% percent of vehicles have photos on the Internet.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="ninetyPercentVehiclesHavePhotosOnInternet"
+                               id="ninetyPercentOfVehiclesHavePhotosOnTheInternet_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="ninetyPercentOfVehiclesHavePhotosOnTheInternet_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="ninetyPercentVehiclesHavePhotosOnInternet"
+                               id="ninetyPercentOfVehiclesHavePhotosOnTheInternet_no" value="No" required>
+                        <label class="form-check-label"
+                               for="ninetyPercentOfVehiclesHavePhotosOnTheInternet_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="ninetyPercentVehiclesHavePhotosOnInternet"
+                               id="ninetyPercentOfVehiclesHavePhotosOnTheInternet_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="ninetyPercentOfVehiclesHavePhotosOnTheInternet_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- All sales staff met in dealership technology requirements. -->
+        <div class="card mb-4">
+            <div class="card-header">All sales staff met in dealership technology requirements.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSalesStaffMetInTechnologyRequirements"
+                               id="allSalesStaffMetInDealershipTechnologyRequirements_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="allSalesStaffMetInDealershipTechnologyRequirements_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSalesStaffMetInTechnologyRequirements"
+                               id="allSalesStaffMetInDealershipTechnologyRequirements_no" value="No" required>
+                        <label class="form-check-label"
+                               for="allSalesStaffMetInDealershipTechnologyRequirements_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSalesStaffMetInTechnologyRequirements"
+                               id="allSalesStaffMetInDealershipTechnologyRequirements_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="allSalesStaffMetInDealershipTechnologyRequirements_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All aged inventory disposed at auction. -->
+        <div class="card mb-4">
+            <div class="card-header">All aged inventory disposed at auction.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allAgedInventoryDisposedAtAuction"
+                               id="allAgedInventoryDisposedAtAuction_yes" value="Yes" required>
+                        <label class="form-check-label" for="allAgedInventoryDisposedAtAuction_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allAgedInventoryDisposedAtAuction"
+                               id="allAgedInventoryDisposedAtAuction_no" value="No" required>
+                        <label class="form-check-label" for="allAgedInventoryDisposedAtAuction_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allAgedInventoryDisposedAtAuction"
+                               id="allAgedInventoryDisposedAtAuction_na" value="N/A" required>
+                        <label class="form-check-label" for="allAgedInventoryDisposedAtAuction_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Policy expenses did not exceed 1% of gross. -->
+        <div class="card mb-4">
+            <div class="card-header">Policy expenses did not exceed 1% of gross.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="policyExpensesDidNotExceed1PercentGross"
+                               id="policyExpensesDidNotExceed1PercentOfGross_yes" value="Yes" required>
+                        <label class="form-check-label" for="policyExpensesDidNotExceed1PercentOfGross_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="policyExpensesDidNotExceed1PercentGross"
+                               id="policyExpensesDidNotExceed1PercentOfGross_no" value="No" required>
+                        <label class="form-check-label" for="policyExpensesDidNotExceed1PercentOfGross_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="policyExpensesDidNotExceed1PercentGross"
+                               id="policyExpensesDidNotExceed1PercentOfGross_na" value="N/A" required>
+                        <label class="form-check-label" for="policyExpensesDidNotExceed1PercentOfGross_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zero lot damage for the month. -->
+        <div class="card mb-4">
+            <div class="card-header">Zero lot damage for the month.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="zeroLotDamageForMonth"
+                               id="zeroLotDamageForTheMonth_yes" value="Yes" required>
+                        <label class="form-check-label" for="zeroLotDamageForTheMonth_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="zeroLotDamageForMonth"
+                               id="zeroLotDamageForTheMonth_no" value="No" required>
+                        <label class="form-check-label" for="zeroLotDamageForTheMonth_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="zeroLotDamageForMonth"
+                               id="zeroLotDamageForTheMonth_na" value="N/A" required>
+                        <label class="form-check-label" for="zeroLotDamageForTheMonth_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Driver licenses checked before customers go on test drives. -->
+        <div class="card mb-4">
+            <div class="card-header">Driver licenses checked before customers go on test drives.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="driverLicensesCheckedBeforeTestDrives"
+                               id="driverLicensesCheckedBeforeTestDrives_yes" value="Yes" required>
+                        <label class="form-check-label" for="driverLicensesCheckedBeforeTestDrives_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="driverLicensesCheckedBeforeTestDrives"
+                               id="driverLicensesCheckedBeforeTestDrives_no" value="No" required>
+                        <label class="form-check-label" for="driverLicensesCheckedBeforeTestDrives_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="driverLicensesCheckedBeforeTestDrives"
+                               id="driverLicensesCheckedBeforeTestDrives_na" value="N/A" required>
+                        <label class="form-check-label" for="driverLicensesCheckedBeforeTestDrives_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All loaner agreements signed. -->
+        <div class="card mb-4">
+            <div class="card-header">All loaner agreements signed.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allLoanerAgreementsSigned"
+                               id="allLoanerAgreementsSigned_yes" value="Yes" required>
+                        <label class="form-check-label" for="allLoanerAgreementsSigned_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allLoanerAgreementsSigned"
+                               id="allLoanerAgreementsSigned_no" value="No" required>
+                        <label class="form-check-label" for="allLoanerAgreementsSigned_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allLoanerAgreementsSigned"
+                               id="allLoanerAgreementsSigned_na" value="N/A" required>
+                        <label class="form-check-label" for="allLoanerAgreementsSigned_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All test drives accompanied by a salesperson. -->
+        <div class="card mb-4">
+            <div class="card-header">All test drives accompanied by a salesperson.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allTestDrivesAccompaniedBySalesperson"
+                               id="allTestDrivesAccompaniedByASalesperson_yes" value="Yes" required>
+                        <label class="form-check-label" for="allTestDrivesAccompaniedByASalesperson_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allTestDrivesAccompaniedBySalesperson"
+                               id="allTestDrivesAccompaniedByASalesperson_no" value="No" required>
+                        <label class="form-check-label" for="allTestDrivesAccompaniedByASalesperson_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allTestDrivesAccompaniedBySalesperson"
+                               id="allTestDrivesAccompaniedByASalesperson_na" value="N/A" required>
+                        <label class="form-check-label" for="allTestDrivesAccompaniedByASalesperson_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conducted training sessions with sales staff (two per week). -->
+        <div class="card mb-4">
+            <div class="card-header">Conducted training sessions with sales staff (two per week).</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="conductedTrainingSessionsTwoPerWeek"
+                               id="conductedTrainingSessionsWithSalesStaffTwoPerWeek_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="conductedTrainingSessionsWithSalesStaffTwoPerWeek_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="conductedTrainingSessionsTwoPerWeek"
+                               id="conductedTrainingSessionsWithSalesStaffTwoPerWeek_no" value="No" required>
+                        <label class="form-check-label"
+                               for="conductedTrainingSessionsWithSalesStaffTwoPerWeek_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="conductedTrainingSessionsTwoPerWeek"
+                               id="conductedTrainingSessionsWithSalesStaffTwoPerWeek_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="conductedTrainingSessionsWithSalesStaffTwoPerWeek_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Reviewed unsold leads daily. -->
+        <div class="card mb-4">
+            <div class="card-header">Reviewed unsold leads daily.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reviewedUnsoldLeadsDaily"
+                               id="reviewedUnsoldLeadsDaily_yes" value="Yes" required>
+                        <label class="form-check-label" for="reviewedUnsoldLeadsDaily_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reviewedUnsoldLeadsDaily"
+                               id="reviewedUnsoldLeadsDaily_no" value="No" required>
+                        <label class="form-check-label" for="reviewedUnsoldLeadsDaily_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reviewedUnsoldLeadsDaily"
+                               id="reviewedUnsoldLeadsDaily_na" value="N/A" required>
+                        <label class="form-check-label" for="reviewedUnsoldLeadsDaily_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviewed phone ups daily. -->
+        <div class="card mb-4">
+            <div class="card-header">Reviewed phone ups daily.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reviewedPhoneUpsDaily"
+                               id="reviewedPhoneUpsDaily_yes" value="Yes" required>
+                        <label class="form-check-label" for="reviewedPhoneUpsDaily_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reviewedPhoneUpsDaily"
+                               id="reviewedPhoneUpsDaily_no" value="No" required>
+                        <label class="form-check-label" for="reviewedPhoneUpsDaily_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="reviewedPhoneUpsDaily"
+                               id="reviewedPhoneUpsDaily_na" value="N/A" required>
+                        <label class="form-check-label" for="reviewedPhoneUpsDaily_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conducted phone up training. -->
+        <div class="card mb-4">
+            <div class="card-header">Conducted phone up training.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="conductedPhoneUpTraining"
+                               id="conductedPhoneUpTraining_yes" value="Yes" required>
+                        <label class="form-check-label" for="conductedPhoneUpTraining_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="conductedPhoneUpTraining"
+                               id="conductedPhoneUpTraining_no" value="No" required>
+                        <label class="form-check-label" for="conductedPhoneUpTraining_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="conductedPhoneUpTraining"
+                               id="conductedPhoneUpTraining_na" value="N/A" required>
+                        <label class="form-check-label" for="conductedPhoneUpTraining_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All aged inventory properly displayed and merchandised. -->
+        <div class="card mb-4">
+            <div class="card-header">All aged inventory properly displayed and merchandised.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allAgedInventoryProperlyDisplayed"
+                               id="allAgedInventoryProperlyDisplayedAndMerchandised_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="allAgedInventoryProperlyDisplayedAndMerchandised_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allAgedInventoryProperlyDisplayed"
+                               id="allAgedInventoryProperlyDisplayedAndMerchandised_no" value="No" required>
+                        <label class="form-check-label"
+                               for="allAgedInventoryProperlyDisplayedAndMerchandised_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allAgedInventoryProperlyDisplayed"
+                               id="allAgedInventoryProperlyDisplayedAndMerchandised_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="allAgedInventoryProperlyDisplayedAndMerchandised_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Established contest/sales promotion to dispose of aged inventory. -->
+        <div class="card mb-4">
+            <div class="card-header">Established contest/sales promotion to dispose of aged inventory.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="establishedSalesContests"
+                               id="establishedContestSalesPromotionToDisposeOfAgedInventory_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="establishedContestSalesPromotionToDisposeOfAgedInventory_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="establishedSalesContests"
+                               id="establishedContestSalesPromotionToDisposeOfAgedInventory_no" value="No" required>
+                        <label class="form-check-label"
+                               for="establishedContestSalesPromotionToDisposeOfAgedInventory_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="establishedSalesContests"
+                               id="establishedContestSalesPromotionToDisposeOfAgedInventory_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="establishedContestSalesPromotionToDisposeOfAgedInventory_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Followed pricing guidelines to promote fast turn. -->
+        <div class="card mb-4">
+            <div class="card-header">Followed pricing guidelines to promote fast turn.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="followedPricingGuidelinesToPromoteFastTurn"
+                               id="followedPricingGuidelinesToPromoteFastTurn_yes" value="Yes" required>
+                        <label class="form-check-label" for="followedPricingGuidelinesToPromoteFastTurn_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="followedPricingGuidelinesToPromoteFastTurn"
+                               id="followedPricingGuidelinesToPromoteFastTurn_no" value="No" required>
+                        <label class="form-check-label" for="followedPricingGuidelinesToPromoteFastTurn_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="followedPricingGuidelinesToPromoteFastTurn"
+                               id="followedPricingGuidelinesToPromoteFastTurn_na" value="N/A" required>
+                        <label class="form-check-label" for="followedPricingGuidelinesToPromoteFastTurn_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achieved department's units performance goal. -->
+        <div class="card mb-4">
+            <div class="card-header">Achieved department's units performance goal.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achievedDepartmentUnitsPerformanceGoal"
+                               id="achievedDepartmentsUnitsPerformanceGoal_yes" value="Yes" required>
+                        <label class="form-check-label" for="achievedDepartmentsUnitsPerformanceGoal_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achievedDepartmentUnitsPerformanceGoal"
+                               id="achievedDepartmentsUnitsPerformanceGoal_no" value="No" required>
+                        <label class="form-check-label" for="achievedDepartmentsUnitsPerformanceGoal_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achievedDepartmentUnitsPerformanceGoal"
+                               id="achievedDepartmentsUnitsPerformanceGoal_na" value="N/A" required>
+                        <label class="form-check-label" for="achievedDepartmentsUnitsPerformanceGoal_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achieved department's gross goal. -->
+        <div class="card mb-4">
+            <div class="card-header">Achieved department's gross goal.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achievedDepartmentGrossGoal"
+                               id="achievedDepartmentsGrossGoal_yes" value="Yes" required>
+                        <label class="form-check-label" for="achievedDepartmentsGrossGoal_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achievedDepartmentGrossGoal"
+                               id="achievedDepartmentsGrossGoal_no" value="No" required>
+                        <label class="form-check-label" for="achievedDepartmentsGrossGoal_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achievedDepartmentGrossGoal"
+                               id="achievedDepartmentsGrossGoal_na" value="N/A" required>
+                        <label class="form-check-label" for="achievedDepartmentsGrossGoal_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achieved 10 cars per sales person average. -->
+        <div class="card mb-4">
+            <div class="card-header">Achieved 10 cars per sales person average.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achieved10CarsPerSalespersonAverage"
+                               id="achieved10CarsPerSalesPersonAverage_yes" value="Yes" required>
+                        <label class="form-check-label" for="achieved10CarsPerSalesPersonAverage_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achieved10CarsPerSalespersonAverage"
+                               id="achieved10CarsPerSalesPersonAverage_no" value="No" required>
+                        <label class="form-check-label" for="achieved10CarsPerSalesPersonAverage_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="achieved10CarsPerSalespersonAverage"
+                               id="achieved10CarsPerSalesPersonAverage_na" value="N/A" required>
+                        <label class="form-check-label" for="achieved10CarsPerSalesPersonAverage_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Are there any titles missing. -->
+        <div class="card mb-4">
+            <div class="card-header">Are there any titles missing.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="areThereAnyTitlesMissing"
+                               id="areThereAnyTitlesMissing_yes" value="Yes" required>
+                        <label class="form-check-label" for="areThereAnyTitlesMissing_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="areThereAnyTitlesMissing"
+                               id="areThereAnyTitlesMissing_no" value="No" required>
+                        <label class="form-check-label" for="areThereAnyTitlesMissing_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="areThereAnyTitlesMissing"
+                               id="areThereAnyTitlesMissing_na" value="N/A" required>
+                        <label class="form-check-label" for="areThereAnyTitlesMissing_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Has a physical inventory been conducted. -->
+        <div class="card mb-4">
+            <div class="card-header">Has a physical inventory been conducted.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="hasAPhysicalInventoryBeenConducted"
+                               id="hasAPhysicalInventoryBeenConducted_yes" value="Yes" required>
+                        <label class="form-check-label" for="hasAPhysicalInventoryBeenConducted_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="hasAPhysicalInventoryBeenConducted"
+                               id="hasAPhysicalInventoryBeenConducted_no" value="No" required>
+                        <label class="form-check-label" for="hasAPhysicalInventoryBeenConducted_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="hasAPhysicalInventoryBeenConducted"
+                               id="hasAPhysicalInventoryBeenConducted_na" value="N/A" required>
+                        <label class="form-check-label" for="hasAPhysicalInventoryBeenConducted_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All state guidelines for advertising were followed?. -->
+        <div class="card mb-4">
+            <div class="card-header">All state guidelines for advertising were followed?.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allStateGuidelinesForAdvertisingFollowed"
+                               id="allStateGuidelinesForAdvertisingWereFollowed_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="allStateGuidelinesForAdvertisingWereFollowed_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allStateGuidelinesForAdvertisingFollowed"
+                               id="allStateGuidelinesForAdvertisingWereFollowed_no" value="No" required>
+                        <label class="form-check-label" for="allStateGuidelinesForAdvertisingWereFollowed_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allStateGuidelinesForAdvertisingFollowed"
+                               id="allStateGuidelinesForAdvertisingWereFollowed_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="allStateGuidelinesForAdvertisingWereFollowed_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All sold deals worksheets were saved in customer's files. -->
+        <div class="card mb-4">
+            <div class="card-header">All sold deals worksheets were saved in customer's files.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSoldDealsWorksheetsSavedInFiles"
+                               id="allSoldDealsWorksheetsWereSavedInCustomersFiles_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="allSoldDealsWorksheetsWereSavedInCustomersFiles_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSoldDealsWorksheetsSavedInFiles"
+                               id="allSoldDealsWorksheetsWereSavedInCustomersFiles_no" value="No" required>
+                        <label class="form-check-label"
+                               for="allSoldDealsWorksheetsWereSavedInCustomersFiles_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSoldDealsWorksheetsSavedInFiles"
+                               id="allSoldDealsWorksheetsWereSavedInCustomersFiles_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="allSoldDealsWorksheetsWereSavedInCustomersFiles_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Truth and lending disclosures were followed when quoting payments to customers? -->
+        <div class="card mb-4">
+            <div class="card-header">Truth and lending disclosures were followed when quoting payments to customers?
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="truthAndLendingDisclosuresFollowed"
+                               id="truthAndLendingDisclosuresFollowedWhenQuotingPayments_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="truthAndLendingDisclosuresFollowedWhenQuotingPayments_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="truthAndLendingDisclosuresFollowed"
+                               id="truthAndLendingDisclosuresFollowedWhenQuotingPayments_no" value="No" required>
+                        <label class="form-check-label"
+                               for="truthAndLendingDisclosuresFollowedWhenQuotingPayments_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="truthAndLendingDisclosuresFollowed"
+                               id="truthAndLendingDisclosuresFollowedWhenQuotingPayments_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="truthAndLendingDisclosuresFollowedWhenQuotingPayments_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- All safety inspections were conducted prior to offering vehicles for sale?. -->
+        <div class="card mb-4">
+            <div class="card-header">All safety inspections were conducted prior to offering vehicles for sale?.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSafetyInspectionsConductedPriorToOffering"
+                               id="allSafetyInspectionsConductedPriorToOfferingVehicles_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="allSafetyInspectionsConductedPriorToOfferingVehicles_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSafetyInspectionsConductedPriorToOffering"
+                               id="allSafetyInspectionsConductedPriorToOfferingVehicles_no" value="No" required>
+                        <label class="form-check-label"
+                               for="allSafetyInspectionsConductedPriorToOfferingVehicles_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allSafetyInspectionsConductedPriorToOffering"
+                               id="allSafetyInspectionsConductedPriorToOfferingVehicles_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="allSafetyInspectionsConductedPriorToOfferingVehicles_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All disclosures have pricing clearly marked?. -->
+        <div class="card mb-4">
+            <div class="card-header">All disclosures have pricing clearly marked?.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allDisclosuresHavePricingClearlyMarked"
+                               id="allDisclosuresHavePricingClearlyMarked_yes" value="Yes" required>
+                        <label class="form-check-label" for="allDisclosuresHavePricingClearlyMarked_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allDisclosuresHavePricingClearlyMarked"
+                               id="allDisclosuresHavePricingClearlyMarked_no" value="No" required>
+                        <label class="form-check-label" for="allDisclosuresHavePricingClearlyMarked_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allDisclosuresHavePricingClearlyMarked"
+                               id="allDisclosuresHavePricingClearlyMarked_na" value="N/A" required>
+                        <label class="form-check-label" for="allDisclosuresHavePricingClearlyMarked_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All vehicles offered for sales have titles in store?. -->
+        <div class="card mb-4">
+            <div class="card-header">All vehicles offered for sales have titles in store?.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allVehiclesOfferedHaveTitlesInStore"
+                               id="allVehiclesOfferedForSalesHaveTitlesInStore_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="allVehiclesOfferedForSalesHaveTitlesInStore_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allVehiclesOfferedHaveTitlesInStore"
+                               id="allVehiclesOfferedForSalesHaveTitlesInStore_no" value="No" required>
+                        <label class="form-check-label" for="allVehiclesOfferedForSalesHaveTitlesInStore_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="allVehiclesOfferedHaveTitlesInStore"
+                               id="allVehiclesOfferedForSalesHaveTitlesInStore_na" value="N/A" required>
+                        <label class="form-check-label" for="allVehiclesOfferedForSalesHaveTitlesInStore_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All carfax/autochecks were reviewed and a copy signed by customer was kept in all files. -->
+        <div class="card mb-4">
+            <div class="card-header">All carfax/autochecks were reviewed and a copy signed by customer was kept in all
+                files.
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allCarfaxAutochecksReviewedAndSignedCopyKept"
+                               id="allCarfaxAutochecksReviewedAndSignedCopyKeptInFiles_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="allCarfaxAutochecksReviewedAndSignedCopyKeptInFiles_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allCarfaxAutochecksReviewedAndSignedCopyKept"
+                               id="allCarfaxAutochecksReviewedAndSignedCopyKeptInFiles_no" value="No" required>
+                        <label class="form-check-label"
+                               for="allCarfaxAutochecksReviewedAndSignedCopyKeptInFiles_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="allCarfaxAutochecksReviewedAndSignedCopyKept"
+                               id="allCarfaxAutochecksReviewedAndSignedCopyKeptInFiles_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="allCarfaxAutochecksReviewedAndSignedCopyKeptInFiles_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- If a customer requested to speak to a previous customer, was the request followed up by dealership personnel?. -->
+        <div class="card mb-4">
+            <div class="card-header">If a customer requested to speak to a previous customer, was the request followed
+                up by dealership personnel?.
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="customerRequestedToSpeakToPreviousCustomer"
+                               id="customerRequestedToSpeakToPreviousCustomerRequestFollowedUp_yes" value="Yes"
+                               required>
+                        <label class="form-check-label"
+                               for="customerRequestedToSpeakToPreviousCustomerRequestFollowedUp_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="customerRequestedToSpeakToPreviousCustomer"
+                               id="customerRequestedToSpeakToPreviousCustomerRequestFollowedUp_no" value="No" required>
+                        <label class="form-check-label"
+                               for="customerRequestedToSpeakToPreviousCustomerRequestFollowedUp_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="customerRequestedToSpeakToPreviousCustomer"
+                               id="customerRequestedToSpeakToPreviousCustomerRequestFollowedUp_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="customerRequestedToSpeakToPreviousCustomerRequestFollowedUp_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 60 deals closed for the month. -->
+        <div class="card mb-4">
+            <div class="card-header">60 deals closed for the month.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sixtyDealsClosedForMonth"
+                               id="sixtyDealsClosedForTheMonth_yes" value="Yes" required>
+                        <label class="form-check-label" for="sixtyDealsClosedForTheMonth_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sixtyDealsClosedForMonth"
+                               id="sixtyDealsClosedForTheMonth_no" value="No" required>
+                        <label class="form-check-label" for="sixtyDealsClosedForTheMonth_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sixtyDealsClosedForMonth"
+                               id="sixtyDealsClosedForTheMonth_na" value="N/A" required>
+                        <label class="form-check-label" for="sixtyDealsClosedForTheMonth_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Monitored Internet respond time on used car leads. -->
+        <div class="card mb-4">
+            <div class="card-header">Monitored Internet respond time on used car leads.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="monitoredInternetRespondTimeOnUsedCarLeads"
+                               id="monitoredInternetRespondTimeOnUsedCarLeads_yes" value="Yes" required>
+                        <label class="form-check-label" for="monitoredInternetRespondTimeOnUsedCarLeads_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="monitoredInternetRespondTimeOnUsedCarLeads"
+                               id="monitoredInternetRespondTimeOnUsedCarLeads_no" value="No" required>
+                        <label class="form-check-label" for="monitoredInternetRespondTimeOnUsedCarLeads_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="monitoredInternetRespondTimeOnUsedCarLeads"
+                               id="monitoredInternetRespondTimeOnUsedCarLeads_na" value="N/A" required>
+                        <label class="form-check-label" for="monitoredInternetRespondTimeOnUsedCarLeads_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory was rotated once weekly on the lot. -->
+        <div class="card mb-4">
+            <div class="card-header">Inventory was rotated once weekly on the lot.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inventoryRotatedOnceWeeklyOnTheLot"
+                               id="inventoryRotatedOnceWeeklyOnTheLot_yes" value="Yes" required>
+                        <label class="form-check-label" for="inventoryRotatedOnceWeeklyOnTheLot_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inventoryRotatedOnceWeeklyOnTheLot"
+                               id="inventoryRotatedOnceWeeklyOnTheLot_no" value="No" required>
+                        <label class="form-check-label" for="inventoryRotatedOnceWeeklyOnTheLot_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="inventoryRotatedOnceWeeklyOnTheLot"
+                               id="inventoryRotatedOnceWeeklyOnTheLot_na" value="N/A" required>
+                        <label class="form-check-label" for="inventoryRotatedOnceWeeklyOnTheLot_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aged inventory was driven to detect possible issues. -->
+        <div class="card mb-4">
+            <div class="card-header">Aged inventory was driven to detect possible issues.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="agedInventoryDrivenToDetectPossibleIssues"
+                               id="agedInventoryDrivenToDetectPossibleIssues_yes" value="Yes" required>
+                        <label class="form-check-label" for="agedInventoryDrivenToDetectPossibleIssues_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="agedInventoryDrivenToDetectPossibleIssues"
+                               id="agedInventoryDrivenToDetectPossibleIssues_no" value="No" required>
+                        <label class="form-check-label" for="agedInventoryDrivenToDetectPossibleIssues_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="agedInventoryDrivenToDetectPossibleIssues"
+                               id="agedInventoryDrivenToDetectPossibleIssues_na" value="N/A" required>
+                        <label class="form-check-label" for="agedInventoryDrivenToDetectPossibleIssues_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save a deal conducted daily. -->
+        <div class="card mb-4">
+            <div class="card-header">Save a deal conducted daily.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="saveADealConductedDaily"
+                               id="saveADealConductedDaily_yes" value="Yes" required>
+                        <label class="form-check-label" for="saveADealConductedDaily_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="saveADealConductedDaily"
+                               id="saveADealConductedDaily_no" value="No" required>
+                        <label class="form-check-label" for="saveADealConductedDaily_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="saveADealConductedDaily"
+                               id="saveADealConductedDaily_na" value="N/A" required>
+                        <label class="form-check-label" for="saveADealConductedDaily_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Early introduction to customers occurred at least 75 percent of the time. -->
+        <div class="card mb-4">
+            <div class="card-header">Early introduction to customers occurred at least 75 percent of the time.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="earlyIntroductionToCustomers"
+                               id="earlyIntroductionToCustomersOccurred75PercentOfTheTime_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="earlyIntroductionToCustomersOccurred75PercentOfTheTime_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="earlyIntroductionToCustomers"
+                               id="earlyIntroductionToCustomersOccurred75PercentOfTheTime_no" value="No" required>
+                        <label class="form-check-label"
+                               for="earlyIntroductionToCustomersOccurred75PercentOfTheTime_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="earlyIntroductionToCustomers"
+                               id="earlyIntroductionToCustomersOccurred75PercentOfTheTime_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="earlyIntroductionToCustomersOccurred75PercentOfTheTime_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 areas of improvement for department for the following month?. -->
+        <div class="card mb-4">
+            <div class="card-header">3 areas of improvement for department for the following month?.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="threeAreasOfImprovementForDepartmentForTheFollowingMonth"
+                               id="threeAreasOfImprovementForDepartmentForTheFollowingMonth_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="threeAreasOfImprovementForDepartmentForTheFollowingMonth_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="threeAreasOfImprovementForDepartmentForTheFollowingMonth"
+                               id="threeAreasOfImprovementForDepartmentForTheFollowingMonth_no" value="No" required>
+                        <label class="form-check-label"
+                               for="threeAreasOfImprovementForDepartmentForTheFollowingMonth_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="threeAreasOfImprovementForDepartmentForTheFollowingMonth"
+                               id="threeAreasOfImprovementForDepartmentForTheFollowingMonth_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="threeAreasOfImprovementForDepartmentForTheFollowingMonth_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 areas for personal improvement for following month?. -->
+        <div class="card mb-4">
+            <div class="card-header">3 areas for personal improvement for following month?.</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="threeAreasForPersonalImprovementForFollowingMonth"
+                               id="threeAreasForPersonalImprovementForFollowingMonth_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="threeAreasForPersonalImprovementForFollowingMonth_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="threeAreasForPersonalImprovementForFollowingMonth"
+                               id="threeAreasForPersonalImprovementForFollowingMonth_no" value="No" required>
+                        <label class="form-check-label"
+                               for="threeAreasForPersonalImprovementForFollowingMonth_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="threeAreasForPersonalImprovementForFollowingMonth"
+                               id="threeAreasForPersonalImprovementForFollowingMonth_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="threeAreasForPersonalImprovementForFollowingMonth_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">Signature</div>
+            <div class="card-body">
+                <div>
+                    <p><strong>By my signature I attest that the information I am providing is accurate and
+                        truthful.</strong></p>
+                    <div class="sigPad">
+                        <div class="sigWrapper">
+                            <canvas id="signatureCanvas"></canvas>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" id="clearSignature">Clear</button>
+                            <button type="button" id="saveSignature">Save</button>
+                        </div>
+                        <div id="signatureError" class="invalid-feedback">Por favor, firma antes de enviar el
+                            formulario.
+                        </div>
+                        <!-- Campo oculto para la firma -->
+                        <input type="hidden" id="signatureData" name="signatureData">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Configurar el canvas para capturar firmas
+            const canvas = document.getElementById('signatureCanvas');
+            const signaturePad = new SignaturePad(canvas);
+
+            const clearButton = document.getElementById('clearSignature');
+            const saveButton = document.getElementById('saveSignature');
+            const signatureDataInput = document.getElementById('signatureData');
+            const signatureError = document.getElementById('signatureError');  // El div donde mostramos el mensaje de error
+
+            // Asegurarse de que el tamaño del canvas sea correcto
+            function resizeCanvas() {
+                const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext('2d').scale(ratio, ratio);
+            }
+
+            // Llamar a resizeCanvas para ajustar el tamaño
+            resizeCanvas();
+
+            // Limpiar el canvas cuando el botón Clear es presionado
+            clearButton.addEventListener('click', function () {
+                signaturePad.clear();
+                canvas.classList.remove('is-invalid');
+                signatureError.style.display = 'none';  // Ocultamos el mensaje de error si se limpia
+            });
+
+            // Guardar la firma en un campo hidden en formato base64
+            saveButton.addEventListener('click', function () {
+                if (signaturePad.isEmpty()) {
+                    alert("Please provide a signature first.");
+                } else {
+                    // Captura la firma en formato base64
+                    signatureDataInput.value = signaturePad.toDataURL();  // Asigna el valor en el campo hidden
+                }
+            });
+
+            // Validar que la firma no esté vacía antes de enviar el formulario
+            document.getElementById("form_generalsalesmanager").addEventListener('submit', function (event) {
+                if (signaturePad.isEmpty()) {
+                    event.preventDefault();
+                    canvas.classList.add('is-invalid');
+                    signatureError.style.display = 'block';  // Mostrar el mensaje de error
+                } else {
+                    canvas.classList.remove('is-invalid');
+                    signatureError.style.display = 'none';  // Ocultar el mensaje de error
+                    document.getElementById('signatureData').value = signaturePad.toDataURL();
+
+                    if (document.getElementById('signatureData').value === '') {
+                        event.preventDefault();
+                        canvas.classList.add('is-invalid');
+                        signatureError.style.display = 'block';  // Mostrar el mensaje de error
+                    }
+                }
+            });
+        </script>
+        <div class="form-group">
+            <label>By using this form you agree with the storage and handling of your data by this website <span
+                    class="text-danger">*</span></label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="consentAcknowledgment" id="consent_acknowledge"
+                       required>
+                <label class="form-check-label" for="consent_acknowledge">ACKNOWLEDGMENT AND CONSENT</label>
+            </div>
+            <div class="invalid-feedback">Please acknowledge consent.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
