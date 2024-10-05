@@ -14,6 +14,8 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
@@ -44,6 +46,9 @@ public class FormularioVirtualAssistant {
 
     @Column(name = "phone", nullable = false, length = 20)
     private String phone;
+
+    @Column(name = "date", nullable = false)
+    private Date date;
 
     @Column(name = "signature_data", nullable = false, length = Integer.MAX_VALUE)
     private String signatureData;

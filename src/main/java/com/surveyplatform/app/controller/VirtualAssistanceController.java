@@ -79,4 +79,15 @@ public class VirtualAssistanceController {
         virtualAssistanceService.submitInternetSalesManager(virtualAssistanceDto);
         return "internet-sales-manager";
     }
+
+    @GetMapping("/promotional-events")
+    public String promotionalEvent() {
+        return "promotional-events";
+    }
+
+    @PostMapping("/submit-promotional-events")
+    public String submitPromotionalEvent(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+        virtualAssistanceService.submitPromotionalEvent(virtualAssistanceDto);
+        return "promotional-events";
+    }
 }

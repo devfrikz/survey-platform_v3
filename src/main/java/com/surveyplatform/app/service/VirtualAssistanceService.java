@@ -20,4 +20,7 @@ public interface VirtualAssistanceService {
 
     @Transactional
     void submitInternetSalesManager(VirtualAssistanceDto virtualAssistanceDto);
+
+    @Transactional
+    void submitPromotionalEvent(VirtualAssistanceDto virtualAssistanceDto);
 }
