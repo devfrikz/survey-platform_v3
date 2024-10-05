@@ -3,6 +3,7 @@ package com.surveyplatform.app.service.impl;
 import com.surveyplatform.app.dto.VirtualAssistanceDto;
 import com.surveyplatform.app.mapper.VirtualAssistanceMapper;
 import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistant;
+import com.surveyplatform.app.persistance.repository.FormularioFinanceDirectorRepository;
 import com.surveyplatform.app.persistance.repository.FormularioGeneralSalesManagerRepository;
 import com.surveyplatform.app.persistance.repository.FormularioSalesManagerPreOwnedRepository;
 import com.surveyplatform.app.persistance.repository.FormulariotoNewCarSalesManagerRepository;
@@ -24,6 +25,7 @@ public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
     private final FormularioVirtualAssistantRepository formularioVirtualAssistantRepository;
     private final FormulariotoNewCarSalesManagerRepository formulariotoNewCarSalesManagerRepository;
     private final FormularioSalesManagerPreOwnedRepository formularioSalesManagerPreOwnedRepository;
+    private final FormularioFinanceDirectorRepository formularioFinanceDirectorRepository;
 
     private final FormularioService formularioService;
 
@@ -70,6 +72,17 @@ public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
         formularioSalesManagerPreOwned.setFormularioVirtualAssistance(virtualAssistance);
 
         formularioSalesManagerPreOwnedRepository.save(formularioSalesManagerPreOwned);
+        log.info(SUBMITTED_FORM, virtualAssistanceDto);
+    }
+
+    @Override
+    @Transactional
+    public void submitFinanceDirector(VirtualAssistanceDto virtualAssistanceDto) {
+        var virtualAssistance = saveVirtualAssistant(virtualAssistanceDto);
+        var formularioFinanceDirector = VirtualAssistanceMapper.MAPPER.toEntityFormularioFinanceDirector(virtualAssistanceDto);
+        formularioFinanceDirector.setFormularioVirtualAssistance(virtualAssistance);
+
+        formularioFinanceDirectorRepository.save(formularioFinanceDirector);
         log.info(SUBMITTED_FORM, virtualAssistanceDto);
     }
 

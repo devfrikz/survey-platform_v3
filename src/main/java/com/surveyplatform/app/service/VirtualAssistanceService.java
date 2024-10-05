@@ -14,4 +14,7 @@ public interface VirtualAssistanceService {
 
     @Transactional
     void submitSalesManagerPreOwned(VirtualAssistanceDto virtualAssistanceDto);
+
+    @Transactional
+    void submitFinanceDirector(VirtualAssistanceDto virtualAssistanceDto);
 }

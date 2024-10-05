@@ -1,6 +1,7 @@
 package com.surveyplatform.app.mapper;
 
 import com.surveyplatform.app.dto.VirtualAssistanceDto;
+import com.surveyplatform.app.persistance.entities.FormularioFinanceDirector;
 import com.surveyplatform.app.persistance.entities.FormularioGeneralManagement;
 import com.surveyplatform.app.persistance.entities.FormularioGeneralSalesManager;
 import com.surveyplatform.app.persistance.entities.FormularioNewCarSalesManager;
@@ -29,4 +30,7 @@ public interface VirtualAssistanceMapper {
 
     @Mapping(target = "id", ignore = true)
     FormularioSalesManagerPreOwned toEntityFormularioSalesManagerPreOwned(VirtualAssistanceDto virtualAssistanceDto);
+
+    @Mapping(target = "id", ignore = true)
+    FormularioFinanceDirector toEntityFormularioFinanceDirector(VirtualAssistanceDto virtualAssistanceDto);
 }
