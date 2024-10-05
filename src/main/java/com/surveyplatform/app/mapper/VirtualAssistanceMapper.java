@@ -4,6 +4,7 @@ import com.surveyplatform.app.dto.VirtualAssistanceDto;
 import com.surveyplatform.app.persistance.entities.FormularioFinanceDirector;
 import com.surveyplatform.app.persistance.entities.FormularioGeneralManagement;
 import com.surveyplatform.app.persistance.entities.FormularioGeneralSalesManager;
+import com.surveyplatform.app.persistance.entities.FormularioInternetSalesManager;
 import com.surveyplatform.app.persistance.entities.FormularioNewCarSalesManager;
 import com.surveyplatform.app.persistance.entities.FormularioSalesManagerPreOwned;
 import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistant;
@@ -33,4 +34,7 @@ public interface VirtualAssistanceMapper {
 
     @Mapping(target = "id", ignore = true)
     FormularioFinanceDirector toEntityFormularioFinanceDirector(VirtualAssistanceDto virtualAssistanceDto);
+
+    @Mapping(target = "id", ignore = true)
+    FormularioInternetSalesManager toEntityFormularioInternetSalesManager(VirtualAssistanceDto virtualAssistanceDto);
 }
