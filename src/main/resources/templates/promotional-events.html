@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promotional Events</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+  <style>
+    .sigWrapper {
+      border: 1px solid #cccccc;
+      height: 150px;
+      max-width: 400px;
+    }
+
+    .sigPad {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    canvas {
+      touch-action: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container mt-5">
+  <h2>Promotional Events</h2>
+  <form enctype="multipart/form-data" method="post" id="form_generalsalesmanager"
+        th:action="@{/submit-promotional-events}">
+    <div class="card mb-4">
+      <div class="card-header">General Information</div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="dealership_name">Name of Dealership</label>
+          <input type="text" id="dealership_name" name="dealershipName" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="website_url">Website/URL</label>
+          <input type="url" id="website_url" name="websiteUrl" class="form-control" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="firstName" class="form-control" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="lastName" class="form-control" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="position">Your Position</label>
+            <input type="text" id="position" name="position" class="form-control" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" class="form-control" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" class="form-control" required>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event materials ready -->
+    <div class="card mb-4">
+      <div class="card-header">Event materials ready</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eventMaterialsReady" id="event_materials_ready_yes" value="Yes" required>
+            <label class="form-check-label" for="event_materials_ready_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eventMaterialsReady" id="event_materials_ready_no" value="No" required>
+            <label class="form-check-label" for="event_materials_ready_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eventMaterialsReady" id="event_materials_ready_na" value="N/A" required>
+            <label class="form-check-label" for="event_materials_ready_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sales tags -->
+    <div class="card mb-4">
+      <div class="card-header">Sales tags</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTags" id="sales_tags_yes" value="Yes" required>
+            <label class="form-check-label" for="sales_tags_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTags" id="sales_tags_no" value="No" required>
+            <label class="form-check-label" for="sales_tags_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTags" id="sales_tags_na" value="N/A" required>
+            <label class="form-check-label" for="sales_tags_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banners -->
+    <div class="card mb-4">
+      <div class="card-header">Banners</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.banners" id="banners_yes" value="Yes" required>
+            <label class="form-check-label" for="banners_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.banners" id="banners_no" value="No" required>
+            <label class="form-check-label" for="banners_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.banners" id="banners_na" value="N/A" required>
+            <label class="form-check-label" for="banners_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prizes -->
+    <div class="card mb-4">
+      <div class="card-header">Prizes</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.prizes" id="prizes_yes" value="Yes" required>
+            <label class="form-check-label" for="prizes_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.prizes" id="prizes_no" value="No" required>
+            <label class="form-check-label" for="prizes_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.prizes" id="prizes_na" value="N/A" required>
+            <label class="form-check-label" for="prizes_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Worksheets -->
+    <div class="card mb-4">
+      <div class="card-header">Worksheets</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.worksheets" id="worksheets_yes" value="Yes" required>
+            <label class="form-check-label" for="worksheets_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.worksheets" id="worksheets_no" value="No" required>
+            <label class="form-check-label" for="worksheets_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.worksheets" id="worksheets_na" value="N/A" required>
+            <label class="form-check-label" for="worksheets_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appraisal form ready - designed for event -->
+    <div class="card mb-4">
+      <div class="card-header">Appraisal form ready - designed for event</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.appraisalFormReady" id="appraisal_form_ready_yes" value="Yes" required>
+            <label class="form-check-label" for="appraisal_form_ready_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.appraisalFormReady" id="appraisal_form_ready_no" value="No" required>
+            <label class="form-check-label" for="appraisal_form_ready_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.appraisalFormReady" id="appraisal_form_ready_na" value="N/A" required>
+            <label class="form-check-label" for="appraisal_form_ready_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Showroom decor ready -->
+    <div class="card mb-4">
+      <div class="card-header">Showroom decor ready</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.showroomDecorReady" id="showroom_decor_ready_yes" value="Yes" required>
+            <label class="form-check-label" for="showroom_decor_ready_yes">Yes</label>
+                <label class="form-check-label" for="showroom_decor_ready_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.showroomDecorReady" id="showroom_decor_ready_no" value="No" required>
+            <label class="form-check-label" for="showroom_decor_ready_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.showroomDecorReady" id="showroom_decor_ready_na" value="N/A" required>
+            <label class="form-check-label" for="showroom_decor_ready_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration table -->
+    <div class="card mb-4">
+      <div class="card-header">Registration table</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.registrationTable" id="registration_table_yes" value="Yes" required>
+            <label class="form-check-label" for="registration_table_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.registrationTable" id="registration_table_no" value="No" required>
+            <label class="form-check-label" for="registration_table_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.registrationTable" id="registration_table_na" value="N/A" required>
+            <label class="form-check-label" for="registration_table_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tables for showroom -->
+    <div class="card mb-4">
+      <div class="card-header">Tables for showroom</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.tablesForShowroom" id="tables_for_showroom_yes" value="Yes" required>
+            <label class="form-check-label" for="tables_for_showroom_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.tablesForShowroom" id="tables_for_showroom_no" value="No" required>
+            <label class="form-check-label" for="tables_for_showroom_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.tablesForShowroom" id="tables_for_showroom_na" value="N/A" required>
+            <label class="form-check-label" for="tables_for_showroom_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chairs -->
+    <div class="card mb-4">
+      <div class="card-header">Chairs</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.chairs" id="chairs_yes" value="Yes" required>
+            <label class="form-check-label" for="chairs_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.chairs" id="chairs_no" value="No" required>
+            <label class="form-check-label" for="chairs_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.chairs" id="chairs_na" value="N/A" required>
+            <label class="form-check-label" for="chairs_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Crowd control -->
+    <div class="card mb-4">
+      <div class="card-header">Crowd control</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.crowdControl" id="crowd_control_yes" value="Yes" required>
+            <label class="form-check-label" for="crowd_control_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.crowdControl" id="crowd_control_no" value="No" required>
+            <label class="form-check-label" for="crowd_control_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.crowdControl" id="crowd_control_na" value="N/A" required>
+            <label class="form-check-label" for="crowd_control_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tents to host valet parking team -->
+    <div class="card mb-4">
+      <div class="card-header">Tents to host valet parking team</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.tentsValetParking" id="tents_valet_parking_yes" value="Yes" required>
+            <label class="form-check-label" for="tents_valet_parking_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.tentsValetParking" id="tents_valet_parking_no" value="No" required>
+            <label class="form-check-label" for="tents_valet_parking_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.tentsValetParking" id="tents_valet_parking_na" value="N/A" required>
+            <label class="form-check-label" for="tents_valet_parking_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service tags for valet parking -->
+    <div class="card mb-4">
+      <div class="card-header">Service tags for valet parking</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.serviceTagsValetParking" id="service_tags_valet_parking_yes" value="Yes" required>
+            <label class="form-check-label" for="service_tags_valet_parking_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.serviceTagsValetParking" id="service_tags_valet_parking_no" value="No" required>
+            <label class="form-check-label" for="service_tags_valet_parking_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.serviceTagsValetParking" id="service_tags_valet_parking_na" value="N/A" required>
+            <label class="form-check-label" for="service_tags_valet_parking_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cones to indicate parking area for customers not using valet parking -->
+    <div class="card mb-4">
+      <div class="card-header">Cones to indicate parking area for customers not using valet parking</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.conesForParkingArea" id="cones_for_parking_area_yes" value="Yes" required>
+            <label class="form-check-label" for="cones_for_parking_area_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.conesForParkingArea" id="cones_for_parking_area_no" value="No" required>
+            <label class="form-check-label" for="cones_for_parking_area_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.conesForParkingArea" id="cones_for_parking_area_na" value="N/A" required>
+            <label class="form-check-label" for="cones_for_parking_area_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barricades to route traffic -->
+    <div class="card mb-4">
+      <div class="card-header">Barricades to route traffic</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.barricadesToRouteTraffic" id="barricades_to_route_traffic_yes" value="Yes" required>
+            <label class="form-check-label" for="barricades_to_route_traffic_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.barricadesToRouteTraffic" id="barricades_to_route_traffic_no" value="No" required>
+            <label class="form-check-label" for="barricades_to_route_traffic_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.barricadesToRouteTraffic" id="barricades_to_route_traffic_na" value="N/A" required>
+            <label class="form-check-label" for="barricades_to_route_traffic_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Designated parking area for vehicles being valet -->
+    <div class="card mb-4">
+      <div class="card-header">Designated parking area for vehicles being valet</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.designatedParkingValet" id="designated_parking_valet_yes" value="Yes" required>
+            <label class="form-check-label" for="designated_parking_valet_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.designatedParkingValet" id="designated_parking_valet_no" value="No" required>
+            <label class="form-check-label" for="designated_parking_valet_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.designatedParkingValet" id="designated_parking_valet_na" value="N/A" required>
+            <label class="form-check-label" for="designated_parking_valet_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Traffic flow mapped out -->
+    <div class="card mb-4">
+      <div class="card-header">Traffic flow mapped out</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.trafficFlowMapped" id="traffic_flow_mapped_yes" value="Yes" required>
+            <label class="form-check-label" for="traffic_flow_mapped_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.trafficFlowMapped" id="traffic_flow_mapped_no" value="No" required>
+            <label class="form-check-label" for="traffic_flow_mapped_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.trafficFlowMapped" id="traffic_flow_mapped_na" value="N/A" required>
+            <label class="form-check-label" for="traffic_flow_mapped_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vests for valet parking staff -->
+    <div class="card mb-4">
+      <div class="card-header">Vests for valet parking staff</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.vestsForValet" id="vests_for_valet_yes" value="Yes" required>
+            <label class="form-check-label" for="vests_for_valet_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.vestsForValet" id="vests_for_valet_no" value="No" required>
+            <label class="form-check-label" for="vests_for_valet_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.vestsForValet" id="vests_for_valet_na" value="N/A" required>
+            <label class="form-check-label" for="vests_for_valet_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Staff -->
+    <div class="card mb-4">
+      <div class="card-header">Additional Staff</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.additionalStaff" id="additional_staff_yes" value="Yes" required>
+            <label class="form-check-label" for="additional_staff_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.additionalStaff" id="additional_staff_no" value="No" required>
+            <label class="form-check-label" for="additional_staff_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.additionalStaff" id="additional_staff_na" value="N/A" required>
+            <label class="form-check-label" for="additional_staff_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Valet Parking -->
+    <div class="card mb-4">
+      <div class="card-header">Valet Parking</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.valetParking" id="valet_parking_yes" value="Yes" required>
+            <label class="form-check-label" for="valet_parking_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.valetParking" id="valet_parking_no" value="No" required>
+            <label class="form-check-label" for="valet_parking_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.valetParking" id="valet_parking_na" value="N/A" required>
+            <label class="form-check-label" for="valet_parking_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sales Staff -->
+    <div class="card mb-4">
+      <div class="card-header">Sales Staff</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesStaff" id="sales_staff_yes" value="Yes" required>
+            <label class="form-check-label" for="sales_staff_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesStaff" id="sales_staff_no" value="No" required>
+            <label class="form-check-label" for="sales_staff_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesStaff" id="sales_staff_na" value="N/A" required>
+            <label class="form-check-label" for="sales_staff_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Closers -->
+    <div class="card mb-4">
+      <div class="card-header">Closers</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.closers" id="closers_yes" value="Yes" required>
+            <label class="form-check-label" for="closers_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.closers" id="closers_no" value="No" required>
+            <label class="form-check-label" for="closers_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.closers" id="closers_na" value="N/A" required>
+            <label class="form-check-label" for="closers_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Billers -->
+    <div class="card mb-4">
+      <div class="card-header">Billers</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.billers" id="billers_yes" value="Yes" required>
+            <label class="form-check-label" for="billers_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.billers" id="billers_no" value="No" required>
+            <label class="form-check-label" for="billers_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.billers" id="billers_na" value="N/A" required>
+            <label class="form-check-label" for="billers_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Communication prior to sale ( IMMS TM ) -->
+    <div class="card mb-4">
+      <div class="card-header">Communication prior to sale ( IMMS TM )</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.communicationPriorToSale" id="communication_prior_to_sale_yes" value="Yes" required>
+            <label class="form-check-label" for="communication_prior_to_sale_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.communicationPriorToSale" id="communication_prior_to_sale_no" value="No" required>
+            <label class="form-check-label" for="communication_prior_to_sale_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.communicationPriorToSale" id="communication_prior_to_sale_na" value="N/A" required>
+            <label class="form-check-label" for="communication_prior_to_sale_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter from general manager to all staff ( service - parts - admin - body shop ) -->
+    <div class="card mb-4">
+      <div class="card-header">Letter from general manager to all staff ( service - parts - admin - body shop )</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToAllStaff" id="letter_to_all_staff_yes" value="Yes" required>
+            <label class="form-check-label" for="letter_to_all_staff_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToAllStaff" id="letter_to_all_staff_no" value="No" required>
+            <label class="form-check-label" for="letter_to_all_staff_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToAllStaff" id="letter_to_all_staff_na" value="N/A" required>
+            <label class="form-check-label" for="letter_to_all_staff_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter from general manager to all service customer -->
+    <div class="card mb-4">
+      <div class="card-header">Letter from general manager to all service customer</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToServiceCustomer" id="letter_to_service_customer_yes" value="Yes" required>
+            <label class="form-check-label" for="letter_to_service_customer_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToServiceCustomer" id="letter_to_service_customer_no" value="No" required>
+            <label class="form-check-label" for="letter_to_service_customer_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToServiceCustomer" id="letter_to_service_customer_na" value="N/A" required>
+            <label class="form-check-label" for="letter_to_service_customer_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter from general manager to all vendors -->
+    <div class="card mb-4">
+      <div class="card-header">Letter from general manager to all vendors</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToVendors" id="letter_to_vendors_yes" value="Yes" required>
+            <label class="form-check-label" for="letter_to_vendors_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToVendors" id="letter_to_vendors_no" value="No" required>
+            <label class="form-check-label" for="letter_to_vendors_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToVendors" id="letter_to_vendors_na" value="N/A" required>
+            <label class="form-check-label" for="letter_to_vendors_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter from general manager to Outside Sales Consultants -->
+    <div class="card mb-4">
+      <div class="card-header">Letter from general manager to Outside Sales Consultants</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToOutsideSalesConsultants" id="letter_to_outside_sales_consultants_yes" value="Yes" required>
+            <label class="form-check-label" for="letter_to_outside_sales_consultants_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToOutsideSalesConsultants" id="letter_to_outside_sales_consultants_no" value="No" required>
+            <label class="form-check-label" for="letter_to_outside_sales_consultants_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.letterToOutsideSalesConsultants" id="letter_to_outside_sales_consultants_na" value="N/A" required>
+            <label class="form-check-label" for="letter_to_outside_sales_consultants_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sales tools -->
+    <div class="card mb-4">
+      <div class="card-header">Sales tools</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTools" id="sales_tools_yes" value="Yes" required>
+            <label class="form-check-label" for="sales_tools_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTools" id="sales_tools_no" value="No" required>
+            <label class="form-check-label" for="sales_tools_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTools" id="sales_tools_na" value="N/A" required>
+            <label class="form-check-label" for="sales_tools_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deal jackets ready with all sales worksheets - appraisals etc. -->
+    <div class="card mb-4">
+      <div class="card-header">Deal jackets ready with all sales worksheets - appraisals etc.</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.dealJacketsReady" id="deal_jackets_ready_yes" value="Yes" required>
+            <label class="form-check-label" for="deal_jackets_ready_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.dealJacketsReady" id="deal_jackets_ready_no" value="No" required>
+            <label class="form-check-label" for="deal_jackets_ready_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.dealJacketsReady" id="deal_jackets_ready_na" value="N/A" required>
+            <label class="form-check-label" for="deal_jackets_ready_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Book out sheets for all vehicles -->
+    <div class="card mb-4">
+      <div class="card-header">Book out sheets for all vehicles</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.bookOutSheets" id="book_out_sheets_yes" value="Yes" required>
+            <label class="form-check-label" for="book_out_sheets_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.bookOutSheets" id="book_out_sheets_no" value="No" required>
+            <label class="form-check-label" for="book_out_sheets_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.bookOutSheets" id="book_out_sheets_na" value="N/A" required>
+            <label class="form-check-label" for="book_out_sheets_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kbb retail valuations for all vehicles -->
+    <div class="card mb-4">
+      <div class="card-header">Kbb retail valuations for all vehicles</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.kbbRetailValuations" id="kbb_retail_valuations_yes" value="Yes" required>
+            <label class="form-check-label" for="kbb_retail_valuations_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.kbbRetailValuations" id="kbb_retail_valuations_no" value="No" required>
+            <label class="form-check-label" for="kbb_retail_valuations_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.kbbRetailValuations" id="kbb_retail_valuations_na" value="N/A" required>
+            <label class="form-check-label" for="kbb_retail_valuations_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carfax reports for all pre-owned vehicles -->
+    <div class="card mb-4">
+      <div class="card-header">Carfax reports for all pre-owned vehicles</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.carfaxReports" id="carfax_reports_yes" value="Yes" required>
+            <label class="form-check-label" for="carfax_reports_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.carfaxReports" id="carfax_reports_no" value="No" required>
+            <label class="form-check-label" for="carfax_reports_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.carfaxReports" id="carfax_reports_na" value="N/A" required>
+            <label class="form-check-label" for="carfax_reports_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event promoted in high traffic areas -->
+    <div class="card mb-4">
+      <div class="card-header">Event promoted in high traffic areas</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eventPromotedHighTraffic" id="event_promoted_high_traffic_yes" value="Yes" required>
+            <label class="form-check-label" for="event_promoted_high_traffic_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eventPromotedHighTraffic" id="event_promoted_high_traffic_no" value="No" required>
+            <label class="form-check-label" for="event_promoted_high_traffic_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eventPromotedHighTraffic" id="event_promoted_high_traffic_na" value="N/A" required>
+            <label class="form-check-label" for="event_promoted_high_traffic_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All entry doors -->
+    <div class="card mb-4">
+      <div class="card-header">All entry doors</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allEntryDoors" id="all_entry_doors_yes" value="Yes" required>
+            <label class="form-check-label" for="all_entry_doors_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allEntryDoors" id="all_entry_doors_no" value="No" required>
+            <label class="form-check-label" for="all_entry_doors_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allEntryDoors" id="all_entry_doors_na" value="N/A" required>
+            <label class="form-check-label" for="all_entry_doors_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All waiting areas -->
+    <div class="card mb-4">
+      <div class="card-header">All waiting areas</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allWaitingAreas" id="all_waiting_areas_yes" value="Yes" required>
+            <label class="form-check-label" for="all_waiting_areas_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allWaitingAreas" id="all_waiting_areas_no" value="No" required>
+            <label class="form-check-label" for="all_waiting_areas_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allWaitingAreas" id="all_waiting_areas_na" value="N/A" required>
+            <label class="form-check-label" for="all_waiting_areas_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All restrooms -->
+    <div class="card mb-4">
+      <div class="card-header">All restrooms</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allRestrooms" id="all_restrooms_yes" value="Yes" required>
+            <label class="form-check-label" for="all_restrooms_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allRestrooms" id="all_restrooms_no" value="No" required>
+            <label class="form-check-label" for="all_restrooms_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.allRestrooms" id="all_restrooms_na" value="N/A" required>
+            <label class="form-check-label" for="all_restrooms_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sales tags mirror message -->
+    <div class="card mb-4">
+      <div class="card-header">Sales tags mirror message</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTagsMirrorMessage" id="sales_tags_mirror_message_yes" value="Yes" required>
+            <label class="form-check-label" for="sales_tags_mirror_message_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTagsMirrorMessage" id="sales_tags_mirror_message_no" value="No" required>
+            <label class="form-check-label" for="sales_tags_mirror_message_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesTagsMirrorMessage" id="sales_tags_mirror_message_na" value="N/A" required>
+            <label class="form-check-label" for="sales_tags_mirror_message_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E-commerce support -->
+    <div class="card mb-4">
+      <div class="card-header">E-commerce support</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eCommerceSupport" id="e_commerce_support_yes" value="Yes" required>
+            <label class="form-check-label" for="e_commerce_support_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eCommerceSupport" id="e_commerce_support_no" value="No" required>
+            <label class="form-check-label" for="e_commerce_support_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.eCommerceSupport" id="e_commerce_support_na" value="N/A" required>
+            <label class="form-check-label" for="e_commerce_support_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Website banners support event -->
+    <div class="card mb-4">
+      <div class="card-header">Website banners support event</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.websiteBannersSupportEvent" id="website_banners_support_event_yes" value="Yes" required>
+            <label class="form-check-label" for="website_banners_support_event_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.websiteBannersSupportEvent" id="website_banners_support_event_no" value="No" required>
+            <label class="form-check-label" for="website_banners_support_event_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.websiteBannersSupportEvent" id="website_banners_support_event_na" value="N/A" required>
+            <label class="form-check-label" for="website_banners_support_event_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E mail blast sent to customers Wednesday -->
+    <div class="card mb-4">
+      <div class="card-header">E mail blast sent to customers Wednesday</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailBlastToCustomers" id="email_blast_to_customers_yes" value="Yes" required>
+            <label class="form-check-label" for="email_blast_to_customers_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailBlastToCustomers" id="email_blast_to_customers_no" value="No" required>
+            <label class="form-check-label" for="email_blast_to_customers_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailBlastToCustomers" id="email_blast_to_customers_na" value="N/A" required>
+            <label class="form-check-label" for="email_blast_to_customers_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E mail from general manager to Outside Sales Consultants -->
+    <div class="card mb-4">
+      <div class="card-header">E mail from general manager to Outside Sales Consultants</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailToOutsideSalesConsultants" id="email_to_outside_sales_consultants_yes" value="Yes" required>
+            <label class="form-check-label" for="email_to_outside_sales_consultants_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailToOutsideSalesConsultants" id="email_to_outside_sales_consultants_no" value="No" required>
+            <label class="form-check-label" for="email_to_outside_sales_consultants_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailToOutsideSalesConsultants" id="email_to_outside_sales_consultants_na" value="N/A" required>
+            <label class="form-check-label" for="email_to_outside_sales_consultants_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- E mail from general manager to vendors -->
+    <div class="card mb-4">
+      <div class="card-header">E mail from general manager to vendors</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailToVendors" id="email_to_vendors_yes" value="Yes" required>
+            <label class="form-check-label" for="email_to_vendors_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailToVendors" id="email_to_vendors_no" value="No" required>
+            <label class="form-check-label" for="email_to_vendors_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.emailToVendors" id="email_to_vendors_na" value="N/A" required>
+            <label class="form-check-label" for="email_to_vendors_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social media supports event -->
+    <div class="card mb-4">
+      <div class="card-header">Social media supports event</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.socialMediaSupportsEvent" id="social_media_supports_event_yes" value="Yes" required>
+            <label class="form-check-label" for="social_media_supports_event_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.socialMediaSupportsEvent" id="social_media_supports_event_no" value="No" required>
+            <label class="form-check-label" for="social_media_supports_event_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.socialMediaSupportsEvent" id="social_media_supports_event_na" value="N/A" required>
+            <label class="form-check-label" for="social_media_supports_event_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Digital Banners support event (targeting and retargeting) -->
+    <div class="card mb-4">
+      <div class="card-header">Digital Banners support event (targeting and retargeting)</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.digitalBannersSupportEvent" id="digital_banners_support_event_yes" value="Yes" required>
+            <label class="form-check-label" for="digital_banners_support_event_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.digitalBannersSupportEvent" id="digital_banners_support_event_no" value="No" required>
+            <label class="form-check-label" for="digital_banners_support_event_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.digitalBannersSupportEvent" id="digital_banners_support_event_na" value="N/A" required>
+            <label class="form-check-label" for="digital_banners_support_event_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banners in 3rd party vendor support event -->
+    <div class="card mb-4">
+      <div class="card-header">Banners in 3rd party vendor support event</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.bannersIn3rdPartyVendor" id="banners_in_3rd_party_vendor_yes" value="Yes" required>
+            <label class="form-check-label" for="banners_in_3rd_party_vendor_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.bannersIn3rdPartyVendor" id="banners_in_3rd_party_vendor_no" value="No" required>
+            <label class="form-check-label" for="banners_in_3rd_party_vendor_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.bannersIn3rdPartyVendor" id="banners_in_3rd_party_vendor_na" value="N/A" required>
+            <label class="form-check-label" for="banners_in_3rd_party_vendor_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Training has been conducted to educate sales staff to promote event -->
+    <div class="card mb-4">
+      <div class="card-header">Training has been conducted to educate sales staff to promote event</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.trainingForSalesStaff" id="training_for_sales_staff_yes" value="Yes" required>
+            <label class="form-check-label" for="training_for_sales_staff_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.trainingForSalesStaff" id="training_for_sales_staff_no" value="No" required>
+            <label class="form-check-label" for="training_for_sales_staff_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.trainingForSalesStaff" id="training_for_sales_staff_na" value="N/A" required>
+            <label class="form-check-label" for="training_for_sales_staff_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sales Scripts given to sales staff for outbound calls supporting event -->
+    <div class="card mb-4">
+      <div class="card-header">Sales Scripts given to sales staff for outbound calls supporting event</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesScriptsForOutboundCalls" id="sales_scripts_for_outbound_calls_yes" value="Yes" required>
+            <label class="form-check-label" for="sales_scripts_for_outbound_calls_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesScriptsForOutboundCalls" id="sales_scripts_for_outbound_calls_no" value="No" required>
+            <label class="form-check-label" for="sales_scripts_for_outbound_calls_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.salesScriptsForOutboundCalls" id="sales_scripts_for_outbound_calls_na" value="N/A" required>
+            <label class="form-check-label" for="sales_scripts_for_outbound_calls_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Receptionists greeting supports event -->
+    <div class="card mb-4">
+      <div class="card-header">Receptionists greeting supports event</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.receptionistsGreetingSupportsEvent" id="receptionists_greeting_supports_event_yes" value="Yes" required>
+            <label class="form-check-label" for="receptionists_greeting_supports_event_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.receptionistsGreetingSupportsEvent" id="receptionists_greeting_supports_event_no" value="No" required>
+            <label class="form-check-label" for="receptionists_greeting_supports_event_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.receptionistsGreetingSupportsEvent" id="receptionists_greeting_supports_event_na" value="N/A" required>
+            <label class="form-check-label" for="receptionists_greeting_supports_event_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Are there incentives for referrals for dealership staff? -->
+    <div class="card mb-4">
+      <div class="card-header">Are there incentives for referrals for dealership staff?</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsStaff" id="incentives_for_referrals_staff_yes" value="Yes" required>
+            <label class="form-check-label" for="incentives_for_referrals_staff_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsStaff" id="incentives_for_referrals_staff_no" value="No" required>
+            <label class="form-check-label" for="incentives_for_referrals_staff_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsStaff" id="incentives_for_referrals_staff_na" value="N/A" required>
+            <label class="form-check-label" for="incentives_for_referrals_staff_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Are there incentives for referrals for vendors? -->
+    <div class="card mb-4">
+      <div class="card-header">Are there incentives for referrals for vendors?</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsVendors" id="incentives_for_referrals_vendors_yes" value="Yes" required>
+            <label class="form-check-label" for="incentives_for_referrals_vendors_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsVendors" id="incentives_for_referrals_vendors_no" value="No" required>
+            <label class="form-check-label" for="incentives_for_referrals_vendors_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsVendors" id="incentives_for_referrals_vendors_na" value="N/A" required>
+            <label class="form-check-label" for="incentives_for_referrals_vendors_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Are there incentives for referrals for customers? -->
+    <div class="card mb-4">
+      <div class="card-header">Are there incentives for referrals for customers?</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsCustomers" id="incentives_for_referrals_customers_yes" value="Yes" required>
+            <label class="form-check-label" for="incentives_for_referrals_customers_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsCustomers" id="incentives_for_referrals_customers_no" value="No" required>
+            <label class="form-check-label" for="incentives_for_referrals_customers_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.incentivesForReferralsCustomers" id="incentives_for_referrals_customers_na" value="N/A" required>
+            <label class="form-check-label" for="incentives_for_referrals_customers_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In store pep rally prior to event with all staff to support sale -->
+    <div class="card mb-4">
+      <div class="card-header">In store pep rally prior to event with all staff to support sale</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.pepRallyPriorToEvent" id="pep_rally_prior_to_event_yes" value="Yes" required>
+            <label class="form-check-label" for="pep_rally_prior_to_event_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.pepRallyPriorToEvent" id="pep_rally_prior_to_event_no" value="No" required>
+            <label class="form-check-label" for="pep_rally_prior_to_event_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.pepRallyPriorToEvent" id="pep_rally_prior_to_event_na" value="N/A" required>
+            <label class="form-check-label" for="pep_rally_prior_to_event_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily sales caffeine meetings to inform staff of sales progress -->
+    <div class="card mb-4">
+      <div class="card-header">Daily sales caffeine meetings to inform staff of sales progress</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.dailySalesMeetings" id="daily_sales_meetings_yes" value="Yes" required>
+            <label class="form-check-label" for="daily_sales_meetings_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.dailySalesMeetings" id="daily_sales_meetings_no" value="No" required>
+            <label class="form-check-label" for="daily_sales_meetings_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.dailySalesMeetings" id="daily_sales_meetings_na" value="N/A" required>
+            <label class="form-check-label" for="daily_sales_meetings_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thank you letter from general manager to staff to share results -->
+    <div class="card mb-4">
+      <div class="card-header">Thank you letter from general manager to staff to share results</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.thankYouLetterToStaff" id="thank_you_letter_to_staff_yes" value="Yes" required>
+            <label class="form-check-label" for="thank_you_letter_to_staff_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.thankYouLetterToStaff" id="thank_you_letter_to_staff_no" value="No" required>
+            <label class="form-check-label" for="thank_you_letter_to_staff_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.thankYouLetterToStaff" id="thank_you_letter_to_staff_na" value="N/A" required>
+            <label class="form-check-label" for="thank_you_letter_to_staff_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Communication to customers via web to share results -->
+    <div class="card mb-4">
+      <div class="card-header">Communication to customers via web to share results</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.communicationToCustomersWeb" id="communication_to_customers_web_yes" value="Yes" required>
+            <label class="form-check-label" for="communication_to_customers_web_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.communicationToCustomersWeb" id="communication_to_customers_web_no" value="No" required>
+            <label class="form-check-label" for="communication_to_customers_web_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.communicationToCustomersWeb" id="communication_to_customers_web_na" value="N/A" required>
+            <label class="form-check-label" for="communication_to_customers_web_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social media support to share results -->
+    <div class="card mb-4">
+      <div class="card-header">Social media support to share results</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.socialMediaSupportToShareResults" id="social_media_support_to_share_results_yes" value="Yes" required>
+            <label class="form-check-label" for="social_media_support_to_share_results_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.socialMediaSupportToShareResults" id="social_media_support_to_share_results_no" value="No" required>
+            <label class="form-check-label" for="social_media_support_to_share_results_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.socialMediaSupportToShareResults" id="social_media_support_to_share_results_na" value="N/A" required>
+            <label class="form-check-label" for="social_media_support_to_share_results_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In store pep rally after event to highlight success and to set up next event -->
+    <div class="card mb-4">
+      <div class="card-header">In store pep rally after event to highlight success and to set up next event</div>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.pepRallyAfterEvent" id="pep_rally_after_event_yes" value="Yes" required>
+            <label class="form-check-label" for="pep_rally_after_event_yes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.pepRallyAfterEvent" id="pep_rally_after_event_no" value="No" required>
+            <label class="form-check-label" for="pep_rally_after_event_no">No</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="promotionalEvents.pepRallyAfterEvent" id="pep_rally_after_event_na" value="N/A" required>
+            <label class="form-check-label" for="pep_rally_after_event_na">N/A</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header">Signature</div>
+      <div class="card-body">
+        <div>
+          <p><strong>By my signature I attest that the information I am providing is accurate and
+            truthful.</strong></p>
+          <div class="sigPad">
+            <div class="sigWrapper">
+              <canvas id="signatureCanvas"></canvas>
+            </div>
+            <div class="buttons">
+              <button type="button" id="clearSignature">Clear</button>
+              <button type="button" id="saveSignature">Save</button>
+            </div>
+            <div id="signatureError" class="invalid-feedback">Por favor, firma antes de enviar el
+              formulario.
+            </div>
+            <!-- Campo oculto para la firma -->
+            <input type="hidden" id="signatureData" name="signatureData">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Configurar el canvas para capturar firmas
+      const canvas = document.getElementById('signatureCanvas');
+      const signaturePad = new SignaturePad(canvas);
+
+      const clearButton = document.getElementById('clearSignature');
+      const saveButton = document.getElementById('saveSignature');
+      const signatureDataInput = document.getElementById('signatureData');
+      const signatureError = document.getElementById('signatureError');  // El div donde mostramos el mensaje de error
+
+      // Asegurarse de que el tamaño del canvas sea correcto
+      function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext('2d').scale(ratio, ratio);
+      }
+
+      // Llamar a resizeCanvas para ajustar el tamaño
+      resizeCanvas();
+
+      // Limpiar el canvas cuando el botón Clear es presionado
+      clearButton.addEventListener('click', function () {
+        signaturePad.clear();
+        canvas.classList.remove('is-invalid');
+        signatureError.style.display = 'none';  // Ocultamos el mensaje de error si se limpia
+      });
+
+      // Guardar la firma en un campo hidden en formato base64
+      saveButton.addEventListener('click', function () {
+        if (signaturePad.isEmpty()) {
+          alert("Please provide a signature first.");
+        } else {
+          // Captura la firma en formato base64
+          signatureDataInput.value = signaturePad.toDataURL();  // Asigna el valor en el campo hidden
+        }
+      });
+
+      // Validar que la firma no esté vacía antes de enviar el formulario
+      document.getElementById("form_generalsalesmanager").addEventListener('submit', function (event) {
+        if (signaturePad.isEmpty()) {
+          event.preventDefault();
+          canvas.classList.add('is-invalid');
+          signatureError.style.display = 'block';  // Mostrar el mensaje de error
+        } else {
+          canvas.classList.remove('is-invalid');
+          signatureError.style.display = 'none';  // Ocultar el mensaje de error
+          document.getElementById('signatureData').value = signaturePad.toDataURL();
+
+          if(document.getElementById('signatureData').value === ''){
+            event.preventDefault();
+            canvas.classList.add('is-invalid');
+            signatureError.style.display = 'block';  // Mostrar el mensaje de error
+          }
+        }
+      });
+    </script>
+    <div class="form-group">
+      <label>By using this form you agree with the storage and handling of your data by this website <span
+              class="text-danger">*</span></label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="consentAcknowledgment" id="consent_acknowledge"
+               required>
+        <label class="form-check-label" for="consent_acknowledge">ACKNOWLEDGMENT AND CONSENT</label>
+      </div>
+      <div class="invalid-feedback">Please acknowledge consent.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</body>
+</html>
