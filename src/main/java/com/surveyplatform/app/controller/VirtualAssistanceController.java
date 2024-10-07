@@ -57,4 +57,15 @@ public class VirtualAssistanceController {
         virtualAssistanceService.submitSalesManagerPreOwned(virtualAssistanceDto);
         return "sales-manager-pre-owned";
     }
+
+    @GetMapping("/finance-director")
+    public String financeDirector() {
+        return "finance-director";
+    }
+
+    @PostMapping("/submit-finance-director")
+    public String submitfinanceDirector(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+        virtualAssistanceService.submitFinanceDirector(virtualAssistanceDto);
+        return "finance-director";
+    }
 }
