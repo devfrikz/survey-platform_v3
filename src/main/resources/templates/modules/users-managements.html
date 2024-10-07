@@ -39,23 +39,30 @@
   <div class="tab-content" id="gestionTabsContent">
     <!-- Sucursal Tab -->
     <div class="tab-pane fade show active" id="sucursal" role="tabpanel" aria-labelledby="sucursal-tab">
-      <form th:action="@{/sucursal/save}" th:object="${sucursal}" method="post" class="mt-4">
+      <form th:action="@{/sucursal/save}" method="post" class="mt-4">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <h3>Gestión de Sucursales</h3>
         <div class="mb-3">
           <label for="nombreSucursal" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="nombreSucursal" placeholder="Nombre de la sucursal">
+          <input type="text" class="form-control" id="nombreSucursal" placeholder="Nombre de la sucursal" name="nombre">
         </div>
         <div class="mb-3">
           <label for="direccionSucursal" class="form-label">Dirección</label>
-          <textarea class="form-control" id="direccionSucursal" rows="3" placeholder="Dirección de la sucursal"></textarea>
+          <textarea class="form-control" id="direccionSucursal" rows="3" placeholder="Dirección de la sucursal" name="direccion"></textarea>
         </div>
         <div class="mb-3">
-          <label for="ciudadSucursal" class="form-label">Ciudad ID</label>
-          <input type="number" class="form-control" id="ciudadSucursal" placeholder="ID de la ciudad">
+          <label for="paisSucursal" class="form-label">País</label>
+          <select id="paisSucursal" name="pais" class="form-control" required data-toggle="tooltip" data-placement="top">
+            <option value="0">Seleccion...</option>
+            <option value="1">España</option>
+          </select>
         </div>
         <div class="mb-3">
-          <label for="paisSucursal" class="form-label">País ID</label>
-          <input type="number" class="form-control" id="paisSucursal" placeholder="ID del país">
+          <label for="ciudadSucursal" class="form-label">Ciudad</label>
+          <select id="ciudadSucursal" name="ciudad" class="form-control" required data-toggle="tooltip" data-placement="top">
+            <option value="0">Seleccion...</option>
+            <option value="1">Barcelona</option>
+          </select>
         </div>
         <button type="submit" class="btn btn-primary">Guardar Sucursal</button>
       </form>
