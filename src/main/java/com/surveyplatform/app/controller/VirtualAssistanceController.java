@@ -68,4 +68,15 @@ public class VirtualAssistanceController {
         virtualAssistanceService.submitFinanceDirector(virtualAssistanceDto);
         return "finance-director";
     }
+
+    @GetMapping("/internet-sales-manager")
+    public String internetSalesManager() {
+        return "internet-sales-manager";
+    }
+
+    @PostMapping("/submit-internet-sales-manager")
+    public String submitInternetSalesManager(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+        virtualAssistanceService.submitInternetSalesManager(virtualAssistanceDto);
+        return "internet-sales-manager";
+    }
 }

@@ -5,6 +5,7 @@ import com.surveyplatform.app.mapper.VirtualAssistanceMapper;
 import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistant;
 import com.surveyplatform.app.persistance.repository.FormularioFinanceDirectorRepository;
 import com.surveyplatform.app.persistance.repository.FormularioGeneralSalesManagerRepository;
+import com.surveyplatform.app.persistance.repository.FormularioInternetSalesManagerRepository;
 import com.surveyplatform.app.persistance.repository.FormularioSalesManagerPreOwnedRepository;
 import com.surveyplatform.app.persistance.repository.FormulariotoNewCarSalesManagerRepository;
 import com.surveyplatform.app.persistance.repository.FormularioGeneralManagementRepository;
@@ -26,6 +27,7 @@ public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
     private final FormulariotoNewCarSalesManagerRepository formulariotoNewCarSalesManagerRepository;
     private final FormularioSalesManagerPreOwnedRepository formularioSalesManagerPreOwnedRepository;
     private final FormularioFinanceDirectorRepository formularioFinanceDirectorRepository;
+    private final FormularioInternetSalesManagerRepository formularioInternetSalesManagerRepository;
 
     private final FormularioService formularioService;
 
@@ -83,6 +85,16 @@ public class VirtualAssistanceServiceImpl implements VirtualAssistanceService {
         formularioFinanceDirector.setFormularioVirtualAssistance(virtualAssistance);
 
         formularioFinanceDirectorRepository.save(formularioFinanceDirector);
+        log.info(SUBMITTED_FORM, virtualAssistanceDto);
+    }
+
+    @Override
+    public void submitInternetSalesManager(VirtualAssistanceDto virtualAssistanceDto) {
+        var virtualAssistance = saveVirtualAssistant(virtualAssistanceDto);
+        var formularioInternetSalesManager = VirtualAssistanceMapper.MAPPER.toEntityFormularioInternetSalesManager(virtualAssistanceDto);
+        formularioInternetSalesManager.setFormularioVirtualAssistance(virtualAssistance);
+
+        formularioInternetSalesManagerRepository.save(formularioInternetSalesManager);
         log.info(SUBMITTED_FORM, virtualAssistanceDto);
     }
 
