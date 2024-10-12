@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class SucursalDto {
+public class ModuleDto {
     private Long id;
-    private String nombre;
-    private String direccion;
-    private Integer ciudad;
-    private Integer pais;
+    private String name;
+    private String description;
 }

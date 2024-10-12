@@ -14,4 +14,8 @@ public interface SucursalMapper {
     @Mapping(target = "pais", ignore = true)
     @Mapping(target = "ciudad", ignore = true)
     Sucursal toEntity(SucursalDto sucursalDto);
+
+    @Mapping(target = "pais", source = "pais.id")
+    @Mapping(target = "ciudad", source = "ciudad.id")
+    SucursalDto toDto(Sucursal sucursal);
 }

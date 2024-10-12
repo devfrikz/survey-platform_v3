@@ -11,6 +11,8 @@ import com.surveyplatform.app.service.SucursalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SucursalServiceImpl implements SucursalService {
@@ -27,5 +29,11 @@ public class SucursalServiceImpl implements SucursalService {
         sucursal.setPais(country);
         sucursal.setCiudad(city);
         sucursalRepository.save(sucursal);
+    }
+
+    @Override
+    public List<SucursalDto> findAll() {
+        var sucursales = sucursalRepository.findAll();
+        return sucursales.stream().map(SucursalMapper.MAPPER::toDto).toList();
     }
 }
