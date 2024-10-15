@@ -24,7 +24,7 @@ import lombok.ToString;
 public class Modulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String nombre;
     private String descripcion;
 }

@@ -18,6 +18,7 @@ public class Sucursal {
     private Integer id;
 
     private String nombre;
+    private String direccion;
 
     @ManyToOne
     @JoinColumn(name = "ciudad_id", referencedColumnName = "id")

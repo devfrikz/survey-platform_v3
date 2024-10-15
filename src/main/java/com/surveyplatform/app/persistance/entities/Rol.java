@@ -20,12 +20,8 @@ public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombre;
     private String descripcion;
-
-    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UsuarioRol> usuarioRoles = new ArrayList<>();
 
     // Relación ManyToMany con Modulo a través de la tabla intermedia rol_modulo
     @ManyToMany

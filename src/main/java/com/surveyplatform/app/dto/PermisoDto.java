@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class SucursalDto {
-    private Long id;
-    private String nombre;
-    private String direccion;
-    private Integer ciudad;
-    private Integer pais;
+public class PermisoDto {
+    private String nombrePermiso;
+    private String descripcionPermiso;
 }

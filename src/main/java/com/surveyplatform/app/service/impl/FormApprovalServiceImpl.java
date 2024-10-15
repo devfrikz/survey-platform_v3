@@ -19,9 +19,10 @@ import com.surveyplatform.app.persistance.repository.FormularioRepository;
 import com.surveyplatform.app.persistance.repository.FormularioRespuestaRepository;
 import com.surveyplatform.app.persistance.repository.FormularioTipoRepository;
 import com.surveyplatform.app.persistance.repository.ModuleRepository;
-import com.surveyplatform.app.persistance.repository.UsuarioRepository;
+import com.surveyplatform.app.persistance.repository.UserRepository;
+import com.surveyplatform.app.persistance.repository.UsuarioRolRepository;
 import com.surveyplatform.app.service.FormApprovalService;
-import com.surveyplatform.app.service.UsuarioService;
+import com.surveyplatform.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -47,19 +48,20 @@ public class FormApprovalServiceImpl implements FormApprovalService {
     private final FormularioDescuentoRepository formularioDescuentoRepository;
     private final FormularioCreditoRepository formularioCreditoRepository;
     private final FormularioPermisoRepository formularioPermisoRepository;
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository userRepository;
+    private final UsuarioRolRepository usuarioRolRepository;
 
-    private final UsuarioService usuarioService;
+    private final UserService userService;
 
     @Override
     public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable) {
-        var username = usuarioService.getLoggedUser();
-        var userOpt = usuarioRepository.findByUsername(username);
+        var username = userService.getLoggedUser();
+        var userOpt = userRepository.findByUsername(username);
 
         if (userOpt.isPresent()) {
             var user = userOpt.get();
-
-            var userRoleList = user.getUsuarioRoles().stream().map(item -> item.getRol().getId()).toList();
+            var userRoleIdList = usuarioRolRepository.findAllByUsuarioId(user.getId());
+            var userRoleList = userRoleIdList.stream().map(UsuarioRol::getRolId).toList();
 
             try {
                 var formularioRespuestas = formularioRespuestaRepository.findBySucursalIdAndRoleIds(Long.valueOf(user.getSucursal().getId()), userRoleList, pageable);
@@ -83,9 +85,9 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
     @Transactional
     public void addForm(SubmittedFormDto submittedFormDto) {
-        var loggedUser = usuarioService.getLoggedUser();
+        var loggedUser = userService.getLoggedUser();
 
-        var user = usuarioRepository.findByEmail(loggedUser)
+        var user = userRepository.findByEmail(loggedUser)
                 .orElseThrow(() -> new SurveyPlatformException("Usuario no encontrado", 404));
 
         var sucursal = user.getSucursal();
