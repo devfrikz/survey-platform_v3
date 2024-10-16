@@ -9,7 +9,6 @@ public class HomeController {
 
     @GetMapping("/index")
     public String home(Model model) {
-        model.addAttribute("mensaje", "¡Hola, Thymeleaf!");
         return "index";
     }
 
