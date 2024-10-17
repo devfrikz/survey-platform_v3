@@ -25,7 +25,7 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         var user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
-                .orElseThrow(() ->new UsernameNotFoundException("Usuario no encontrado con username o email: " + usernameOrEmail));
+                .orElseThrow(() ->new UsernameNotFoundException("User not found with username or email: " + usernameOrEmail));
         var userRoleList = usuarioRolRepository.findAllByUsuarioId(user.getId());
 
         var userRoleIdList = userRoleList.stream().map(UsuarioRol::getRolId).toList();

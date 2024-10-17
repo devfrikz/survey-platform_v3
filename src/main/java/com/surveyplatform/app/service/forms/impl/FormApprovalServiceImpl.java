@@ -114,7 +114,7 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
         var formularioRespuesta = FormularioRespuesta.builder()
                 .formulario(formSaved)
-                .usuario(Long.valueOf(user.getId()))
+                .usuario(user.getId())
                 .sucursal(sucursal)
                 .datos("") // TODO: Chequear para qué es este campo
                 .createdAt(new Timestamp(System.currentTimeMillis()))

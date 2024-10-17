@@ -27,7 +27,6 @@ import org.mapstruct.factory.Mappers;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ManagementMapper {
@@ -251,7 +250,7 @@ public interface ManagementMapper {
                     entry.setFormularioEndOfDay(formularioEndOfDay);
                     return entry;
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
     default FormularioEndOfDay toFormularioEndOfDayEntityWithDetails(SubmittedFormDto submittedFormDto) {

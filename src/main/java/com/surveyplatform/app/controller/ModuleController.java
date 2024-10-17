@@ -1,9 +1,7 @@
 package com.surveyplatform.app.controller;
 
 import com.surveyplatform.app.dto.internal.ModuleDto;
-import com.surveyplatform.app.dto.internal.PermisoDto;
 import com.surveyplatform.app.service.internal.ModuleService;
-import com.surveyplatform.app.service.internal.PermissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
