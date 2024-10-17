@@ -1,8 +1,8 @@
 package com.surveyplatform.app.controller;
 
-import com.surveyplatform.app.dto.SubmittedFormDto;
+import com.surveyplatform.app.dto.forms.SubmittedFormDto;
 import com.surveyplatform.app.exception.SurveyPlatformException;
-import com.surveyplatform.app.service.FormApprovalService;
+import com.surveyplatform.app.service.forms.FormApprovalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;

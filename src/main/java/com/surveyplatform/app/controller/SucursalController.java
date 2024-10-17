@@ -1,7 +1,7 @@
 package com.surveyplatform.app.controller;
 
-import com.surveyplatform.app.dto.SucursalDto;
-import com.surveyplatform.app.service.SucursalService;
+import com.surveyplatform.app.dto.internal.SucursalDto;
+import com.surveyplatform.app.service.internal.SucursalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +16,6 @@ public class SucursalController {
     @PostMapping("/sucursal/save")
     public String saveSucursal(SucursalDto sucursal, Model model) {
         sucursalService.saveSucursal(sucursal);
-        return "modules/users-managements";
+        return "redirect:/user-management";
     }
 }

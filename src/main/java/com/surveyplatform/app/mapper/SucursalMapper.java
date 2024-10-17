@@ -1,7 +1,7 @@
 package com.surveyplatform.app.mapper;
 
-import com.surveyplatform.app.dto.SucursalDto;
-import com.surveyplatform.app.persistance.entities.Sucursal;
+import com.surveyplatform.app.dto.internal.SucursalDto;
+import com.surveyplatform.app.persistance.entities.internal.Sucursal;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

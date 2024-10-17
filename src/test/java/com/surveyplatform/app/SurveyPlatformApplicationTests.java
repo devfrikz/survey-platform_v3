@@ -8,6 +8,7 @@ class SurveyPlatformApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// TODO implement unit test
 	}
 
 }

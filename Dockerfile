@@ -2,7 +2,7 @@
 FROM openjdk:17-jdk-slim AS build
 
 # Instalar Maven dentro del contenedor
-RUN apt-get update && apt-get install -y maven
+RUN apt-get update && apt-get install -y maven && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Establecer el directorio de trabajo
 WORKDIR /app

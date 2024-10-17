@@ -1,7 +1,7 @@
 package com.surveyplatform.app.controller;
 
-import com.surveyplatform.app.dto.VirtualAssistanceDto;
-import com.surveyplatform.app.service.VirtualAssistanceService;
+import com.surveyplatform.app.dto.forms.VirtualAssistanceDto;
+import com.surveyplatform.app.service.forms.VirtualAssistanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

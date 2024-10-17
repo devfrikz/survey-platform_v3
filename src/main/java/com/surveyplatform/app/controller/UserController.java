@@ -1,7 +1,7 @@
 package com.surveyplatform.app.controller;
 
-import com.surveyplatform.app.dto.UserDto;
-import com.surveyplatform.app.service.UserService;
+import com.surveyplatform.app.dto.internal.UserDto;
+import com.surveyplatform.app.service.internal.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +16,6 @@ public class UserController {
     @PostMapping("/user/save")
     public String save(UserDto userDto, Model model) {
         userService.save(userDto);
-        return "modules/users-managements";
+        return "redirect:/user-management";
     }
 }
