@@ -19,4 +19,10 @@ public class RoleServiceImpl implements RoleService {
         var roles = roleRepository.findAll();
         return roles.stream().map(RoleMapper.MAPPER::toDto).toList();
     }
+
+    @Override
+    public void saveRole(RoleDto roleDto) {
+        var roleEntity = RoleMapper.MAPPER.toEntity(roleDto);
+        roleRepository.save(roleEntity);
+    }
 }

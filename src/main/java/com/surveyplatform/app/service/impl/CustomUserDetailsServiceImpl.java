@@ -1,6 +1,6 @@
 package com.surveyplatform.app.service.impl;
 
-import com.surveyplatform.app.persistance.entities.Rol;
+import com.surveyplatform.app.persistance.entities.Role;
 import com.surveyplatform.app.persistance.entities.manytomany.UsuarioRol;
 import com.surveyplatform.app.persistance.repository.RoleRepository;
 import com.surveyplatform.app.persistance.repository.UserRepository;
@@ -29,7 +29,7 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
         var userRoleList = usuarioRolRepository.findAllByUsuarioId(user.getId());
 
         var userRoleIdList = userRoleList.stream().map(UsuarioRol::getRolId).toList();
-        var userRoleNameList = roleRepository.findAllById(userRoleIdList).stream().map(Rol::getNombre).toList();
+        var userRoleNameList = roleRepository.findAllById(userRoleIdList).stream().map(Role::getNombre).toList();
 
         return User.builder()
                 .username(user.getUsername())

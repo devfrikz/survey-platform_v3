@@ -1,7 +1,7 @@
 package com.surveyplatform.app.mapper;
 
 import com.surveyplatform.app.dto.RoleDto;
-import com.surveyplatform.app.persistance.entities.Rol;
+import com.surveyplatform.app.persistance.entities.Role;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -13,8 +13,8 @@ public interface RoleMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "nombre", source = "name")
     @Mapping(target = "descripcion", source = "description")
-    Rol toEntity(RoleDto roleDto);
+    Role toEntity(RoleDto roleDto);
     @Mapping(target = "name", source = "nombre")
     @Mapping(target = "description", source = "descripcion")
-    RoleDto toDto(Rol role);
+    RoleDto toDto(Role role);
 }
