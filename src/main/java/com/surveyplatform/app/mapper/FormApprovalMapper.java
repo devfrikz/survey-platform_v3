@@ -1,20 +1,16 @@
 package com.surveyplatform.app.mapper;
 
-import com.surveyplatform.app.dto.FormularioDto;
-import com.surveyplatform.app.persistance.entities.FormularioRespuesta;
+import com.surveyplatform.app.dto.forms.FormularioDto;
+import com.surveyplatform.app.persistance.entities.forms.FormularioRespuesta;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
-import org.mapstruct.factory.Mappers;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 @Mapper(componentModel = "spring")
 public interface FormApprovalMapper {
