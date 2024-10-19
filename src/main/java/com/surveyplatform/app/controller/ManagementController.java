@@ -1,7 +1,7 @@
 package com.surveyplatform.app.controller;
 
-import com.surveyplatform.app.dto.SubmittedFormDto;
-import com.surveyplatform.app.service.ManagementService;
+import com.surveyplatform.app.dto.forms.SubmittedFormDto;
+import com.surveyplatform.app.service.forms.ManagementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
