@@ -1,7 +1,7 @@
 package com.surveyplatform.app.mapper;
 
-import com.surveyplatform.app.dto.RoleDto;
-import com.surveyplatform.app.persistance.entities.Role;
+import com.surveyplatform.app.dto.internal.RoleDto;
+import com.surveyplatform.app.persistance.entities.internal.Role;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

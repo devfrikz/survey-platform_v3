@@ -1,14 +1,14 @@
 package com.surveyplatform.app.mapper;
 
-import com.surveyplatform.app.dto.VirtualAssistanceDto;
-import com.surveyplatform.app.persistance.entities.FormularioFinanceDirector;
-import com.surveyplatform.app.persistance.entities.FormularioGeneralManagement;
-import com.surveyplatform.app.persistance.entities.FormularioGeneralSalesManager;
-import com.surveyplatform.app.persistance.entities.FormularioInternetSalesManager;
-import com.surveyplatform.app.persistance.entities.FormularioNewCarSalesManager;
-import com.surveyplatform.app.persistance.entities.FormularioPromotionalEvent;
-import com.surveyplatform.app.persistance.entities.FormularioSalesManagerPreOwned;
-import com.surveyplatform.app.persistance.entities.FormularioVirtualAssistant;
+import com.surveyplatform.app.dto.forms.VirtualAssistanceDto;
+import com.surveyplatform.app.persistance.entities.forms.FormularioFinanceDirector;
+import com.surveyplatform.app.persistance.entities.forms.FormularioGeneralManagement;
+import com.surveyplatform.app.persistance.entities.forms.FormularioGeneralSalesManager;
+import com.surveyplatform.app.persistance.entities.forms.FormularioInternetSalesManager;
+import com.surveyplatform.app.persistance.entities.forms.FormularioNewCarSalesManager;
+import com.surveyplatform.app.persistance.entities.forms.FormularioPromotionalEvent;
+import com.surveyplatform.app.persistance.entities.forms.FormularioSalesManagerPreOwned;
+import com.surveyplatform.app.persistance.entities.forms.FormularioVirtualAssistant;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

@@ -1,25 +1,25 @@
 package com.surveyplatform.app.mapper;
 
-import com.surveyplatform.app.dto.CrmProspectDto;
-import com.surveyplatform.app.dto.FacebookMarketPlaceDto;
-import com.surveyplatform.app.dto.FbMarketplaceVehicleDto;
-import com.surveyplatform.app.dto.ReferralDto;
-import com.surveyplatform.app.dto.ShowroomVisitDto;
-import com.surveyplatform.app.dto.SubmittedFormDto;
-import com.surveyplatform.app.dto.TradeInDto;
-import com.surveyplatform.app.dto.VehicleDto;
-import com.surveyplatform.app.persistance.entities.CrmProspect;
-import com.surveyplatform.app.persistance.entities.FacebookMarketPlace;
-import com.surveyplatform.app.persistance.entities.FbMarketplaceVehicle;
-import com.surveyplatform.app.persistance.entities.FormularioCustomerNeed;
-import com.surveyplatform.app.persistance.entities.FormularioDailyPlanner;
-import com.surveyplatform.app.persistance.entities.FormularioDeliveryChecklist;
-import com.surveyplatform.app.persistance.entities.FormularioEndOfDay;
-import com.surveyplatform.app.persistance.entities.FormularioSsi1000;
-import com.surveyplatform.app.persistance.entities.Referral;
-import com.surveyplatform.app.persistance.entities.ShowroomVisit;
-import com.surveyplatform.app.persistance.entities.TradeIn;
-import com.surveyplatform.app.persistance.entities.Vehicle;
+import com.surveyplatform.app.dto.forms.CrmProspectDto;
+import com.surveyplatform.app.dto.forms.FacebookMarketPlaceDto;
+import com.surveyplatform.app.dto.forms.FbMarketplaceVehicleDto;
+import com.surveyplatform.app.dto.forms.ReferralDto;
+import com.surveyplatform.app.dto.forms.ShowroomVisitDto;
+import com.surveyplatform.app.dto.forms.SubmittedFormDto;
+import com.surveyplatform.app.dto.forms.TradeInDto;
+import com.surveyplatform.app.dto.forms.VehicleDto;
+import com.surveyplatform.app.persistance.entities.forms.CrmProspect;
+import com.surveyplatform.app.persistance.entities.forms.FacebookMarketPlace;
+import com.surveyplatform.app.persistance.entities.forms.FbMarketplaceVehicle;
+import com.surveyplatform.app.persistance.entities.forms.FormularioCustomerNeed;
+import com.surveyplatform.app.persistance.entities.forms.FormularioDailyPlanner;
+import com.surveyplatform.app.persistance.entities.forms.FormularioDeliveryChecklist;
+import com.surveyplatform.app.persistance.entities.forms.FormularioEndOfDay;
+import com.surveyplatform.app.persistance.entities.forms.FormularioSsi1000;
+import com.surveyplatform.app.persistance.entities.forms.Referral;
+import com.surveyplatform.app.persistance.entities.forms.ShowroomVisit;
+import com.surveyplatform.app.persistance.entities.forms.TradeIn;
+import com.surveyplatform.app.persistance.entities.forms.Vehicle;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -27,7 +27,6 @@ import org.mapstruct.factory.Mappers;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ManagementMapper {
@@ -251,7 +250,7 @@ public interface ManagementMapper {
                     entry.setFormularioEndOfDay(formularioEndOfDay);
                     return entry;
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
     default FormularioEndOfDay toFormularioEndOfDayEntityWithDetails(SubmittedFormDto submittedFormDto) {

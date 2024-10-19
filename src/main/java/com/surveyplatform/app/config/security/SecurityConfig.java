@@ -1,11 +1,11 @@
 package com.surveyplatform.app.config.security;
 
 import com.surveyplatform.app.controller.handler.CustomAuthenticationFailureHandler;
-import com.surveyplatform.app.persistance.repository.RoleRepository;
-import com.surveyplatform.app.persistance.repository.UserRepository;
-import com.surveyplatform.app.persistance.repository.UsuarioRolRepository;
-import com.surveyplatform.app.service.CustomUserDetailsService;
-import com.surveyplatform.app.service.impl.CustomUserDetailsServiceImpl;
+import com.surveyplatform.app.persistance.repository.internal.RoleRepository;
+import com.surveyplatform.app.persistance.repository.internal.UserRepository;
+import com.surveyplatform.app.persistance.repository.internal.UsuarioRolRepository;
+import com.surveyplatform.app.service.forms.CustomUserDetailsService;
+import com.surveyplatform.app.service.forms.impl.CustomUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
