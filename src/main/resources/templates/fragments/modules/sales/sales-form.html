@@ -1,0 +1,90 @@
+<div th:fragment="sale-form">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Sales Forms</h2>
+        <form th:action="@{/add-form}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <div class="form-group">
+                <label for="form-type">Select form type:</label>
+                <select class="form-control" id="form-type" name="formType" required>
+                    <option value="">--Select an option--</option>
+                    <option value="permiso">Permission Form</option>
+                    <option value="credito">Credit Approval Form</option>
+                    <option value="descuento">Discount Form</option>
+                    <option value="referenciado">Referral Form</option>
+                </select>
+            </div>
+
+            <!-- Permission Form Fields -->
+            <div id="permiso-fields" class="form-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="permiso-fecha">Start Date:</label>
+                    <input type="date" class="form-control" id="permiso-fecha" name="permisoFecha">
+                </div>
+                <div class="form-group">
+                    <label for="permiso-duracion">Duration (days):</label>
+                    <input type="number" class="form-control" id="permiso-duracion" name="permisoDuracion">
+                </div>
+            </div>
+
+            <!-- Credit Approval Form Fields -->
+            <div id="credito-fields" class="form-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="credito-amount">Credit Amount:</label>
+                    <input type="number" class="form-control" id="credito-amount" name="creditoAmount">
+                </div>
+                <div class="form-group">
+                    <label for="credito-cliente">Client Name:</label>
+                    <input type="text" class="form-control" id="credito-cliente" name="creditoCliente">
+                </div>
+            </div>
+
+            <!-- Discount Form Fields -->
+            <div id="descuento-fields" class="form-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="descuento-porcentaje">Discount Percentage:</label>
+                    <input type="number" class="form-control" id="descuento-porcentaje" name="descuentoPorcentaje">
+                </div>
+                <div class="form-group">
+                    <label for="descuento-razon">Reason for Discount:</label>
+                    <textarea class="form-control" id="descuento-razon" name="descuentoRazon"></textarea>
+                </div>
+            </div>
+
+            <!-- Referral Form Fields -->
+            <div id="referenciado-fields" class="form-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="referenciado-nombre">Referred Client Name:</label>
+                    <input type="text" class="form-control" id="referenciado-nombre" name="nombreClienteReferenciado">
+                </div>
+                <div class="form-group">
+                    <label for="referenciado-email">Client's Email Address:</label>
+                    <input type="email" class="form-control" id="referenciado-email" name="emailClienteReferenciado">
+                </div>
+            </div>
+
+            <div class="form-group text-center mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Hide all fields when the page loads
+            document.querySelectorAll('.form-fields').forEach(function (element) {
+                element.style.display = 'none';
+            });
+
+            // Show specific fields when a form type is selected
+            document.getElementById('form-type').addEventListener('change', function () {
+                var formType = this.value;
+                document.querySelectorAll('.form-fields').forEach(function (element) {
+                    element.style.display = 'none';
+                });
+                if (formType) {
+                    document.getElementById(formType + '-fields').style.display = 'block';
+                }
+            });
+        });
+    </script>
+</div>
