@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Manager</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <style>
-        .sigWrapper {
-            border: 1px solid #cccccc;
-            height: 150px;
-            max-width: 400px;
-        }
-
-        .sigPad {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        canvas {
-            touch-action: none;
-            user-select: none;
-        }
-    </style>
-</head>
-<body>
-<div th:replace="fragments/navbar :: navbar"></div>
-<div class="container mt-5">
+<div th:fragment="general-sales-manager" class="container mt-5">
     <h2>General Sales Manager</h2>
     <form enctype="multipart/form-data" method="post" id="form_generalsalesmanager"
           th:action="@{/submit-general-sales-manager}">
@@ -107,19 +74,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.storePreOwnedVehicleSalesMet"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.storePreOwnedVehicleSalesMet"
                                id="store_pre_owned_vehicle_sales_met_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="store_pre_owned_vehicle_sales_met_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.storePreOwnedVehicleSalesMet"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.storePreOwnedVehicleSalesMet"
                                id="store_pre_owned_vehicle_sales_met_no"
                                value="No" required>
                         <label class="form-check-label" for="store_pre_owned_vehicle_sales_met_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.storePreOwnedVehicleSalesMet"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.storePreOwnedVehicleSalesMet"
                                id="store_pre_owned_vehicle_sales_met_na"
                                value="N/A" required>
                         <label class="form-check-label" for="store_pre_owned_vehicle_sales_met_na">N/A</label>
@@ -135,19 +105,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.reconTimeAt4DaysForTheMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.reconTimeAt4DaysForTheMonth"
                                id="recon_time_at_4_days_for_the_month_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="recon_time_at_4_days_for_the_month_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.reconTimeAt4DaysForTheMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.reconTimeAt4DaysForTheMonth"
                                id="recon_time_at_4_days_for_the_month_no"
                                value="No" required>
                         <label class="form-check-label" for="recon_time_at_4_days_for_the_month_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.reconTimeAt4DaysForTheMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.reconTimeAt4DaysForTheMonth"
                                id="recon_time_at_4_days_for_the_month_na"
                                value="N/A" required>
                         <label class="form-check-label" for="recon_time_at_4_days_for_the_month_na">N/A</label>
@@ -163,19 +136,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.storeFinanceObjectivesMet"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.storeFinanceObjectivesMet"
                                id="store_finance_objectives_met_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="store_finance_objectives_met_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.storeFinanceObjectivesMet"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.storeFinanceObjectivesMet"
                                id="store_finance_objectives_met_no"
                                value="No" required>
                         <label class="form-check-label" for="store_finance_objectives_met_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.storeFinanceObjectivesMet"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.storeFinanceObjectivesMet"
                                id="store_finance_objectives_met_na"
                                value="N/A" required>
                         <label class="form-check-label" for="store_finance_objectives_met_na">N/A</label>
@@ -190,19 +166,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.newVehicleInventoryNext90Days"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.newVehicleInventoryNext90Days"
                                id="new_vehicle_inventory_next_90_days_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="new_vehicle_inventory_next_90_days_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.newVehicleInventoryNext90Days"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.newVehicleInventoryNext90Days"
                                id="new_vehicle_inventory_next_90_days_no"
                                value="No" required>
                         <label class="form-check-label" for="new_vehicle_inventory_next_90_days_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.newVehicleInventoryNext90Days"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.newVehicleInventoryNext90Days"
                                id="new_vehicle_inventory_next_90_days_na"
                                value="N/A" required>
                         <label class="form-check-label" for="new_vehicle_inventory_next_90_days_na">N/A</label>
@@ -219,19 +198,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.preOwnedVehicleInventoryNext60Days"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.preOwnedVehicleInventoryNext60Days"
                                id="pre_owned_vehicle_inventory_next_60_days_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="pre_owned_vehicle_inventory_next_60_days_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.preOwnedVehicleInventoryNext60Days"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.preOwnedVehicleInventoryNext60Days"
                                id="pre_owned_vehicle_inventory_next_60_days_no"
                                value="No" required>
                         <label class="form-check-label" for="pre_owned_vehicle_inventory_next_60_days_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.preOwnedVehicleInventoryNext60Days"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.preOwnedVehicleInventoryNext60Days"
                                id="pre_owned_vehicle_inventory_next_60_days_na"
                                value="N/A" required>
                         <label class="form-check-label" for="pre_owned_vehicle_inventory_next_60_days_na">N/A</label>
@@ -248,19 +230,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.allCoOpAdDollarsAppliedFor"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.allCoOpAdDollarsAppliedFor"
                                id="all_co_op_ad_dollars_applied_for_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="all_co_op_ad_dollars_applied_for_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.allCoOpAdDollarsAppliedFor"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.allCoOpAdDollarsAppliedFor"
                                id="all_co_op_ad_dollars_applied_for_no"
                                value="No" required>
                         <label class="form-check-label" for="all_co_op_ad_dollars_applied_for_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.allCoOpAdDollarsAppliedFor"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.allCoOpAdDollarsAppliedFor"
                                id="all_co_op_ad_dollars_applied_for_na"
                                value="N/A" required>
                         <label class="form-check-label" for="all_co_op_ad_dollars_applied_for_na">N/A</label>
@@ -275,19 +260,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.advertisingCompliantWithStateLaws"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.advertisingCompliantWithStateLaws"
                                id="advertising_compliant_with_state_laws_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="advertising_compliant_with_state_laws_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.advertisingCompliantWithStateLaws"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.advertisingCompliantWithStateLaws"
                                id="advertising_compliant_with_state_laws_no"
                                value="No" required>
                         <label class="form-check-label" for="advertising_compliant_with_state_laws_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.advertisingCompliantWithStateLaws"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.advertisingCompliantWithStateLaws"
                                id="advertising_compliant_with_state_laws_na"
                                value="N/A" required>
                         <label class="form-check-label" for="advertising_compliant_with_state_laws_na">N/A</label>
@@ -357,19 +345,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewNewCarManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewNewCarManagers"
                                id="performance_review_new_car_managers_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="performance_review_new_car_managers_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewNewCarManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewNewCarManagers"
                                id="performance_review_new_car_managers_no"
                                value="No" required>
                         <label class="form-check-label" for="performance_review_new_car_managers_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewNewCarManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewNewCarManagers"
                                id="performance_review_new_car_managers_na"
                                value="N/A" required>
                         <label class="form-check-label" for="performance_review_new_car_managers_na">N/A</label>
@@ -384,20 +375,23 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewPreOwnedSalesManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewPreOwnedSalesManagers"
                                id="performance_review_pre_owned_sales_managers_yes"
                                value="Yes" required>
                         <label class="form-check-label"
                                for="performance_review_pre_owned_sales_managers_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewPreOwnedSalesManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewPreOwnedSalesManagers"
                                id="performance_review_pre_owned_sales_managers_no"
                                value="No" required>
                         <label class="form-check-label" for="performance_review_pre_owned_sales_managers_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewPreOwnedSalesManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewPreOwnedSalesManagers"
                                id="performance_review_pre_owned_sales_managers_na"
                                value="N/A" required>
                         <label class="form-check-label" for="performance_review_pre_owned_sales_managers_na">N/A</label>
@@ -414,19 +408,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewFinanceManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewFinanceManagers"
                                id="performance_review_finance_managers_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="performance_review_finance_managers_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewFinanceManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewFinanceManagers"
                                id="performance_review_finance_managers_no"
                                value="No" required>
                         <label class="form-check-label" for="performance_review_finance_managers_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewFinanceManagers"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewFinanceManagers"
                                id="performance_review_finance_managers_na"
                                value="N/A" required>
                         <label class="form-check-label" for="performance_review_finance_managers_na">N/A</label>
@@ -443,19 +440,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewInternetSalesManager"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewInternetSalesManager"
                                id="performance_review_internet_sales_manager_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="performance_review_internet_sales_manager_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewInternetSalesManager"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewInternetSalesManager"
                                id="performance_review_internet_sales_manager_no"
                                value="No" required>
                         <label class="form-check-label" for="performance_review_internet_sales_manager_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.performanceReviewInternetSalesManager"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.performanceReviewInternetSalesManager"
                                id="performance_review_internet_sales_manager_na"
                                value="N/A" required>
                         <label class="form-check-label" for="performance_review_internet_sales_manager_na">N/A</label>
@@ -509,19 +509,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.trainingInitiativesEstablished"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.trainingInitiativesEstablished"
                                id="training_initiatives_established_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="training_initiatives_established_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.trainingInitiativesEstablished"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.trainingInitiativesEstablished"
                                id="training_initiatives_established_no"
                                value="No" required>
                         <label class="form-check-label" for="training_initiatives_established_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.trainingInitiativesEstablished"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.trainingInitiativesEstablished"
                                id="training_initiatives_established_na"
                                value="N/A" required>
                         <label class="form-check-label" for="training_initiatives_established_na">N/A</label>
@@ -537,19 +540,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.coachingSessionsConducted"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.coachingSessionsConducted"
                                id="coaching_sessions_conducted_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="coaching_sessions_conducted_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.coachingSessionsConducted"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.coachingSessionsConducted"
                                id="coaching_sessions_conducted_no"
                                value="No" required>
                         <label class="form-check-label" for="coaching_sessions_conducted_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.coachingSessionsConducted"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.coachingSessionsConducted"
                                id="coaching_sessions_conducted_na"
                                value="N/A" required>
                         <label class="form-check-label" for="coaching_sessions_conducted_na">N/A</label>
@@ -565,17 +571,23 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.csiScoresAchievedForTheMonth" id="csi_scores_achieved_for_the_month_yes"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.csiScoresAchievedForTheMonth"
+                               id="csi_scores_achieved_for_the_month_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="csi_scores_achieved_for_the_month_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.csiScoresAchievedForTheMonth" id="csi_scores_achieved_for_the_month_no"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.csiScoresAchievedForTheMonth"
+                               id="csi_scores_achieved_for_the_month_no"
                                value="No" required>
                         <label class="form-check-label" for="csi_scores_achieved_for_the_month_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.csiScoresAchievedForTheMonth" id="csi_scores_achieved_for_the_month_na"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.csiScoresAchievedForTheMonth"
+                               id="csi_scores_achieved_for_the_month_na"
                                value="N/A" required>
                         <label class="form-check-label" for="csi_scores_achieved_for_the_month_na">N/A</label>
                     </div>
@@ -590,19 +602,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.goalsSetForTheFollowingMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.goalsSetForTheFollowingMonth"
                                id="goals_set_for_the_following_month_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="goals_set_for_the_following_month_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.goalsSetForTheFollowingMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.goalsSetForTheFollowingMonth"
                                id="goals_set_for_the_following_month_no"
                                value="No" required>
                         <label class="form-check-label" for="goals_set_for_the_following_month_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.goalsSetForTheFollowingMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.goalsSetForTheFollowingMonth"
                                id="goals_set_for_the_following_month_na"
                                value="N/A" required>
                         <label class="form-check-label" for="goals_set_for_the_following_month_na">N/A</label>
@@ -618,19 +633,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.goalsAndBudgetsCommunicatedToTeam"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.goalsAndBudgetsCommunicatedToTeam"
                                id="goals_and_budgets_communicated_to_team_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="goals_and_budgets_communicated_to_team_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.goalsAndBudgetsCommunicatedToTeam"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.goalsAndBudgetsCommunicatedToTeam"
                                id="goals_and_budgets_communicated_to_team_no"
                                value="No" required>
                         <label class="form-check-label" for="goals_and_budgets_communicated_to_team_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.goalsAndBudgetsCommunicatedToTeam"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.goalsAndBudgetsCommunicatedToTeam"
                                id="goals_and_budgets_communicated_to_team_na"
                                value="N/A" required>
                         <label class="form-check-label" for="goals_and_budgets_communicated_to_team_na">N/A</label>
@@ -645,19 +663,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.salesOperationsImprovementGrowth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.salesOperationsImprovementGrowth"
                                id="sales_operations_improvement_growth_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="sales_operations_improvement_growth_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.salesOperationsImprovementGrowth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.salesOperationsImprovementGrowth"
                                id="sales_operations_improvement_growth_no"
                                value="No" required>
                         <label class="form-check-label" for="sales_operations_improvement_growth_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.salesOperationsImprovementGrowth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.salesOperationsImprovementGrowth"
                                id="sales_operations_improvement_growth_na"
                                value="N/A" required>
                         <label class="form-check-label" for="sales_operations_improvement_growth_na">N/A</label>
@@ -699,19 +720,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.teamworkImprovementStrategies"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.teamworkImprovementStrategies"
                                id="teamwork_improvement_strategies_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="teamwork_improvement_strategies_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.teamworkImprovementStrategies"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.teamworkImprovementStrategies"
                                id="teamwork_improvement_strategies_no"
                                value="No" required>
                         <label class="form-check-label" for="teamwork_improvement_strategies_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.teamworkImprovementStrategies"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.teamworkImprovementStrategies"
                                id="teamwork_improvement_strategies_na"
                                value="N/A" required>
                         <label class="form-check-label" for="teamwork_improvement_strategies_na">N/A</label>
@@ -726,19 +750,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.teamworkImprovementStrategiesNextMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.teamworkImprovementStrategiesNextMonth"
                                id="teamwork_improvement_strategies_next_month_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="teamwork_improvement_strategies_next_month_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.teamworkImprovementStrategiesNextMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.teamworkImprovementStrategiesNextMonth"
                                id="teamwork_improvement_strategies_next_month_no"
                                value="No" required>
                         <label class="form-check-label" for="teamwork_improvement_strategies_next_month_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.teamworkImprovementStrategiesNextMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.teamworkImprovementStrategiesNextMonth"
                                id="teamwork_improvement_strategies_next_month_na"
                                value="N/A" required>
                         <label class="form-check-label" for="teamwork_improvement_strategies_next_month_na">N/A</label>
@@ -753,20 +780,23 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.moraleImprovementStrategiesPreviousMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.moraleImprovementStrategiesPreviousMonth"
                                id="morale_improvement_strategies_previous_month_yes"
                                value="Yes" required>
                         <label class="form-check-label"
                                for="morale_improvement_strategies_previous_month_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.moraleImprovementStrategiesPreviousMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.moraleImprovementStrategiesPreviousMonth"
                                id="morale_improvement_strategies_previous_month_no"
                                value="No" required>
                         <label class="form-check-label" for="morale_improvement_strategies_previous_month_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.moraleImprovementStrategiesPreviousMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.moraleImprovementStrategiesPreviousMonth"
                                id="morale_improvement_strategies_previous_month_na"
                                value="N/A" required>
                         <label class="form-check-label"
@@ -782,19 +812,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.moraleImprovementStrategiesNextMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.moraleImprovementStrategiesNextMonth"
                                id="morale_improvement_strategies_next_month_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="morale_improvement_strategies_next_month_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.moraleImprovementStrategiesNextMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.moraleImprovementStrategiesNextMonth"
                                id="morale_improvement_strategies_next_month_no"
                                value="No" required>
                         <label class="form-check-label" for="morale_improvement_strategies_next_month_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.moraleImprovementStrategiesNextMonth"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.moraleImprovementStrategiesNextMonth"
                                id="morale_improvement_strategies_next_month_na"
                                value="N/A" required>
                         <label class="form-check-label" for="morale_improvement_strategies_next_month_na">N/A</label>
@@ -809,19 +842,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.threeAreasForSelfImprovement"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.threeAreasForSelfImprovement"
                                id="three_areas_for_self_improvement_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="three_areas_for_self_improvement_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.threeAreasForSelfImprovement"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.threeAreasForSelfImprovement"
                                id="three_areas_for_self_improvement_no"
                                value="No" required>
                         <label class="form-check-label" for="three_areas_for_self_improvement_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalSalesManager.threeAreasForSelfImprovement"
+                        <input class="form-check-input" type="radio"
+                               name="generalSalesManager.threeAreasForSelfImprovement"
                                id="three_areas_for_self_improvement_na"
                                value="N/A" required>
                         <label class="form-check-label" for="three_areas_for_self_improvement_na">N/A</label>
@@ -888,7 +924,7 @@
                 if (signaturePad.isEmpty()) {
                     alert("Please provide a signature first.");
                 } else {
-                      // Captura la firma en formato base64
+                    // Captura la firma en formato base64
                     signatureDataInput.value = signaturePad.toDataURL();  // Asigna el valor en el campo hidden
                 }
             });
@@ -904,7 +940,7 @@
                     signatureError.style.display = 'none';  // Ocultar el mensaje de error
                     document.getElementById('signatureData').value = signaturePad.toDataURL();
 
-                    if(document.getElementById('signatureData').value === ''){
+                    if (document.getElementById('signatureData').value === '') {
                         event.preventDefault();
                         canvas.classList.add('is-invalid');
                         signatureError.style.display = 'block';  // Mostrar el mensaje de error
@@ -926,5 +962,3 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-</body>
-</html>

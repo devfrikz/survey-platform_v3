@@ -1,0 +1,64 @@
+<div th:fragment="right-content" class="col-md-9 col-sm-12 p-4">
+    <!-- Right Content -->
+    <div th:if="${showContent == null}">
+        <h3>Dashboard</h3>
+        <p>Graphics for reports</p>
+    </div>
+    <div th:if="${showContent == 'sale'}">
+        <div th:replace="~{fragments/modules/sales/sales-form :: sale-form}"></div>
+    </div>
+
+    <div th:if="${showContent == 'daily-planner'}">
+        <div th:replace="~{fragments/modules/sales/daily-planner :: daily-planner}"></div>
+    </div>
+
+    <div th:if="${showContent == 'customer-needs'}">
+        <div th:replace="~{fragments/modules/sales/customer-needs :: customer-needs}"></div>
+    </div>
+
+    <div th:if="${showContent == 'delivery-checklist'}">
+        <div th:replace="~{fragments/modules/sales/delivery-checklist :: delivery-checklist}"></div>
+    </div>
+
+    <div th:if="${showContent == 'end-of-day'}">
+        <div th:replace="~{fragments/modules/sales/end-of-day :: end-of-day}"></div>
+    </div>
+
+    <div th:if="${showContent == 'ssi-1000'}">
+        <div th:replace="~{fragments/modules/sales/ssi-1000 :: ssi-1000}"></div>
+    </div>
+
+    <div th:if="${showContent == 'approvals'}">
+        <div th:replace="~{fragments/modules/management/approval :: approval}"></div>
+    </div>
+
+    <div th:if="${showContent == 'user-management'}">
+        <div th:replace="~{fragments/modules/admin/users-managements :: users-managements}"></div>
+    </div>
+
+    <div th:if="${showContent == 'general-management'}">
+        <div th:replace="~{fragments/modules/management/general-management :: general-management}"></div>
+    </div>
+
+    <div th:if="${showContent == 'general-sales-manager'}">
+        <div th:replace="~{fragments/modules/management/general-sales-manager :: general-sales-manager}"></div>
+    </div>
+
+    <div th:if="${showContent == 'internet-sales-manager'}">
+        <div th:replace="~{fragments/modules/management/internet-sales-manager :: internet-sales-manager}"></div>
+    </div>
+
+    <div th:if="${showContent == 'new-car-sales-manager'}">
+        <div th:replace="~{fragments/modules/management/new-car-sales-manager :: new-car-sales-manager}"></div>
+    </div>
+
+    <div th:if="${showContent == 'promotional-events'}">
+        <div th:replace="~{fragments/modules/management/promotional-events :: promotional-events}"></div>
+    </div>
+
+    <div th:if="${showContent == 'sales-manager-pre-owned'}">
+        <div th:replace="~{fragments/modules/management/sales-manager-pre-owned :: sales-manager-pre-owned}"></div>
+    </div>
+
+
+</div>
