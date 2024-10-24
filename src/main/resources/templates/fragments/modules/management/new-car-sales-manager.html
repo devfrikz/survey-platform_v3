@@ -1,0 +1,1179 @@
+<div th:fragment="new-car-sales-manager" class="container mt-5">
+    <h2>New Car Sales Manager</h2>
+    <form enctype="multipart/form-data" method="post" id="form_generalsalesmanager"
+          th:action="@{/submit-new-car-sales-manager}">
+        <div class="card mb-4">
+            <div class="card-header">General Information</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="dealership_name">Name of Dealership</label>
+                    <input type="text" id="dealership_name" name="dealershipName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="website_url">Website/URL</label>
+                    <input type="url" id="website_url" name="websiteUrl" class="form-control" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="firstName" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="lastName" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="position">Your Position</label>
+                        <input type="text" id="position" name="position" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conducted one on ones daily -->
+        <div class="card mb-4">
+            <div class="card-header">Conducted one on ones daily</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.conductedOneOnOnesDaily"
+                               id="conducted_one_on_ones_daily_yes" value="Yes" required>
+                        <label class="form-check-label" for="conducted_one_on_ones_daily_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.conductedOneOnOnesDaily"
+                               id="conducted_one_on_ones_daily_no" value="No" required>
+                        <label class="form-check-label" for="conducted_one_on_ones_daily_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.conductedOneOnOnesDaily"
+                               id="conducted_one_on_ones_daily_na" value="N/A" required>
+                        <label class="form-check-label" for="conducted_one_on_ones_daily_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Called back unsold traffic daily -->
+        <div class="card mb-4">
+            <div class="card-header">Called back unsold traffic daily</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.calledBackUnsoldTrafficDaily"
+                               id="called_back_unsold_traffic_daily_yes" value="Yes" required>
+                        <label class="form-check-label" for="called_back_unsold_traffic_daily_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.calledBackUnsoldTrafficDaily"
+                               id="called_back_unsold_traffic_daily_no" value="No" required>
+                        <label class="form-check-label" for="called_back_unsold_traffic_daily_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.calledBackUnsoldTrafficDaily"
+                               id="called_back_unsold_traffic_daily_na" value="N/A" required>
+                        <label class="form-check-label" for="called_back_unsold_traffic_daily_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All sales team members factory certified -->
+        <div class="card mb-4">
+            <div class="card-header">All sales team members factory certified</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.allSalesTeamMembersFactoryCertified"
+                               id="all_sales_team_members_factory_certified_yes" value="Yes" required>
+                        <label class="form-check-label" for="all_sales_team_members_factory_certified_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.allSalesTeamMembersFactoryCertified"
+                               id="all_sales_team_members_factory_certified_no" value="No" required>
+                        <label class="form-check-label" for="all_sales_team_members_factory_certified_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.allSalesTeamMembersFactoryCertified"
+                               id="all_sales_team_members_factory_certified_na" value="N/A" required>
+                        <label class="form-check-label" for="all_sales_team_members_factory_certified_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All sales team member have met product knowledge proficiency -->
+        <div class="card mb-4">
+            <div class="card-header">All sales team member have met product knowledge proficiency</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.allSalesTeamMemberMetProductKnowledgeProficiency"
+                               id="all_sales_team_member_have_met_product_knowledge_proficiency_yes" value="Yes"
+                               required>
+                        <label class="form-check-label"
+                               for="all_sales_team_member_have_met_product_knowledge_proficiency_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.allSalesTeamMemberMetProductKnowledgeProficiency"
+                               id="all_sales_team_member_have_met_product_knowledge_proficiency_no" value="No" required>
+                        <label class="form-check-label"
+                               for="all_sales_team_member_have_met_product_knowledge_proficiency_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.allSalesTeamMemberMetProductKnowledgeProficiency"
+                               id="all_sales_team_member_have_met_product_knowledge_proficiency_na" value="N/A"
+                               required>
+                        <label class="form-check-label"
+                               for="all_sales_team_member_have_met_product_knowledge_proficiency_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Satisfaction Scores for areas of responsibilities (sales) meet factory standards -->
+        <div class="card mb-4">
+            <div class="card-header">Customer Satisfaction Scores for areas of responsibilities (sales) meet factory
+                standards
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.customerSatisfactionScoresMetFactoryStandards"
+                               id="customer_satisfaction_scores_for_areas_of_responsibilities_sales_meet_factory_standards_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="customer_satisfaction_scores_for_areas_of_responsibilities_sales_meet_factory_standards_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.customerSatisfactionScoresMetFactoryStandards"
+                               id="customer_satisfaction_scores_for_areas_of_responsibilities_sales_meet_factory_standards_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="customer_satisfaction_scores_for_areas_of_responsibilities_sales_meet_factory_standards_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.customerSatisfactionScoresMetFactoryStandards"
+                               id="customer_satisfaction_scores_for_areas_of_responsibilities_sales_meet_factory_standards_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="customer_satisfaction_scores_for_areas_of_responsibilities_sales_meet_factory_standards_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All three day follow up to sold customers complete -->
+        <div class="card mb-4">
+            <div class="card-header">All three day follow up to sold customers complete</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.threeDayFollowUpCompleted"
+                               id="all_three_day_follow_up_to_sold_customers_complete_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="all_three_day_follow_up_to_sold_customers_complete_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.threeDayFollowUpCompleted"
+                               id="all_three_day_follow_up_to_sold_customers_complete_no" value="No" required>
+                        <label class="form-check-label"
+                               for="all_three_day_follow_up_to_sold_customers_complete_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.threeDayFollowUpCompleted"
+                               id="all_three_day_follow_up_to_sold_customers_complete_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="all_three_day_follow_up_to_sold_customers_complete_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conducted two training sessions with sales team per week -->
+        <div class="card mb-4">
+            <div class="card-header">Conducted two training sessions with sales team per week</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedTwoTrainingSessionsPerWeek"
+                               id="conducted_two_training_sessions_with_sales_team_per_week_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="conducted_two_training_sessions_with_sales_team_per_week_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedTwoTrainingSessionsPerWeek"
+                               id="conducted_two_training_sessions_with_sales_team_per_week_no" value="No" required>
+                        <label class="form-check-label"
+                               for="conducted_two_training_sessions_with_sales_team_per_week_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedTwoTrainingSessionsPerWeek"
+                               id="conducted_two_training_sessions_with_sales_team_per_week_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="conducted_two_training_sessions_with_sales_team_per_week_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sixty deals closed performance requirement met -->
+        <div class="card mb-4">
+            <div class="card-header">Sixty deals closed performance requirement met</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.sixtyDealsClosedRequirementMet"
+                               id="sixty_deals_closed_performance_requirement_met_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="sixty_deals_closed_performance_requirement_met_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.sixtyDealsClosedRequirementMet"
+                               id="sixty_deals_closed_performance_requirement_met_no" value="No" required>
+                        <label class="form-check-label"
+                               for="sixty_deals_closed_performance_requirement_met_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.sixtyDealsClosedRequirementMet"
+                               id="sixty_deals_closed_performance_requirement_met_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="sixty_deals_closed_performance_requirement_met_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conducted Walkaround presentation training sessions - 2 per month to meet minimum performance standard -->
+        <div class="card mb-4">
+            <div class="card-header">Conducted Walkaround presentation training sessions - 2 per month to meet minimum
+                performance standard
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedWalkaroundPresentationTraining"
+                               id="conducted_walkaround_presentation_training_sessions__2_per_month_to_meet_minimum_performance_standard_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="conducted_walkaround_presentation_training_sessions__2_per_month_to_meet_minimum_performance_standard_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedWalkaroundPresentationTraining"
+                               id="conducted_walkaround_presentation_training_sessions__2_per_month_to_meet_minimum_performance_standard_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="conducted_walkaround_presentation_training_sessions__2_per_month_to_meet_minimum_performance_standard_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedWalkaroundPresentationTraining"
+                               id="conducted_walkaround_presentation_training_sessions__2_per_month_to_meet_minimum_performance_standard_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="conducted_walkaround_presentation_training_sessions__2_per_month_to_meet_minimum_performance_standard_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviewed Phone ups call tracking daily -->
+        <div class="card mb-4">
+            <div class="card-header">Reviewed Phone ups call tracking daily</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedPhoneUpsCallTrackingDaily"
+                               id="reviewed_phone_ups_call_tracking_daily_yes" value="Yes" required>
+                        <label class="form-check-label" for="reviewed_phone_ups_call_tracking_daily_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedPhoneUpsCallTrackingDaily"
+                               id="reviewed_phone_ups_call_tracking_daily_no" value="No" required>
+                        <label class="form-check-label" for="reviewed_phone_ups_call_tracking_daily_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedPhoneUpsCallTrackingDaily"
+                               id="reviewed_phone_ups_call_tracking_daily_na" value="N/A" required>
+                        <label class="form-check-label" for="reviewed_phone_ups_call_tracking_daily_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conducted two phone training sessions -->
+        <div class="card mb-4">
+            <div class="card-header">Conducted two phone training sessions</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedTwoPhoneTrainingSessions"
+                               id="conducted_two_phone_training_sessions_yes" value="Yes" required>
+                        <label class="form-check-label" for="conducted_two_phone_training_sessions_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedTwoPhoneTrainingSessions"
+                               id="conducted_two_phone_training_sessions_no" value="No" required>
+                        <label class="form-check-label" for="conducted_two_phone_training_sessions_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.conductedTwoPhoneTrainingSessions"
+                               id="conducted_two_phone_training_sessions_na" value="N/A" required>
+                        <label class="form-check-label" for="conducted_two_phone_training_sessions_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Provided motivational material once a week to sales staff -->
+        <div class="card mb-4">
+            <div class="card-header">Provided motivational material once a week to sales staff</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.providedMotivationalMaterial"
+                               id="provided_motivational_material_once_a_week_to_sales_staff_yes" value="Yes" required>
+                        <label class="form-check-label"
+                               for="provided_motivational_material_once_a_week_to_sales_staff_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.providedMotivationalMaterial"
+                               id="provided_motivational_material_once_a_week_to_sales_staff_no" value="No" required>
+                        <label class="form-check-label"
+                               for="provided_motivational_material_once_a_week_to_sales_staff_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.providedMotivationalMaterial"
+                               id="provided_motivational_material_once_a_week_to_sales_staff_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="provided_motivational_material_once_a_week_to_sales_staff_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Maintained appropriate levels of inventory (90 day supply per model) -->
+        <div class="card mb-4">
+            <div class="card-header">Maintained appropriate levels of inventory (90 day supply per model)</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.maintainedInventoryLevels"
+                               id="maintained_appropriate_levels_of_inventory_90_day_supply_per_model_yes" value="Yes"
+                               required>
+                        <label class="form-check-label"
+                               for="maintained_appropriate_levels_of_inventory_90_day_supply_per_model_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.maintainedInventoryLevels"
+                               id="maintained_appropriate_levels_of_inventory_90_day_supply_per_model_no" value="No"
+                               required>
+                        <label class="form-check-label"
+                               for="maintained_appropriate_levels_of_inventory_90_day_supply_per_model_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.maintainedInventoryLevels"
+                               id="maintained_appropriate_levels_of_inventory_90_day_supply_per_model_na" value="N/A"
+                               required>
+                        <label class="form-check-label"
+                               for="maintained_appropriate_levels_of_inventory_90_day_supply_per_model_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Merchandised aged inventory in showroom and in high traffic areas -->
+        <div class="card mb-4">
+            <div class="card-header">Merchandised aged inventory in showroom and in high traffic areas</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.merchandisedAgedInventory"
+                               id="merchandised_aged_inventory_in_showroom_and_in_high_traffic_areas_yes" value="Yes"
+                               required>
+                        <label class="form-check-label"
+                               for="merchandised_aged_inventory_in_showroom_and_in_high_traffic_areas_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.merchandisedAgedInventory"
+                               id="merchandised_aged_inventory_in_showroom_and_in_high_traffic_areas_no" value="No"
+                               required>
+                        <label class="form-check-label"
+                               for="merchandised_aged_inventory_in_showroom_and_in_high_traffic_areas_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.merchandisedAgedInventory"
+                               id="merchandised_aged_inventory_in_showroom_and_in_high_traffic_areas_na" value="N/A"
+                               required>
+                        <label class="form-check-label"
+                               for="merchandised_aged_inventory_in_showroom_and_in_high_traffic_areas_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Developed sales contests and/or incentives to keep sales staff engaged throughout the month -->
+        <div class="card mb-4">
+            <div class="card-header">Developed sales contests and/or incentives to keep sales staff engaged throughout
+                the month
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.developedSalesContests"
+                               id="developed_sales_contests_andor_incentives_to_keep_sales_staff_engaged_throughout_the_month_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="developed_sales_contests_andor_incentives_to_keep_sales_staff_engaged_throughout_the_month_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.developedSalesContests"
+                               id="developed_sales_contests_andor_incentives_to_keep_sales_staff_engaged_throughout_the_month_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="developed_sales_contests_andor_incentives_to_keep_sales_staff_engaged_throughout_the_month_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.developedSalesContests"
+                               id="developed_sales_contests_andor_incentives_to_keep_sales_staff_engaged_throughout_the_month_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="developed_sales_contests_andor_incentives_to_keep_sales_staff_engaged_throughout_the_month_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviewed Internet response time -->
+        <div class="card mb-4">
+            <div class="card-header">Reviewed Internet response time</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedInternetResponseTime"
+                               id="reviewed_internet_response_time_yes" value="Yes" required>
+                        <label class="form-check-label" for="reviewed_internet_response_time_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedInternetResponseTime"
+                               id="reviewed_internet_response_time_no" value="No" required>
+                        <label class="form-check-label" for="reviewed_internet_response_time_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedInternetResponseTime"
+                               id="reviewed_internet_response_time_na" value="N/A" required>
+                        <label class="form-check-label" for="reviewed_internet_response_time_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviewed Internet lost sales -->
+        <div class="card mb-4">
+            <div class="card-header">Reviewed Internet lost sales</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.reviewedInternetLostSales"
+                               id="reviewed_internet_lost_sales_yes" value="Yes" required>
+                        <label class="form-check-label" for="reviewed_internet_lost_sales_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.reviewedInternetLostSales"
+                               id="reviewed_internet_lost_sales_no" value="No" required>
+                        <label class="form-check-label" for="reviewed_internet_lost_sales_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.reviewedInternetLostSales"
+                               id="reviewed_internet_lost_sales_na" value="N/A" required>
+                        <label class="form-check-label" for="reviewed_internet_lost_sales_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviewed Internet Merchandising -->
+        <div class="card mb-4">
+            <div class="card-header">Reviewed Internet Merchandising</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedInternetMerchandising"
+                               id="reviewed_internet_merchandising_yes" value="Yes" required>
+                        <label class="form-check-label" for="reviewed_internet_merchandising_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedInternetMerchandising"
+                               id="reviewed_internet_merchandising_no" value="No" required>
+                        <label class="form-check-label" for="reviewed_internet_merchandising_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.reviewedInternetMerchandising"
+                               id="reviewed_internet_merchandising_na" value="N/A" required>
+                        <label class="form-check-label" for="reviewed_internet_merchandising_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assisted sales staff prospecting in market customers -->
+        <div class="card mb-4">
+            <div class="card-header">Assisted sales staff prospecting in market customers</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.assistedSalesStaffInProspecting"
+                               id="assisted_sales_staff_prospecting_in_market_customers_yes" value="Yes" required>
+                        <label class="form-check-label" for="assisted_sales_staff_prospecting_in_market_customers_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.assistedSalesStaffInProspecting"
+                               id="assisted_sales_staff_prospecting_in_market_customers_no" value="No" required>
+                        <label class="form-check-label"
+                               for="assisted_sales_staff_prospecting_in_market_customers_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.assistedSalesStaffInProspecting"
+                               id="assisted_sales_staff_prospecting_in_market_customers_na" value="N/A" required>
+                        <label class="form-check-label" for="assisted_sales_staff_prospecting_in_market_customers_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Created sales call lists for customers in equity (3 to 4 year old customers) -->
+        <div class="card mb-4">
+            <div class="card-header">Created sales call lists for customers in equity (3 to 4 year old customers)</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdSalesCallListsForEquityCustomers"
+                               id="created_sales_call_lists_for_customers_in_equity_3_to_4_year_old_customers_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="created_sales_call_lists_for_customers_in_equity_3_to_4_year_old_customers_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdSalesCallListsForEquityCustomers"
+                               id="created_sales_call_lists_for_customers_in_equity_3_to_4_year_old_customers_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="created_sales_call_lists_for_customers_in_equity_3_to_4_year_old_customers_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdSalesCallListsForEquityCustomers"
+                               id="created_sales_call_lists_for_customers_in_equity_3_to_4_year_old_customers_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="created_sales_call_lists_for_customers_in_equity_3_to_4_year_old_customers_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Created call back lists for customer with ending lease contracts -->
+        <div class="card mb-4">
+            <div class="card-header">Created call back lists for customer with ending lease contracts</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdCallBackListsForLeaseContracts"
+                               id="created_call_back_lists_for_customer_with_ending_lease_contracts_yes" value="Yes"
+                               required>
+                        <label class="form-check-label"
+                               for="created_call_back_lists_for_customer_with_ending_lease_contracts_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdCallBackListsForLeaseContracts"
+                               id="created_call_back_lists_for_customer_with_ending_lease_contracts_no" value="No"
+                               required>
+                        <label class="form-check-label"
+                               for="created_call_back_lists_for_customer_with_ending_lease_contracts_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdCallBackListsForLeaseContracts"
+                               id="created_call_back_lists_for_customer_with_ending_lease_contracts_na" value="N/A"
+                               required>
+                        <label class="form-check-label"
+                               for="created_call_back_lists_for_customer_with_ending_lease_contracts_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Created call back lists for trade in buy back offers (customers who have vehicles in pre-owned inventory shortage) -->
+        <div class="card mb-4">
+            <div class="card-header">Created call back lists for trade in buy back offers (customers who have vehicles
+                in pre-owned inventory shortage)
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdCallBackListsForTradeInBuyBackOffers"
+                               id="created_call_back_lists_for_trade_in_buy_back_offers_customers_who_have_vehicles_in_preowned_inventory_shortage_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="created_call_back_lists_for_trade_in_buy_back_offers_customers_who_have_vehicles_in_preowned_inventory_shortage_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdCallBackListsForTradeInBuyBackOffers"
+                               id="created_call_back_lists_for_trade_in_buy_back_offers_customers_who_have_vehicles_in_preowned_inventory_shortage_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="created_call_back_lists_for_trade_in_buy_back_offers_customers_who_have_vehicles_in_preowned_inventory_shortage_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.createdCallBackListsForTradeInBuyBackOffers"
+                               id="created_call_back_lists_for_trade_in_buy_back_offers_customers_who_have_vehicles_in_preowned_inventory_shortage_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="created_call_back_lists_for_trade_in_buy_back_offers_customers_who_have_vehicles_in_preowned_inventory_shortage_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secured google reviews (30 percent of vehicles sold to meet minimum performance required) -->
+        <div class="card mb-4">
+            <div class="card-header">Secured google reviews (30 percent of vehicles sold to meet minimum performance
+                required)
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.securedGoogleReviews"
+                               id="secured_google_reviews_30_percent_of_vehicles_sold_to_meet_minimum_performance_required_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="secured_google_reviews_30_percent_of_vehicles_sold_to_meet_minimum_performance_required_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.securedGoogleReviews"
+                               id="secured_google_reviews_30_percent_of_vehicles_sold_to_meet_minimum_performance_required_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="secured_google_reviews_30_percent_of_vehicles_sold_to_meet_minimum_performance_required_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.securedGoogleReviews"
+                               id="secured_google_reviews_30_percent_of_vehicles_sold_to_meet_minimum_performance_required_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="secured_google_reviews_30_percent_of_vehicles_sold_to_meet_minimum_performance_required_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secured facebook likes (10 - 15 percent minimum performance required) -->
+        <div class="card mb-4">
+            <div class="card-header">Secured facebook likes (10 - 15 percent minimum performance required)</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.securedFacebookLikes"
+                               id="secured_facebook_likes_10__15_percent_minimum_performance_required_yes" value="Yes"
+                               required>
+                        <label class="form-check-label"
+                               for="secured_facebook_likes_10__15_percent_minimum_performance_required_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.securedFacebookLikes"
+                               id="secured_facebook_likes_10__15_percent_minimum_performance_required_no" value="No"
+                               required>
+                        <label class="form-check-label"
+                               for="secured_facebook_likes_10__15_percent_minimum_performance_required_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.securedFacebookLikes"
+                               id="secured_facebook_likes_10__15_percent_minimum_performance_required_na" value="N/A"
+                               required>
+                        <label class="form-check-label"
+                               for="secured_facebook_likes_10__15_percent_minimum_performance_required_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ensured sales staff compliance with in house technology requirements for sales staff - fb - linkedin - smart phone - e mail/cell phone crm integration -->
+        <div class="card mb-4">
+            <div class="card-header">Ensured sales staff compliance with in house technology requirements for sales
+                staff - fb - linkedin - smart phone - e mail/cell phone crm integration
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.ensuredSalesStaffComplianceWithTechnology"
+                               id="ensured_sales_staff_compliance_with_in_house_technology_requirements_for_sales_staff__fb__linkedin__smart_phone__e_mailcell_phone_crm_integration_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="ensured_sales_staff_compliance_with_in_house_technology_requirements_for_sales_staff__fb__linkedin__smart_phone__e_mailcell_phone_crm_integration_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.ensuredSalesStaffComplianceWithTechnology"
+                               id="ensured_sales_staff_compliance_with_in_house_technology_requirements_for_sales_staff__fb__linkedin__smart_phone__e_mailcell_phone_crm_integration_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="ensured_sales_staff_compliance_with_in_house_technology_requirements_for_sales_staff__fb__linkedin__smart_phone__e_mailcell_phone_crm_integration_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.ensuredSalesStaffComplianceWithTechnology"
+                               id="ensured_sales_staff_compliance_with_in_house_technology_requirements_for_sales_staff__fb__linkedin__smart_phone__e_mailcell_phone_crm_integration_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="ensured_sales_staff_compliance_with_in_house_technology_requirements_for_sales_staff__fb__linkedin__smart_phone__e_mailcell_phone_crm_integration_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Distributed good press articles about company or product to sales staff -->
+        <div class="card mb-4">
+            <div class="card-header">Distributed good press articles about company or product to sales staff</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.distributedGoodPressArticles"
+                               id="distributed_good_press_articles_about_company_or_product_to_sales_staff_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="distributed_good_press_articles_about_company_or_product_to_sales_staff_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.distributedGoodPressArticles"
+                               id="distributed_good_press_articles_about_company_or_product_to_sales_staff_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="distributed_good_press_articles_about_company_or_product_to_sales_staff_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.distributedGoodPressArticles"
+                               id="distributed_good_press_articles_about_company_or_product_to_sales_staff_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="distributed_good_press_articles_about_company_or_product_to_sales_staff_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Praised individuals in public for their performance -->
+        <div class="card mb-4">
+            <div class="card-header">Praised individuals in public for their performance</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.praisedIndividualsPublicly"
+                               id="praised_individuals_in_public_for_their_performance_yes" value="Yes" required>
+                        <label class="form-check-label" for="praised_individuals_in_public_for_their_performance_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.praisedIndividualsPublicly"
+                               id="praised_individuals_in_public_for_their_performance_no" value="No" required>
+                        <label class="form-check-label"
+                               for="praised_individuals_in_public_for_their_performance_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.praisedIndividualsPublicly"
+                               id="praised_individuals_in_public_for_their_performance_na" value="N/A" required>
+                        <label class="form-check-label"
+                               for="praised_individuals_in_public_for_their_performance_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documented any all issues regarding performance, attendance, etc. concerning members of his/her team -->
+        <div class="card mb-4">
+            <div class="card-header">Documented any all issues regarding performance, attendance, etc. concerning
+                members of his/her team
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.documentedPerformanceIssues"
+                               id="documented_any_all_issues_regarding_performance_attendance_etc_concerning_members_of_hisher_team_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="documented_any_all_issues_regarding_performance_attendance_etc_concerning_members_of_hisher_team_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.documentedPerformanceIssues"
+                               id="documented_any_all_issues_regarding_performance_attendance_etc_concerning_members_of_hisher_team_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="documented_any_all_issues_regarding_performance_attendance_etc_concerning_members_of_hisher_team_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.documentedPerformanceIssues"
+                               id="documented_any_all_issues_regarding_performance_attendance_etc_concerning_members_of_hisher_team_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="documented_any_all_issues_regarding_performance_attendance_etc_concerning_members_of_hisher_team_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Were all advertising and promotions shared with sales staff, receptionists, office staff and service personnel? -->
+        <div class="card mb-4">
+            <div class="card-header">Were all advertising and promotions shared with sales staff, receptionists, office
+                staff and service personnel?
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.advertisingAndPromotionsShared"
+                               id="were_all_advertising_and_promotions_shared_with_sales_staff_receptionists_office_staff_and_service_personnel_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="were_all_advertising_and_promotions_shared_with_sales_staff_receptionists_office_staff_and_service_personnel_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.advertisingAndPromotionsShared"
+                               id="were_all_advertising_and_promotions_shared_with_sales_staff_receptionists_office_staff_and_service_personnel_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="were_all_advertising_and_promotions_shared_with_sales_staff_receptionists_office_staff_and_service_personnel_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.advertisingAndPromotionsShared"
+                               id="were_all_advertising_and_promotions_shared_with_sales_staff_receptionists_office_staff_and_service_personnel_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="were_all_advertising_and_promotions_shared_with_sales_staff_receptionists_office_staff_and_service_personnel_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Priced vehicles in the Internet -->
+        <div class="card mb-4">
+            <div class="card-header">Priced vehicles in the Internet</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.pricedVehiclesOnInternet"
+                               id="priced_vehicles_in_the_internet_yes" value="Yes" required>
+                        <label class="form-check-label" for="priced_vehicles_in_the_internet_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.pricedVehiclesOnInternet"
+                               id="priced_vehicles_in_the_internet_no" value="No" required>
+                        <label class="form-check-label" for="priced_vehicles_in_the_internet_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.pricedVehiclesOnInternet"
+                               id="priced_vehicles_in_the_internet_na" value="N/A" required>
+                        <label class="form-check-label" for="priced_vehicles_in_the_internet_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ensured special offers were posted and updated on the company's website -->
+        <div class="card mb-4">
+            <div class="card-header">Ensured special offers were posted and updated on the company's website</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.ensuredSpecialOffersPostedOnWebsite"
+                               id="ensured_special_offers_were_posted_and_updated_on_the_companys_website_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="ensured_special_offers_were_posted_and_updated_on_the_companys_website_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.ensuredSpecialOffersPostedOnWebsite"
+                               id="ensured_special_offers_were_posted_and_updated_on_the_companys_website_no" value="No"
+                               required>
+                        <label class="form-check-label"
+                               for="ensured_special_offers_were_posted_and_updated_on_the_companys_website_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.ensuredSpecialOffersPostedOnWebsite"
+                               id="ensured_special_offers_were_posted_and_updated_on_the_companys_website_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="ensured_special_offers_were_posted_and_updated_on_the_companys_website_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Updated personnel on website -->
+        <div class="card mb-4">
+            <div class="card-header">Updated personnel on website</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.updatedPersonnelOnWebsite"
+                               id="updated_personnel_on_website_yes" value="Yes" required>
+                        <label class="form-check-label" for="updated_personnel_on_website_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.updatedPersonnelOnWebsite"
+                               id="updated_personnel_on_website_no" value="No" required>
+                        <label class="form-check-label" for="updated_personnel_on_website_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.updatedPersonnelOnWebsite"
+                               id="updated_personnel_on_website_na" value="N/A" required>
+                        <label class="form-check-label" for="updated_personnel_on_website_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zero turnover on sales team -->
+        <div class="card mb-4">
+            <div class="card-header">Zero turnover on sales team</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.zeroTurnoverOnSalesTeam"
+                               id="zero_turnover_on_sales_team_yes" value="Yes" required>
+                        <label class="form-check-label" for="zero_turnover_on_sales_team_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.zeroTurnoverOnSalesTeam"
+                               id="zero_turnover_on_sales_team_no" value="No" required>
+                        <label class="form-check-label" for="zero_turnover_on_sales_team_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.zeroTurnoverOnSalesTeam"
+                               id="zero_turnover_on_sales_team_na" value="N/A" required>
+                        <label class="form-check-label" for="zero_turnover_on_sales_team_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save a deal conducted daily -->
+        <div class="card mb-4">
+            <div class="card-header">Save a deal conducted daily</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.saveADealConductedDaily"
+                               id="save_a_deal_conducted_daily_yes" value="Yes" required>
+                        <label class="form-check-label" for="save_a_deal_conducted_daily_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.saveADealConductedDaily"
+                               id="save_a_deal_conducted_daily_no" value="No" required>
+                        <label class="form-check-label" for="save_a_deal_conducted_daily_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="newCarSalesManager.saveADealConductedDaily"
+                               id="save_a_deal_conducted_daily_na" value="N/A" required>
+                        <label class="form-check-label" for="save_a_deal_conducted_daily_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Early Introduction to customers occurred at least 75 percent of the time -->
+        <div class="card mb-4">
+            <div class="card-header">Early Introduction to customers occurred at least 75 percent of the time</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.earlyIntroductionToCustomers"
+                               id="early_introduction_to_customers_occurred_at_least_75_percent_of_the_time_yes"
+                               value="Yes" required>
+                        <label class="form-check-label"
+                               for="early_introduction_to_customers_occurred_at_least_75_percent_of_the_time_yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.earlyIntroductionToCustomers"
+                               id="early_introduction_to_customers_occurred_at_least_75_percent_of_the_time_no"
+                               value="No" required>
+                        <label class="form-check-label"
+                               for="early_introduction_to_customers_occurred_at_least_75_percent_of_the_time_no">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="newCarSalesManager.earlyIntroductionToCustomers"
+                               id="early_introduction_to_customers_occurred_at_least_75_percent_of_the_time_na"
+                               value="N/A" required>
+                        <label class="form-check-label"
+                               for="early_introduction_to_customers_occurred_at_least_75_percent_of_the_time_na">N/A</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">Signature</div>
+            <div class="card-body">
+                <div>
+                    <p><strong>By my signature I attest that the information I am providing is accurate and
+                        truthful.</strong></p>
+                    <div class="sigPad">
+                        <div class="sigWrapper">
+                            <canvas id="signatureCanvas"></canvas>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" id="clearSignature">Clear</button>
+                            <button type="button" id="saveSignature">Save</button>
+                        </div>
+                        <div id="signatureError" class="invalid-feedback">Por favor, firma antes de enviar el
+                            formulario.
+                        </div>
+                        <!-- Campo oculto para la firma -->
+                        <input type="hidden" id="signatureData" name="signatureData">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Configurar el canvas para capturar firmas
+            const canvas = document.getElementById('signatureCanvas');
+            const signaturePad = new SignaturePad(canvas);
+
+            const clearButton = document.getElementById('clearSignature');
+            const saveButton = document.getElementById('saveSignature');
+            const signatureDataInput = document.getElementById('signatureData');
+            const signatureError = document.getElementById('signatureError');  // El div donde mostramos el mensaje de error
+
+            // Asegurarse de que el tamaño del canvas sea correcto
+            function resizeCanvas() {
+                const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext('2d').scale(ratio, ratio);
+            }
+
+            // Llamar a resizeCanvas para ajustar el tamaño
+            resizeCanvas();
+
+            // Limpiar el canvas cuando el botón Clear es presionado
+            clearButton.addEventListener('click', function () {
+                signaturePad.clear();
+                canvas.classList.remove('is-invalid');
+                signatureError.style.display = 'none';  // Ocultamos el mensaje de error si se limpia
+            });
+
+            // Guardar la firma en un campo hidden en formato base64
+            saveButton.addEventListener('click', function () {
+                if (signaturePad.isEmpty()) {
+                    alert("Please provide a signature first.");
+                } else {
+                    // Captura la firma en formato base64
+                    signatureDataInput.value = signaturePad.toDataURL();  // Asigna el valor en el campo hidden
+                }
+            });
+
+            // Validar que la firma no esté vacía antes de enviar el formulario
+            document.getElementById("form_generalsalesmanager").addEventListener('submit', function (event) {
+                if (signaturePad.isEmpty()) {
+                    event.preventDefault();
+                    canvas.classList.add('is-invalid');
+                    signatureError.style.display = 'block';  // Mostrar el mensaje de error
+                } else {
+                    canvas.classList.remove('is-invalid');
+                    signatureError.style.display = 'none';  // Ocultar el mensaje de error
+                    document.getElementById('signatureData').value = signaturePad.toDataURL();
+
+                    if (document.getElementById('signatureData').value === '') {
+                        event.preventDefault();
+                        canvas.classList.add('is-invalid');
+                        signatureError.style.display = 'block';  // Mostrar el mensaje de error
+                    }
+                }
+            });
+        </script>
+        <div class="form-group">
+            <label>By using this form you agree with the storage and handling of your data by this website <span
+                    class="text-danger">*</span></label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="consentAcknowledgment" id="consent_acknowledge"
+                       required>
+                <label class="form-check-label" for="consent_acknowledge">ACKNOWLEDGMENT AND CONSENT</label>
+            </div>
+            <div class="invalid-feedback">Please acknowledge consent.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

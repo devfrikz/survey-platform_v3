@@ -9,6 +9,8 @@ public class HomeController {
 
     @GetMapping("/index")
     public String home(Model model) {
+
+        model.addAttribute("showContent", null);
         return "index";
     }
 
