@@ -26,14 +26,8 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
     @Override
-    public String getLoggedUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails userDetails) {
-            return userDetails.getUsername();
-        } else {
-            return principal.toString();
-        }
+    public UserDetails getLoggedUser() {
+        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
     @Override

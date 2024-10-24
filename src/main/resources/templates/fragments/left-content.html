@@ -1,4 +1,4 @@
-<div th:fragment="left-content" class="col-md-3 col-sm-12 bg-light p-4">
+<div th:fragment="left-content" class="col-md-3 col-sm-12 bg-light p-4" xmlns:sec="http://www.w3.org/1999/xhtml">
     <!-- Left Content with Collapsible Sidebar -->
         <div>
             <!-- Sección 1 -->
@@ -38,11 +38,11 @@
             </div>
 
             <!-- Sección 2 -->
-            <button class="menu-title" type="button" data-toggle="collapse" data-target="#sidebarMenu2"
+            <button sec:authorize="hasRole('ROLE_ADMIN')" class="menu-title" type="button" data-toggle="collapse" data-target="#sidebarMenu2"
                     aria-expanded="false" aria-controls="sidebarMenu2">
                 <i class="fas fa-angle-right"></i> Management
             </button>
-            <div class="collapse" id="sidebarMenu2">
+            <div sec:authorize="hasRole('ROLE_ADMIN')" class="collapse" id="sidebarMenu2">
                 <div class="list-group">
                     <a class="list-group-item list-group-item-action" th:href="@{/approvals}" style="font-family: 'Arial', sans-serif; font-size: 16px;">Approvals</a>
                 </div>
@@ -55,7 +55,8 @@
             </button>
             <div class="collapse" id="sidebarMenu3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">General Report</a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" href="#" class="list-group-item list-group-item-action">Management Reports</a>
+                    <a href="#" class="list-group-item list-group-item-action">General Reports</a>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ public class FormularioServiceImpl implements FormularioService {
     private final UserService userService;
 
     public Formulario saveFormByType(Long formTypeParam) {
-        var usuarioLogueado = userService.getLoggedUser();
+        var usuarioLogueado = userService.getLoggedUser().getUsername();
         var usuario = userRepository.findByEmail(usuarioLogueado).orElseThrow(() -> new SurveyPlatformException("Usuario no encontrado", 404));
         var formType = formularioTipoRepository.findById(formTypeParam).orElseThrow(() -> new SurveyPlatformException("Tipo de formulario no encontrado", 404));
         var module = moduleRepository.findById(1L).orElseThrow(() -> new SurveyPlatformException("Modulo no encontrado", 404));//TODO ver de donde obtener el modulo

@@ -55,7 +55,7 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
     @Override
     public Page<FormularioDto> getPendingFormsBySucursalAndRol(Pageable pageable) {
-        var username = userService.getLoggedUser();
+        var username = userService.getLoggedUser().getUsername();
         var userOpt = userRepository.findByUsername(username);
 
         if (userOpt.isPresent()) {
@@ -85,7 +85,7 @@ public class FormApprovalServiceImpl implements FormApprovalService {
 
     @Transactional
     public void addForm(SubmittedFormDto submittedFormDto) {
-        var loggedUser = userService.getLoggedUser();
+        var loggedUser = userService.getLoggedUser().getUsername();
 
         var user = userRepository.findByEmail(loggedUser)
                 .orElseThrow(() -> new SurveyPlatformException("Usuario no encontrado", 404));
