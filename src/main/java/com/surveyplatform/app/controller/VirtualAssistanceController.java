@@ -8,6 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.surveyplatform.app.utils.Constants.FINANCE_DIRECTOR;
+import static com.surveyplatform.app.utils.Constants.GENERAL_MANAGEMENT;
+import static com.surveyplatform.app.utils.Constants.GENERAL_SALES_MANAGER;
+import static com.surveyplatform.app.utils.Constants.INDEX;
+import static com.surveyplatform.app.utils.Constants.INTERNET_SALES_MANAGER;
+import static com.surveyplatform.app.utils.Constants.NEW_CAR_SALES_MANAGER;
+import static com.surveyplatform.app.utils.Constants.PROMOTIONAL_EVENTS;
+import static com.surveyplatform.app.utils.Constants.SALES_MANAGER_PRE_OWNED;
+import static com.surveyplatform.app.utils.Constants.SHOW_CONTENT;
+
 @Controller
 @RequiredArgsConstructor
 public class VirtualAssistanceController {
@@ -15,79 +25,87 @@ public class VirtualAssistanceController {
     private final VirtualAssistanceService virtualAssistanceService;
 
     @GetMapping("/general-management")
-    public String generalManagement() {
-        return "general-management";
+    public String generalManagement(Model model) {
+        model.addAttribute(SHOW_CONTENT, GENERAL_MANAGEMENT);
+        return INDEX;
     }
 
     @PostMapping("/submit-general-management")
-    public String submitGeneralManagement(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+    public String submitGeneralManagement(VirtualAssistanceDto virtualAssistanceDto) {
         virtualAssistanceService.submitGeneralManagement(virtualAssistanceDto);
-        return "general-management";
+        return INDEX;
     }
 
     @GetMapping("/general-sales-manager")
-    public String generalSalesManager() {
-        return "general-sales-manager";
+    public String generalSalesManager(Model model) {
+        
+        model.addAttribute(SHOW_CONTENT, GENERAL_SALES_MANAGER);
+        return INDEX;
     }
 
     @PostMapping("/submit-general-sales-manager")
-    public String submitGeneralSalesManager(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+    public String submitGeneralSalesManager(VirtualAssistanceDto virtualAssistanceDto) {
         virtualAssistanceService.submitGeneralSalesManager(virtualAssistanceDto);
-        return "general-sales-manager";
+        return INDEX;
     }
 
     @GetMapping("/new-car-sales-manager")
-    public String newCarSalesManager() {
-        return "new-car-sales-manager";
+    public String newCarSalesManager(Model model) {
+        model.addAttribute(SHOW_CONTENT, NEW_CAR_SALES_MANAGER);
+        return INDEX;
     }
 
     @PostMapping("/submit-new-car-sales-manager")
-    public String submitNewCarSalesManager(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+    public String submitNewCarSalesManager(VirtualAssistanceDto virtualAssistanceDto) {
         virtualAssistanceService.submitSalesManagerEvaluation(virtualAssistanceDto);
-        return "new-car-sales-manager";
+        return INDEX;
     }
 
     @GetMapping("/sales-manager-pre-owned")
-    public String salesManagerPreOwned() {
-        return "sales-manager-pre-owned";
+    public String salesManagerPreOwned(Model model){
+        model.addAttribute(SHOW_CONTENT, SALES_MANAGER_PRE_OWNED);
+        return INDEX;
     }
 
     @PostMapping("/submit-sales-manager-pre-owned")
-    public String submitSalesManagerPreOwned(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+    public String submitSalesManagerPreOwned(VirtualAssistanceDto virtualAssistanceDto) {
         virtualAssistanceService.submitSalesManagerPreOwned(virtualAssistanceDto);
-        return "sales-manager-pre-owned";
+        return INDEX;
     }
 
     @GetMapping("/finance-director")
-    public String financeDirector() {
-        return "finance-director";
+    public String financeDirector(Model model){
+        model.addAttribute(SHOW_CONTENT, FINANCE_DIRECTOR);
+        return INDEX;
     }
 
     @PostMapping("/submit-finance-director")
-    public String submitfinanceDirector(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+    public String submitfinanceDirector(VirtualAssistanceDto virtualAssistanceDto) {
         virtualAssistanceService.submitFinanceDirector(virtualAssistanceDto);
-        return "finance-director";
+        return INDEX;
     }
 
     @GetMapping("/internet-sales-manager")
-    public String internetSalesManager() {
-        return "internet-sales-manager";
+    public String internetSalesManager(Model model){
+        model.addAttribute(SHOW_CONTENT, INTERNET_SALES_MANAGER);
+        return INDEX;
     }
 
     @PostMapping("/submit-internet-sales-manager")
-    public String submitInternetSalesManager(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+    public String submitInternetSalesManager(VirtualAssistanceDto virtualAssistanceDto) {
         virtualAssistanceService.submitInternetSalesManager(virtualAssistanceDto);
-        return "internet-sales-manager";
+        return INDEX;
     }
 
     @GetMapping("/promotional-events")
-    public String promotionalEvent() {
-        return "promotional-events";
+    public String promotionalEvent(Model model){
+        model.addAttribute(SHOW_CONTENT, PROMOTIONAL_EVENTS);
+        return INDEX;
     }
 
     @PostMapping("/submit-promotional-events")
-    public String submitPromotionalEvent(VirtualAssistanceDto virtualAssistanceDto, Model model) {
+    public String submitPromotionalEvent(VirtualAssistanceDto virtualAssistanceDto) {
         virtualAssistanceService.submitPromotionalEvent(virtualAssistanceDto);
-        return "promotional-events";
+        return INDEX;
     }
 }

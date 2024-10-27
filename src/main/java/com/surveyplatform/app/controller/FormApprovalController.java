@@ -11,15 +11,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static com.surveyplatform.app.utils.Constants.APPROVALS;
+import static com.surveyplatform.app.utils.Constants.INDEX;
+import static com.surveyplatform.app.utils.Constants.SALE_FORM;
+import static com.surveyplatform.app.utils.Constants.SHOW_CONTENT;
+
 @Controller
 @RequiredArgsConstructor
 public class FormApprovalController {
 
     private final FormApprovalService formApprovalService;
-
     @GetMapping("/create-form")
-    public String createForm() {
-        return "form";  // Retorna la vista create-form.html
+    public String createForm(Model model) {
+
+        model.addAttribute(SHOW_CONTENT, SALE_FORM);
+        return INDEX;
     }
 
     @GetMapping("/approvals")
@@ -36,16 +42,18 @@ public class FormApprovalController {
             model.addAttribute("totalPages", formularioPage.getTotalPages());
             model.addAttribute("size", size);
 
-            return "approval";
+            model.addAttribute(SHOW_CONTENT, APPROVALS);
+            return INDEX;
         } catch (SurveyPlatformException e) {
             throw new SurveyPlatformException(e.getMessage(), e.getCode());
         }
     }
 
     @PostMapping("/add-form")
-    public String addForm(SubmittedFormDto submittedFormDto) {
+    public String addForm(SubmittedFormDto submittedFormDto, Model model) {
         formApprovalService.addForm(submittedFormDto);
-        return "form";
+        model.addAttribute(SHOW_CONTENT, SALE_FORM);
+        return INDEX;
     }
 
     @PostMapping("/approve-form")

@@ -1,0 +1,336 @@
+<div th:fragment="delivery-checklist">
+    <script>
+        // JavaScript to concatenate values into JSON for all relevant sections
+        function formSubmit() {
+            const copyOf = [];
+            document.querySelectorAll('input[name="copyOf"]:checked').forEach(function (checkbox) {
+                copyOf.push(checkbox.value);
+            });
+            document.getElementById('copyOfJson').value = JSON.stringify(copyOf);
+
+            const signed = [];
+            document.querySelectorAll('input[name="signed"]:checked').forEach(function (checkbox) {
+                signed.push(checkbox.value);
+            });
+            document.getElementById('signedJson').value = JSON.stringify(signed);
+
+            const titlePlates = [];
+            document.querySelectorAll('input[name="titlePlates"]:checked').forEach(function (checkbox) {
+                titlePlates.push(checkbox.value);
+            });
+            document.getElementById('titlePlatesJson').value = JSON.stringify(titlePlates);
+
+            const salesManagerChecklist = [];
+            document.querySelectorAll('input[name="salesManagerChecklist"]:checked').forEach(function (checkbox) {
+                salesManagerChecklist.push(checkbox.value);
+            });
+            document.getElementById('salesManagerChecklistJson').value = JSON.stringify(salesManagerChecklist);
+
+            const domCastleChecklist = [];
+            document.querySelectorAll('input[name="domCastleChecklist"]:checked').forEach(function (checkbox) {
+                domCastleChecklist.push(checkbox.value);
+            });
+            document.getElementById('domCastleChecklistJson').value = JSON.stringify(domCastleChecklist);
+
+            const refund = [];
+            document.querySelectorAll('input[name="refund"]:checked').forEach(function (checkbox) {
+                refund.push(checkbox.value);
+            });
+            document.getElementById('refundJson').value = JSON.stringify(refund);
+
+            const vehicleType = [];
+            document.querySelectorAll('input[name="vehicleType"]:checked').forEach(function (checkbox) {
+                vehicleType.push(checkbox.value);
+            });
+            document.getElementById('vehicleTypeJson').value = JSON.stringify(vehicleType);
+
+            document.getElementById('form').submit();
+        }
+    </script>
+    <div class="container mt-5">
+        <h3 class="text-center mb-4">Delivery Checklist</h3>
+        <form id="form" th:action="@{/submit-delivery-checklist}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+            <div class="form-group">
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" name="customerName" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock:</label>
+                <input type="text" id="stock" name="stock" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="vehicle">Vehicle:</label>
+                <input type="text" id="vehicle" name="vehicle" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>Vehicle Type:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="vehicleNew" name="vehicleType" value="New"
+                           required>
+                    <label class="form-check-label" for="vehicleNew">New</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="vehicleUsed" name="vehicleType" value="Used">
+                    <label class="form-check-label" for="vehicleUsed">Used</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="locatedSticker" name="vehicleType"
+                           value="Located-Signed window sticker">
+                    <label class="form-check-label" for="locatedSticker">Located-Signed window sticker</label>
+                </div>
+            </div>
+
+            <!-- Campo oculto para enviar los valores concatenados o en JSON -->
+            <input type="hidden" id="vehicleTypeJson" name="vehicleTypeJson">
+
+            <h4>Salesperson Checklist:</h4>
+
+            <div class="form-group">
+                <label>Copy of:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="driversLicense" name="copyOf"
+                           value="Drivers License">
+                    <label class="form-check-label" for="driversLicense">Drivers License</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="insurance" name="copyOf" value="Insurance">
+                    <label class="form-check-label" for="insurance">Insurance</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="registration" name="copyOf"
+                           value="Registration">
+                    <label class="form-check-label" for="registration">Registration</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="coBuyer" name="copyOf" value="Co Buyer???">
+                    <label class="form-check-label" for="coBuyer">Co Buyer???</label>
+                </div>
+            </div>
+
+            <!-- Campo oculto para enviar los valores concatenados o en JSON -->
+            <input type="hidden" id="copyOfJson" name="copyOfJson">
+
+            <div class="form-group">
+                <label>Signed:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="privacyNotice" name="signed"
+                           value="Privacy Notice">
+                    <label class="form-check-label" for="privacyNotice">Privacy Notice</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="fourSquare" name="signed" value="4 Square">
+                    <label class="form-check-label" for="fourSquare">4 Square</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="creditApp" name="signed" value="Credit App">
+                    <label class="form-check-label" for="creditApp">Credit App</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="payoffTo" name="signed" value="Payoff to">
+                    <label class="form-check-label" for="payoffTo">Payoff to</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="weOwe" name="signed" value="We Owe">
+                    <label class="form-check-label" for="weOwe">We Owe</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="newMiles" name="signed" value="Miles">
+                    <label class="form-check-label" for="newMiles">Miles (New & Trade)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="deeryProtection" name="signed"
+                           value="Deery Protection Plan (Form)">
+                    <label class="form-check-label" for="deeryProtection">Deery Protection Plan (Form)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="osPlusFormSigned" name="signed"
+                           value="OS+Form Signed">
+                    <label class="form-check-label" for="osPlusFormSigned">OS+Form Signed</label>
+                </div>
+            </div>
+
+            <!-- Campo oculto para enviar los valores concatenados o en JSON -->
+            <input type="hidden" id="signedJson" name="signedJson">
+
+            <div class="form-group">
+                <label>TITLE/PLATES:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="newPlates" name="titlePlates"
+                           value="New Plates">
+                    <label class="form-check-label" for="newPlates">New Plates</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="transferredPlates" name="titlePlates"
+                           value="Transferred Plates">
+                    <label class="form-check-label" for="transferredPlates">Transferred Plates</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="businessTrade" name="titlePlates"
+                           value="Business trade">
+                    <label class="form-check-label" for="businessTrade">Business trade</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="tonnage" name="titlePlates" value="Tonnage???">
+                    <label class="form-check-label" for="tonnage">Tonnage???</label>
+                </div>
+            </div>
+
+            <!-- Campo oculto para enviar los valores concatenados o en JSON -->
+            <input type="hidden" id="titlePlatesJson" name="titlePlatesJson">
+
+            <h4>Deposit</h4>
+
+            <div class="form-group">
+                <label for="depositAmount">AMT $</label>
+                <input type="text" id="depositAmount" name="depositAmount" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="collectedBy">Collected by:</label>
+                <input type="text" id="collectedBy" name="collectedBy" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="collectedDate">Date:</label>
+                <input type="date" id="collectedDate" name="collectedDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>REFUND TO CUSTOMER?</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="refundYes" name="refund" value="YES">
+                    <label class="form-check-label" for="refundYes">YES</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="refundNo" name="refund" value="NO">
+                    <label class="form-check-label" for="refundNo">NO</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="refundedBy">Refunded by:</label>
+                <input type="text" id="refundedBy" name="refundedBy" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="refundDate">Refund Date:</label>
+                <input type="date" id="refundDate" name="refundDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="downPaymentAmount">DOWN PAYMENT AMT $</label>
+                <input type="text" id="downPaymentAmount" name="downPaymentAmount" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="totalCollected">TOTAL COLLECTED $</label>
+                <input type="text" id="totalCollected" name="totalCollected" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="fiInitials">FI Initials:</label>
+                <input type="text" id="fiInitials" name="fiInitials" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="fiDate">Date:</label>
+                <input type="date" id="fiDate" name="fiDate" class="form-control">
+            </div>
+
+            <h4>Sales Manager Checklist</h4>
+
+            <div class="form-group">
+                <label>Checklist Items:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="invoiceLenderSheet" name="salesManagerChecklist"
+                           value="Invoice/Lender Sheet">
+                    <label class="form-check-label" for="invoiceLenderSheet">Invoice/Lender Sheet</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="salesManagerChecklist"
+                           name="salesManagerChecklist" value="Credit APP">
+                    <label class="form-check-label" for="creditApp">Credit APP</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="dealLoaded" name="salesManagerChecklist"
+                           value="Deal Loaded in ADP">
+                    <label class="form-check-label" for="dealLoaded">Deal Loaded in ADP</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="regAmt" name="salesManagerChecklist"
+                           value="Reg AMT &amp; Month (Arts)">
+                    <label class="form-check-label" for="regAmt">Reg AMT &amp; Month (Arts)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="customerInfo" name="salesManagerChecklist"
+                           value="Cust Info (DL, ADD, DOB, SSN)">
+                    <label class="form-check-label" for="customerInfo">Cust Info (DL, ADD, DOB, SSN)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="milesNewTrade" name="salesManagerChecklist"
+                           value="Miles (New &amp; Trade)">
+                    <label class="form-check-label" for="milesNewTrade">Miles (New &amp; Trade)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="insuranceInfo" name="salesManagerChecklist"
+                           value="Insurance Info">
+                    <label class="form-check-label" for="insuranceInfo">Insurance Info</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="weOweManager" name="salesManagerChecklist"
+                           value="We Owe">
+                    <label class="form-check-label" for="weOweManager">We Owe</label>
+                </div>
+            </div>
+
+            <!-- Campo oculto para enviar los valores concatenados o en JSON -->
+            <input type="hidden" id="salesManagerChecklistJson" name="salesManagerChecklistJson">
+
+            <h4>DOM CASTLE (ALL NEW VEHICLE)</h4>
+
+            <div class="form-group">
+                <label>Checklist Items:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="nvdr" name="domCastleChecklist" value="NVDR">
+                    <label class="form-check-label" for="nvdr">NVDR</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="dateDom" name="domCastleChecklist" value="Date">
+                    <label class="form-check-label" for="dateDom">Date</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="claimRebates" name="domCastleChecklist"
+                           value="Claim Rebates">
+                    <label class="form-check-label" for="claimRebates">Claim Rebates</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="printRebates" name="domCastleChecklist"
+                           value="Print Rebates Claimed">
+                    <label class="form-check-label" for="printRebates">Print Rebates Claimed</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="osPlusSignedDom" name="domCastleChecklist"
+                           value="OS+Form Signed">
+                    <label class="form-check-label" for="osPlusSignedDom">OS+Form Signed</label>
+                </div>
+            </div>
+
+            <!-- Campo oculto para enviar los valores concatenados o en JSON -->
+            <input type="hidden" id="domCastleChecklistJson" name="domCastleChecklistJson">
+
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <textarea class="form-control" id="notes" name="notes" rows="4"></textarea>
+            </div>
+
+            <div class="form-group text-center mt-4">
+                <button type="submit" class="btn btn-primary" onclick="formSubmit()">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

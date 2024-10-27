@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>General Manager Form</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <style>
-        .sigWrapper {
-            border: 1px solid #cccccc;
-            height: 150px;
-            max-width: 400px;
-        }
-
-        .sigPad {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        canvas {
-            touch-action: none;
-            user-select: none;
-        }
-    </style>
-</head>
-<body>
-<div th:replace="fragments/navbar :: navbar"></div>
-<div class="container mt-5">
+<div th:fragment="general-management" class="container mt-5">
     <h2>General Manager Form</h2>
     <form th:action="@{/submit-general-management}" enctype="multipart/form-data" method="post"
           id="form_generalmanager">
@@ -90,18 +57,21 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.generalManager.reviewedContracts"
+                        <input class="form-check-input" type="radio"
+                               name="generalManager.generalManager.reviewedContracts"
                                id="reviewed_contracts_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="reviewed_contracts_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewedContracts" id="reviewed_contracts_no"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewedContracts"
+                               id="reviewed_contracts_no"
                                value="No" required>
                         <label class="form-check-label" for="reviewed_contracts_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewedContracts" id="reviewed_contracts_na"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewedContracts"
+                               id="reviewed_contracts_na"
                                value="NA" required>
                         <label class="form-check-label" for="reviewed_contracts_na">N/A</label>
                     </div>
@@ -115,19 +85,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.warrantyReceivables" id="warranty_yes"
+                        <input class="form-check-input" type="radio" name="generalManager.warrantyReceivables"
+                               id="warranty_yes"
                                value="Yes"
                                required>
                         <label class="form-check-label" for="warranty_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.warrantyReceivables" id="warranty_no"
+                        <input class="form-check-input" type="radio" name="generalManager.warrantyReceivables"
+                               id="warranty_no"
                                value="No"
                                required>
                         <label class="form-check-label" for="warranty_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.warrantyReceivables" id="warranty_na"
+                        <input class="form-check-input" type="radio" name="generalManager.warrantyReceivables"
+                               id="warranty_na"
                                value="NA"
                                required>
                         <label class="form-check-label" for="warranty_na">N/A</label>
@@ -142,15 +115,18 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.titles" id="titles_yes" value="Yes" required>
+                        <input class="form-check-input" type="radio" name="generalManager.titles" id="titles_yes"
+                               value="Yes" required>
                         <label class="form-check-label" for="titles_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.titles" id="titles_no" value="No" required>
+                        <input class="form-check-input" type="radio" name="generalManager.titles" id="titles_no"
+                               value="No" required>
                         <label class="form-check-label" for="titles_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.titles" id="titles_na" value="NA" required>
+                        <input class="form-check-input" type="radio" name="generalManager.titles" id="titles_na"
+                               value="NA" required>
                         <label class="form-check-label" for="titles_na">N/A</label>
                     </div>
                     <div class="invalid-feedback">Please select an option.</div>
@@ -163,19 +139,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.rebatesReceivables" id="rebates_yes"
+                        <input class="form-check-input" type="radio" name="generalManager.rebatesReceivables"
+                               id="rebates_yes"
                                value="Yes"
                                required>
                         <label class="form-check-label" for="rebates_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.rebatesReceivables" id="rebates_no"
+                        <input class="form-check-input" type="radio" name="generalManager.rebatesReceivables"
+                               id="rebates_no"
                                value="No"
                                required>
                         <label class="form-check-label" for="rebates_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.rebatesReceivables" id="rebates_na"
+                        <input class="form-check-input" type="radio" name="generalManager.rebatesReceivables"
+                               id="rebates_na"
                                value="NA"
                                required>
                         <label class="form-check-label" for="rebates_na">N/A</label>
@@ -190,18 +169,21 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewInsurance" id="review_insurance_yes"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewInsurance"
+                               id="review_insurance_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="review_insurance_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewInsurance" id="review_insurance_no"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewInsurance"
+                               id="review_insurance_no"
                                value="No"
                                required>
                         <label class="form-check-label" for="review_insurance_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewInsurance" id="review_insurance_na"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewInsurance"
+                               id="review_insurance_na"
                                value="NA"
                                required>
                         <label class="form-check-label" for="review_insurance_na">N/A</label>
@@ -216,19 +198,22 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewExpense" id="review_expense_yes"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewExpense"
+                               id="review_expense_yes"
                                value="Yes"
                                required>
                         <label class="form-check-label" for="review_expense_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewExpense" id="review_expense_no"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewExpense"
+                               id="review_expense_no"
                                value="No"
                                required>
                         <label class="form-check-label" for="review_expense_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewExpense" id="review_expense_na"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewExpense"
+                               id="review_expense_na"
                                value="NA"
                                required>
                         <label class="form-check-label" for="review_expense_na">N/A</label>
@@ -330,12 +315,14 @@
                         <label class="form-check-label" for="reviewed_marketing_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewedMarketing" id="reviewed_marketing_no"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewedMarketing"
+                               id="reviewed_marketing_no"
                                value="No" required>
                         <label class="form-check-label" for="reviewed_marketing_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewedMarketing" id="reviewed_marketing_na"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewedMarketing"
+                               id="reviewed_marketing_na"
                                value="NA" required>
                         <label class="form-check-label" for="reviewed_marketing_na">N/A</label>
                     </div>
@@ -349,17 +336,20 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.compliance" id="compliance_yes" value="Yes"
+                        <input class="form-check-input" type="radio" name="generalManager.compliance"
+                               id="compliance_yes" value="Yes"
                                required>
                         <label class="form-check-label" for="compliance_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.compliance" id="compliance_no" value="No"
+                        <input class="form-check-input" type="radio" name="generalManager.compliance" id="compliance_no"
+                               value="No"
                                required>
                         <label class="form-check-label" for="compliance_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.compliance" id="compliance_na" value="NA"
+                        <input class="form-check-input" type="radio" name="generalManager.compliance" id="compliance_na"
+                               value="NA"
                                required>
                         <label class="form-check-label" for="compliance_na">N/A</label>
                     </div>
@@ -373,18 +363,21 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.gatheredVirtualAssistantSurveys"
+                        <input class="form-check-input" type="radio"
+                               name="generalManager.gatheredVirtualAssistantSurveys"
                                id="gathered_yes" value="Yes" required>
                         <label class="form-check-label" for="gathered_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.gatheredVirtualAssistantSurveys"
+                        <input class="form-check-input" type="radio"
+                               name="generalManager.gatheredVirtualAssistantSurveys"
                                id="gathered_no"
                                value="No" required>
                         <label class="form-check-label" for="gathered_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.gatheredVirtualAssistantSurveys"
+                        <input class="form-check-input" type="radio"
+                               name="generalManager.gatheredVirtualAssistantSurveys"
                                id="gathered_na"
                                value="NA" required>
                         <label class="form-check-label" for="gathered_na">N/A</label>
@@ -399,15 +392,18 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.romiReportAnalyzed" id="romi_yes" value="Yes" required>
+                        <input class="form-check-input" type="radio" name="generalManager.romiReportAnalyzed"
+                               id="romi_yes" value="Yes" required>
                         <label class="form-check-label" for="romi_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.romiReportAnalyzed" id="romi_no" value="No" required>
+                        <input class="form-check-input" type="radio" name="generalManager.romiReportAnalyzed"
+                               id="romi_no" value="No" required>
                         <label class="form-check-label" for="romi_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.romiReportAnalyzed" id="romi_na" value="NA" required>
+                        <input class="form-check-input" type="radio" name="generalManager.romiReportAnalyzed"
+                               id="romi_na" value="NA" required>
                         <label class="form-check-label" for="romi_na">N/A</label>
                     </div>
                     <div class="invalid-feedback">Please select an option.</div>
@@ -422,17 +418,20 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewedForecast" id="reviewed_forecast_yes"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewedForecast"
+                               id="reviewed_forecast_yes"
                                value="Yes" required>
                         <label class="form-check-label" for="reviewed_forecast_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewedForecast" id="reviewed_forecast_no"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewedForecast"
+                               id="reviewed_forecast_no"
                                value="No" required>
                         <label class="form-check-label" for="reviewed_forecast_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.reviewedForecast" id="reviewed_forecast_na"
+                        <input class="form-check-input" type="radio" name="generalManager.reviewedForecast"
+                               id="reviewed_forecast_na"
                                value="NA" required>
                         <label class="form-check-label" for="reviewed_forecast_na">N/A</label>
                     </div>
@@ -598,17 +597,20 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.setNewGoal" id="set_new_goal_yes" value="Yes"
+                        <input class="form-check-input" type="radio" name="generalManager.setNewGoal"
+                               id="set_new_goal_yes" value="Yes"
                                required>
                         <label class="form-check-label" for="set_new_goal_yes">Yes</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.setNewGoal" id="set_new_goal_no" value="No"
+                        <input class="form-check-input" type="radio" name="generalManager.setNewGoal"
+                               id="set_new_goal_no" value="No"
                                required>
                         <label class="form-check-label" for="set_new_goal_no">No</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="generalManager.setNewGoal" id="set_new_goal_na" value="NA"
+                        <input class="form-check-input" type="radio" name="generalManager.setNewGoal"
+                               id="set_new_goal_na" value="NA"
                                required>
                         <label class="form-check-label" for="set_new_goal_na">N/A</label>
                     </div>
@@ -737,7 +739,7 @@
                     signatureError.style.display = 'none';  // Ocultar el mensaje de error
                     document.getElementById('signatureData').value = signaturePad.toDataURL();
 
-                    if(document.getElementById('signatureData').value === ''){
+                    if (document.getElementById('signatureData').value === '') {
                         event.preventDefault();
                         canvas.classList.add('is-invalid');
                         signatureError.style.display = 'block';  // Mostrar el mensaje de error
@@ -760,5 +762,3 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-</body>
-</html>

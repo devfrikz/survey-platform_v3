@@ -1,0 +1,63 @@
+<div th:fragment="left-content" class="col-md-3 col-sm-12 bg-light p-4">
+    <!-- Left Content with Collapsible Sidebar -->
+        <div>
+            <!-- Sección 1 -->
+            <button class="menu-title" type="button" data-toggle="collapse" data-target="#sidebarMenu1"
+                    aria-expanded="false" aria-controls="sidebarMenu1">
+                <i class="fas fa-angle-right"></i> Sales Management
+            </button>
+            <div class="collapse" id="sidebarMenu1">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action" th:href="@{/create-form}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Sales Forms</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/daily-planner}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Daily Planner</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/customer-needs}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Customer Needs</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/delivery-checklist}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Delivery Checklist</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/end-of-day}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">End of the Day</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/ssi-1000}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">SSI 1000</a>
+                </div>
+            </div>
+
+            <!-- Sección 2 -->
+            <button class="menu-title" type="button" data-toggle="collapse" data-target="#sidebarMenu2"
+                    aria-expanded="false" aria-controls="sidebarMenu2">
+                <i class="fas fa-angle-right"></i> Generential Management
+            </button>
+            <div class="collapse" id="sidebarMenu2">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action" th:href="@{/approvals}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Approvals</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/general-management}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">General Management</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/general-sales-manager}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">General Sales Manager</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/new-car-sales-manager}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">New Car Sales Manager</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/sales-manager-pre-owned}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Sales Manager Pre-Owned</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/finance-director}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Finance Director</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/internet-sales-manager}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Internet Sales Manager</a>
+                    <a class="list-group-item list-group-item-action" th:href="@{/promotional-events}"
+                       style="font-family: 'Arial', sans-serif; font-size: 16px;">Promotional Events</a>
+                </div>
+            </div>
+
+            <!-- Sección 3 -->
+            <button class="menu-title" type="button" data-toggle="collapse" data-target="#sidebarMenu3"
+                    aria-expanded="false" aria-controls="sidebarMenu3">
+                <i class="fas fa-angle-right"></i> Reports
+            </button>
+            <div class="collapse" id="sidebarMenu3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">Report 1</a>
+                </div>
+            </div>
+        </div>
+    </div>

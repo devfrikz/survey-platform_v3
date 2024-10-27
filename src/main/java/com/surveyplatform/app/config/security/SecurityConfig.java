@@ -1,15 +1,10 @@
 package com.surveyplatform.app.config.security;
 
 import com.surveyplatform.app.controller.handler.CustomAuthenticationFailureHandler;
-import com.surveyplatform.app.persistance.repository.internal.RoleRepository;
-import com.surveyplatform.app.persistance.repository.internal.UserRepository;
-import com.surveyplatform.app.persistance.repository.internal.UsuarioRolRepository;
 import com.surveyplatform.app.service.forms.CustomUserDetailsService;
-import com.surveyplatform.app.service.forms.impl.CustomUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -25,10 +20,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final UsuarioRolRepository usuarioRolRepository;
-
 
     private final CustomUserDetailsService customUserDetailsService;
 
@@ -91,13 +82,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    @Primary
-    public CustomUserDetailsService userDetailsService() {
-        return new CustomUserDetailsServiceImpl(userRepository, roleRepository, usuarioRolRepository);
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) {
+    public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(customUserDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());

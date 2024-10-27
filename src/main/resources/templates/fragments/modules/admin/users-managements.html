@@ -1,0 +1,234 @@
+<div th:fragment="users-managements">
+    <div class="container my-5">
+        <h2>General User Management</h2>
+
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="gestionTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="usuario-tab" data-bs-toggle="tab" data-bs-target="#usuario"
+                        type="button" role="tab" aria-controls="usuario" aria-selected="true">Users
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="sucursal-tab" data-bs-toggle="tab" data-bs-target="#sucursal"
+                        type="button" role="tab" aria-controls="sucursal" aria-selected="false">Offices
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="rol-tab" data-bs-toggle="tab" data-bs-target="#rol"
+                        type="button" role="tab" aria-controls="rol" aria-selected="false">Role
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="permiso-tab" data-bs-toggle="tab" data-bs-target="#permiso"
+                        type="button" role="tab" aria-controls="permiso" aria-selected="false">Permissions
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="modulo-tab" data-bs-toggle="tab" data-bs-target="#modulo"
+                        type="button" role="tab" aria-controls="modulo" aria-selected="false">Modules
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="gestionTabsContent">
+            <!-- Usuario Tab -->
+            <div class="tab-pane fade show active" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
+                <form th:action="@{/user/save}" method="post" class="mt-4">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <h3>User Management</h3>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password"
+                               name="password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreCompleto" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="nombreCompleto" placeholder="Full name"
+                               name="nombreCompleto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="readyToday">Offices</label>
+                        <select id="readyToday" name="sucursalId" class="form-control" required>
+                            <option value="0">Select...</option>
+                            <foreach th:each="sucursal : ${sucursalList}">
+                                <option th:value="${sucursal.id}" th:text="${sucursal.nombre + ' - ' + sucursal.id}"/>
+                            </foreach>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol">Role</label>
+                        <select id="userRol" name="rolId" class="form-control" required>
+                            <option value="0">Select...</option>
+                            <foreach th:each="rol : ${roleList}">
+                                <option th:value="${rol.id}" th:text="${rol.name}"/>
+                            </foreach>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="activo" class="form-label">Active</label>
+                        <select class="form-select" id="activo" name="activo">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save New User</button>
+                </form>
+            </div>
+
+            <!-- Sucursal Tab -->
+            <div class="tab-pane fade" id="sucursal" role="tabpanel" aria-labelledby="sucursal-tab">
+                <form th:action="@{/sucursal/save}" method="post" class="mt-4">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <h3>Offices Management</h3>
+                    <div class="mb-3">
+                        <label for="nombreSucursal" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="nombreSucursal" placeholder="Office name"
+                               name="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccionSucursal" class="form-label">Address</label>
+                        <textarea class="form-control" id="direccionSucursal" rows="3" placeholder="Office address"
+                                  name="direccion"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="paisSucursal">Country</label>
+                        <select id="paisSucursal" name="pais" class="form-control" required>
+                            <option value="0">Select...</option>
+                            <foreach th:each="country : ${countryList}">
+                                <option th:value="${country.id}" th:text="${country.name}"></option>
+                            </foreach>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ciudadSucursal">City</label>
+                        <select id="ciudadSucursal" name="ciudad" class="form-control" required>
+                            <option value="0">Select...</option>
+                        </select>
+                    </div>
+
+                    <script type="text/javascript">
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const countrySelect = document.getElementById('paisSucursal');
+                            const citySelect = document.getElementById('ciudadSucursal');
+
+                            countrySelect.addEventListener('change', function () {
+                                const countryId = countrySelect.value;
+
+                                if (countryId !== "0") {
+                                    fetch(`/survey-platform/api/cities?countryId=${countryId}`)
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error('Network response was not ok');
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            citySelect.innerHTML = '<option value="0">Select...</option>';
+                                            data.forEach(city => {
+                                                const option = document.createElement('option');
+                                                option.value = city.id;
+                                                option.textContent = city.name;
+                                                citySelect.appendChild(option);
+                                            });
+                                        })
+                                        .catch(error => {
+                                            console.error('Error fetching cities:', error);
+                                        });
+                                } else {
+                                    // Si el valor es 0, limpiar el dropdown de ciudades
+                                    citySelect.innerHTML = '<option value="0">Select...</option>';
+                                }
+                            });
+                        });
+                    </script>
+                    <button type="submit" class="btn btn-primary">Save Office</button>
+                </form>
+            </div>
+
+            <!-- Rol Tab -->
+            <div class="tab-pane fade" id="rol" role="tabpanel" aria-labelledby="rol-tab">
+                <form th:action="@{/role/save}" method="post" class="mt-4">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <h3>Role Management</h3>
+                    <div class="mb-3">
+                        <label for="nombreRol" class="form-label">Role name</label>
+                        <input type="text" class="form-control" id="nombreRol" name="name" placeholder="Role name"
+                               style="text-transform: uppercase;">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcionRol" class="form-label">Role description</label>
+                        <textarea class="form-control" id="descripcionRol" rows="3" name="description"
+                                  placeholder="Role description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Role</button>
+                </form>
+            </div>
+
+            <!-- Permiso Tab -->
+            <div class="tab-pane fade" id="permiso" role="tabpanel" aria-labelledby="permiso-tab">
+                <form th:action="@{/permission/save}" method="post" class="mt-4">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <h3>Permission Management</h3>
+                    <div class="mb-3">
+                        <label for="rol">Role</label>
+                        <select id="permissionRol" name="roleId" class="form-control" required>
+                            <option value="0">Select...</option>
+                            <foreach th:each="rol : ${roleList}">
+                                <option th:value="${rol.id}" th:text="${rol.name}"/>
+                            </foreach>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombrePermiso" class="form-label">Permission Name</label>
+                        <input type="text" class="form-control" id="nombrePermiso" placeholder="Permission Name"
+                               name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcionPermiso" class="form-label">Description</label>
+                        <textarea class="form-control" id="descripcionPermiso" rows="3"
+                                  placeholder="Permission Description" name="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Permission</button>
+                </form>
+            </div>
+
+            <!-- Módulo Tab -->
+            <div class="tab-pane fade" id="modulo" role="tabpanel" aria-labelledby="modulo-tab">
+                <form th:action="@{/module/save}" method="post" class="mt-4">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <h3>Module Management</h3>
+                    <div class="mb-3">
+                        <label for="rol">Role</label>
+                        <select id="moduleRol" name="roleId" class="form-control" required>
+                            <option value="0">Select...</option>
+                            <foreach th:each="rol : ${roleList}">
+                                <option th:value="${rol.id}" th:text="${rol.name}"/>
+                            </foreach>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreModulo" class="form-label">Module Name</label>
+                        <input type="text" class="form-control" id="nombreModulo" placeholder="Nombre del módulo"
+                               name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcionModulo" class="form-label">Description</label>
+                        <textarea class="form-control" id="descripcionModulo" rows="3"
+                                  placeholder="Descripción del módulo" name="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Module</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

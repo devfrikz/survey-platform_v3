@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import static com.surveyplatform.app.utils.Constants.SHOW_CONTENT;
+import static com.surveyplatform.app.utils.Constants.USER_MANAGEMENT;
+
 @Controller
 @RequiredArgsConstructor
 public class UserManagementController {
@@ -28,6 +31,7 @@ public class UserManagementController {
         model.addAttribute("roleList", roleList);
         model.addAttribute("countryList", countryList);
 
-        return "modules/users-managements";
+        model.addAttribute(SHOW_CONTENT, USER_MANAGEMENT);
+        return "index";
     }
 }

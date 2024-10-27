@@ -1,0 +1,89 @@
+<div th:fragment="approval">
+    <div class="container mt-5">
+        <h2>Form Approval</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered approval-table">
+                <thead class="thead-light">
+                <tr>
+                    <th>Item Id</th>
+                    <th>Form Type</th>
+                    <th>Employee</th>
+                    <th>Date Submitted</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Iterar sobre la lista de formularioDtos -->
+                <tr th:each="formulario, iterStat : ${formularios}">
+                    <td th:text="${formulario.id}">1</td>
+                    <td th:text="${formulario.tipo}">Permission Request</td>
+                    <td th:text="${formulario.empleado}">John Doe</td>
+                    <td th:text="${formulario.fechaEnvio}">2023-08-19</td>
+                    <td>
+                    <span th:if="${formulario.estado == null || !formulario.estado || formulario.estado}"
+                          th:text="${formulario.estado == null ? 'Pending' : (formulario.estado ? 'Approved' : 'Rejected')}"
+                          th:classappend="${formulario.estado == null ? 'Pending' : (formulario.estado ? 'Approved' : 'Rejected')}">
+                        Pending
+                    </span>
+
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-sm" th:attr="data-id=${formulario.id}"
+                                th:if="${formulario.estado == null}">Approve
+                        </button>
+                        <button class="btn btn-danger btn-sm" th:attr="data-id=${formulario.id}"
+                                th:if="${formulario.estado == null}">Reject
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav>
+            <ul class="pagination justify-content-center">
+                <!-- Link para la página anterior -->
+                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/approvals(size=${size}, page=${currentPage - 1})}">&laquo;</a>
+                </li>
+
+                <!-- Links para cada página -->
+                <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${i} == ${currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{/approvals(size=${size}, page=${i})}" th:text="${i + 1}">1</a>
+                </li>
+
+                <!-- Link para la página siguiente -->
+                <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/approvals(size=${size}, page=${currentPage + 1})}">&raquo;</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <form name="approvalForm" method="post" th:action="@{/approve-form}">
+        <input type="hidden" name="formId">
+    </form>
+    <form name="rejectionForm" method="post" th:action="@{/reject-form}">
+        <input type="hidden" name="formId">
+        <script>
+            document.querySelectorAll('.btn-success').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    console.log('Approve form with ID:', id);
+                    document.approvalForm.formId.value = id;
+                    document.approvalForm.submit();
+                });
+            });
+
+            document.querySelectorAll('.btn-danger').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    console.log('Reject form with ID:', id);
+                    document.rejectionForm.formId.value = id;
+                    document.rejectionForm.submit();
+                });
+            });
+        </script>
+    </form>
+</div>
