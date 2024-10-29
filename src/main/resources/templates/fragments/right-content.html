@@ -1,8 +1,6 @@
 <div th:fragment="right-content" class="col-md-9 col-sm-12 p-4">
-    <!-- Right Content -->
     <div th:if="${showContent == null}">
-        <h3>Dashboard</h3>
-        <p>Graphics for reports</p>
+        <div th:replace="~{fragments/grafics/grafics :: grafics}"></div>
     </div>
     <div th:if="${showContent == 'sale'}">
         <div th:replace="~{fragments/modules/sales/sales-form :: sale-form}"></div>

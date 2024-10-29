@@ -1,0 +1,139 @@
+<div th:fragment="grafics" class="container mt-5">
+    <h3>Dashboard</h3>
+    <div class="row">
+        <!-- Gráfico de Líneas -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Activity</h5>
+                    <div class="chart-container">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de Barras -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Statistics</h5>
+                    <div class="chart-container">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico de Proyectos Totales -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Projects</h5>
+                    <div class="chart-container">
+                        <canvas id="projectsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico Circular -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Daily Sales</h5>
+                    <div class="chart-container">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Gráfico de Líneas
+        const lineChart = new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: {
+                labels: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'],
+                datasets: [
+                    {
+                        label: 'Series 1',
+                        data: [8, 5, 3, 5, 7, 6, 4, 7],
+                        borderColor: 'red',
+                        fill: false
+                    },
+                    {
+                        label: 'Series 2',
+                        data: [7, 4, 2, 4, 6, 5, 3, 6],
+                        borderColor: 'lightcoral',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Gráfico de Barras
+        const barChart = new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2010', '2011', '2012', '2013', '2014', '2015'],
+                datasets: [
+                    {
+                        label: 'Statistics',
+                        data: [80, 50, 90, 40, 20, 93],
+                        backgroundColor: 'blue'
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Gráfico de Proyectos Totales
+        const projectsChart = new Chart(document.getElementById('projectsChart'), {
+            type: 'line',
+            data: {
+                labels: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'],
+                datasets: [
+                    {
+                        label: 'Projects 1',
+                        data: [20, 30, 40, 50, 60, 70, 80, 90],
+                        borderColor: 'blue',
+                        fill: false
+                    },
+                    {
+                        label: 'Projects 2',
+                        data: [50, 40, 30, 60, 70, 50, 60, 80],
+                        borderColor: 'red',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Gráfico Circular
+        const pieChart = new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Normal', 'In-Site', 'Mail-Order'],
+                datasets: [
+                    {
+                        label: 'Sales Distribution',
+                        data: [55.6, 22.2, 22.2],
+                        backgroundColor: ['blue', 'red', 'orange']
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+</div>
